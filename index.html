@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7fbff" />
+  <title>Aygen IT × Ford Otosan — Light Cinematic Executive Showcase</title>
+  <link rel="preload" as="image" href="assets/cinematic-backbone-v15.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/cinematic-integration-v15.jpg" />
+  <link rel="preload" as="image" href="assets/cinematic-rpa-v15.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="cursor-aura" id="cursorAura" aria-hidden="true"></div>
+
+    <div class="transition-stage" id="transitionStage" aria-hidden="true">
+      <div class="transition-panel transition-panel-a"></div>
+      <div class="transition-panel transition-panel-b"></div>
+      <div class="transition-panel transition-panel-c"></div>
+      <div class="transition-title">
+        <span id="transitionNumber">01</span>
+        <strong id="transitionName">Açılış</strong>
+      </div>
+    </div>
+
+    <header class="topbar">
+      <button class="mini-brand" id="homeBtn" type="button" aria-label="Başa dön">
+        <img src="assets/aygen-color.png" alt="Aygen" />
+      </button>
+      <div class="topbar-center">
+        <span class="section-name" id="sectionName">Açılış</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="top-btn" id="overviewBtn" type="button" aria-label="Bölüm menüsü">☷</button>
+        <button class="top-btn" id="langBtn" type="button" aria-label="Dili değiştir">TR</button>
+        <button class="top-btn notes-toggle" id="notesBtn" type="button" aria-label="Konuşma notları">⌁</button>
+        <button class="top-btn" id="fullscreenBtn" type="button" aria-label="Tam ekran">⛶</button>
+      </div>
+    </header>
+
+    <main class="deck" id="deck">
+      <section class="slide slide-opening is-active" data-title-tr="Açılış" data-title-en="Opening">
+        <div class="opening-grid" aria-hidden="true"></div>
+        <div class="opening-orbit opening-orbit-a" aria-hidden="true"></div>
+        <div class="opening-orbit opening-orbit-b" aria-hidden="true"></div>
+        <div class="executive-wow executive-wow-a" aria-hidden="true"></div>
+        <div class="executive-wow executive-wow-b" aria-hidden="true"></div>
+        <div class="executive-scanline" aria-hidden="true"></div>
+        <div class="opening-content">
+          <div class="partnership-lockup" data-reveal="scale">
+            <div class="logo-stage"><img src="assets/aygen-color.png" alt="Aygen" /></div>
+            <div class="partnership-bridge"><span></span><b>×</b><span></span></div>
+            <div class="logo-stage logo-stage-ford"><img src="assets/ford-otosan.webp" alt="Ford Otosan" /></div>
+          </div>
+          <h1 class="opening-title" data-reveal="up">
+            <span data-tr="Ford operasyonları için" data-en="For Ford operations">Ford operasyonları için</span>
+            <em data-tr="tek dijital omurga." data-en="one digital backbone.">tek dijital omurga.</em>
+          </h1>
+          <p class="opening-copy" data-reveal="up" data-tr="29 proje, 37 rapor akışı ve saha operasyonlarını; entegrasyon, otomasyon ve görünürlükte birleştiren Aycube ekosistemi." data-en="The Aycube ecosystem unifies 29 projects, 37 report flows and field operations through integration, automation and visibility.">29 proje, 37 rapor akışı ve saha operasyonlarını; entegrasyon, otomasyon ve görünürlükte birleştiren Aycube ekosistemi.</p>
+          <div class="opening-kpi-strip" data-reveal="up"><article><strong>29</strong><span data-tr="Ford projesi" data-en="Ford projects">Ford projesi</span></article><article><strong>37</strong><span data-tr="rapor akışı" data-en="report flows">rapor akışı</span></article><article><strong>4</strong><span data-tr="ana kabiliyet" data-en="core capabilities">ana kabiliyet</span></article></div>
+          <button class="primary-button" id="startBtn" type="button" data-reveal="up"><span data-tr="Sunumu Başlat" data-en="Begin Executive Briefing">Executive Sunumu Başlat</span><b>→</b></button>
+        </div>
+        <div class="opening-footer"><span>AYGEN IT</span><span>FORD OTOSAN</span><span>2026</span></div>
+      </section>
+
+      <section class="slide slide-agenda" data-title-tr="Toplantı Gündemi" data-title-en="Meeting Agenda">
+        <div class="content-wide">
+          <div class="heading-row" data-reveal="up">
+            <div><p class="kicker" data-tr="01 — YÖNETİCİ AKIŞI" data-en="01 — EXECUTIVE FLOW">01 — YÖNETİCİ AKIŞI</p><h2 data-tr="Değer dört eksende büyüyor." data-en="Value scales across four pillars.">Değer dört eksende büyüyor.</h2></div>
+            <p class="side-note" data-tr="Ekip ve iş birliğinden, platform ve otomasyona; oradan sahadaki görünür sonuca uzanan tek hikâye." data-en="One connected story: from team and partnership to platform, automation and visible field impact.">Ekip ve iş birliğinden, platform ve otomasyona; oradan sahadaki görünür sonuca uzanan tek hikâye.</p>
+          </div>
+          <div class="agenda-rail" data-reveal="up">
+            <button class="agenda-card" data-target="2" type="button"><span>01 / TEMEL</span><strong data-tr="Net sahiplik" data-en="Clear ownership">Net sahiplik</strong><small data-tr="Uzman ekip ve kısa karar döngüsü" data-en="Expert team and short decision cycles">Uzman ekip ve kısa karar döngüsü</small><b>03—04</b></button>
+            <button class="agenda-card" data-target="4" type="button"><span>02 / OMURGA</span><strong data-tr="Tek platform" data-en="One platform">Tek platform</strong><small data-tr="Aycube projeleri ve ortak veri modeli" data-en="Aycube projects and a shared data model">Aycube projeleri ve ortak veri modeli</small><b>05—07</b></button>
+            <button class="agenda-card" data-target="5" type="button"><span>03 / OTOMASYON</span><strong data-tr="Karar ritmi" data-en="Decision rhythm">Karar ritmi</strong><small data-tr="Otomail, RPA ve OCR ile daha az tekrar" data-en="Less repetition through Otomail, RPA and OCR">Otomail, RPA ve OCR ile daha az tekrar</small><b>06—08</b></button>
+            <button class="agenda-card" data-target="8" type="button"><span>04 / SAHA</span><strong data-tr="Görünür etki" data-en="Visible impact">Görünür etki</strong><small data-tr="Özel projeler ve Supalan saha yönetimi" data-en="Special projects and Supalan field management">Özel projeler ve Supalan saha yönetimi</small><b>09—10</b></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide-team" data-title-tr="IT Ekibimiz" data-title-en="Our IT Team">
+        <div class="content-wide">
+          <div class="heading-row compact-heading" data-reveal="up">
+            <div><p class="kicker" data-tr="02 — IT EKİBİMİZ" data-en="02 — OUR IT TEAM">02 — IT EKİBİMİZ</p><h2 data-tr="Beş uzmanlık. Tek teslimat sorumluluğu." data-en="Five disciplines. One delivery ownership.">Beş uzmanlık. Tek teslimat sorumluluğu.</h2></div>
+            <p class="side-note" data-tr="Her kart, ekip üyesinin Ford operasyonlarına taşıdığı ana katkıyı gösterir." data-en="Each card highlights the team member’s core contribution to Ford operations.">Her kart, ekip üyesinin Ford operasyonlarına taşıdığı ana katkıyı gösterir.</p>
+          </div>
+          <div class="team-grid" data-reveal="up">
+            <button class="team-card is-open" data-team-card type="button" aria-expanded="true">
+              <span class="team-photo-wrap"><img src="assets/team/serkan-duran.png" alt="Serkan Duran profil görseli" /><span class="team-status">LEADERSHIP</span></span>
+              <span class="team-role">IT Manager</span><strong class="team-name">Serkan DURAN</strong>
+              <span class="team-open-row"><span data-tr="Sorumluluk alanı" data-en="Ownership area">Sorumluluk alanı</span><b>＋</b></span>
+              <span class="team-details"><span class="demo-label" data-tr="TESLİMAT LİDERLİĞİ" data-en="DELIVERY LEADERSHIP">TESLİMAT LİDERLİĞİ</span><span><small data-tr="Strateji" data-en="Strategy">Strateji</small><strong data-tr="Teknoloji yol haritası" data-en="Technology roadmap">Teknoloji yol haritası</strong></span><span><small data-tr="Teslimat" data-en="Delivery">Teslimat</small><strong data-tr="Öncelik, ekip ve kalite yönetimi" data-en="Priority, team and quality management">Öncelik, ekip ve kalite yönetimi</strong></span></span>
+            </button>
+            <button class="team-card" data-team-card type="button" aria-expanded="false">
+              <span class="team-photo-wrap"><img src="assets/team/yener-karatas.png" alt="Yener Karataş profil görseli" /><span class="team-status">SOFTWARE</span></span>
+              <span class="team-role">Senior Software Developer</span><strong class="team-name">Yener KARATAŞ</strong>
+              <span class="team-open-row"><span data-tr="Sorumluluk alanı" data-en="Ownership area">Sorumluluk alanı</span><b>＋</b></span>
+              <span class="team-details"><span class="demo-label" data-tr="TEKNİK OMURGA" data-en="TECHNICAL BACKBONE">TEKNİK OMURGA</span><span><small data-tr="Mimari" data-en="Architecture">Mimari</small><strong data-tr="Sürdürülebilir uygulama tasarımı" data-en="Sustainable application design">Sürdürülebilir uygulama tasarımı</strong></span><span><small data-tr="Geliştirme" data-en="Development">Geliştirme</small><strong data-tr="Entegrasyon ve ana ürün akışları" data-en="Integration and core product flows">Entegrasyon ve ana ürün akışları</strong></span></span>
+            </button>
+            <button class="team-card" data-team-card type="button" aria-expanded="false">
+              <span class="team-photo-wrap"><img src="assets/team/ebru-selvi.png" alt="Ebru Selvi profil görseli" /><span class="team-status">ANALYSIS</span></span>
+              <span class="team-role">Business Analyst</span><strong class="team-name">Ebru SELVİ</strong>
+              <span class="team-open-row"><span data-tr="Sorumluluk alanı" data-en="Ownership area">Sorumluluk alanı</span><b>＋</b></span>
+              <span class="team-details"><span class="demo-label" data-tr="OPERASYON NETLİĞİ" data-en="OPERATIONAL CLARITY">OPERASYON NETLİĞİ</span><span><small data-tr="Analiz" data-en="Analysis">Analiz</small><strong data-tr="İhtiyaç ve süreç modelleme" data-en="Requirement and process modelling">İhtiyaç ve süreç modelleme</strong></span><span><small data-tr="Doğrulama" data-en="Validation">Doğrulama</small><strong data-tr="Kabul kriteri ve kullanıcı geri bildirimi" data-en="Acceptance criteria and user feedback">Kabul kriteri ve kullanıcı geri bildirimi</strong></span></span>
+            </button>
+            <button class="team-card" data-team-card type="button" aria-expanded="false">
+              <span class="team-photo-wrap"><img src="assets/team/berk-efe-tas.png" alt="Berk Efe Taş profil görseli" /><span class="team-status">AI & RPA</span></span>
+              <span class="team-role">AI & RPA Developer</span><strong class="team-name">Berk Efe TAŞ</strong>
+              <span class="team-open-row"><span data-tr="Sorumluluk alanı" data-en="Ownership area">Sorumluluk alanı</span><b>＋</b></span>
+              <span class="team-details"><span class="demo-label" data-tr="AKILLI OTOMASYON" data-en="INTELLIGENT AUTOMATION">AKILLI OTOMASYON</span><span><small>RPA</small><strong data-tr="Portal akışları ve istisna yönetimi" data-en="Portal flows and exception handling">Portal akışları ve istisna yönetimi</strong></span><span><small>AI / OCR</small><strong data-tr="Belge okuma ve veri çıkarımı" data-en="Document reading and data extraction">Belge okuma ve veri çıkarımı</strong></span></span>
+            </button>
+            <button class="team-card" data-team-card type="button" aria-expanded="false">
+              <span class="team-photo-wrap"><img src="assets/team/fatih-suha-selvi.jpg" alt="Fatih Süha Selvi profil görseli" /><span class="team-status">SOFTWARE</span></span>
+              <span class="team-role">Jr. Software Developer</span><strong class="team-name">Fatih Süha SELVİ</strong>
+              <span class="team-open-row"><span data-tr="Sorumluluk alanı" data-en="Ownership area">Sorumluluk alanı</span><b>＋</b></span>
+              <span class="team-details"><span class="demo-label" data-tr="ÜRÜN GELİŞTİRME" data-en="PRODUCT DEVELOPMENT">ÜRÜN GELİŞTİRME</span><span><small data-tr="Geliştirme" data-en="Development">Geliştirme</small><strong data-tr="Aycube modülleri ve ekranlar" data-en="Aycube modules and interfaces">Aycube modülleri ve ekranlar</strong></span><span><small data-tr="İyileştirme" data-en="Improvement">İyileştirme</small><strong data-tr="Hızlı sürüm ve kullanıcı geri bildirimi" data-en="Rapid releases and user feedback">Hızlı sürüm ve kullanıcı geri bildirimi</strong></span></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide-partnership" data-title-tr="Aygen & Ford Otosan İş Birliği" data-title-en="Aygen & Ford Otosan Partnership">
+        <div class="content-wide partnership-layout">
+          <div class="partnership-copy" data-reveal="left">
+            <p class="kicker" data-tr="03 — İŞ BİRLİĞİ" data-en="03 — PARTNERSHIP">03 — İŞ BİRLİĞİ</p>
+            <h2><span data-tr="Aynı masa." data-en="One table.">Aynı masa.</span><span data-tr="Kısa döngü." data-en="Short cycles.">Kısa döngü.</span><em data-tr="Sürdürülebilir sonuç." data-en="Sustainable outcomes.">Sürdürülebilir sonuç.</em></h2>
+            <p data-tr="İhtiyaç, analiz, geliştirme ve geri bildirim tek teslimat ritminde birleşir; Ford operasyonları için karar süresi kısalır, sahiplik netleşir." data-en="Needs, analysis, development and feedback come together in one delivery rhythm—shortening decision cycles and clarifying ownership for Ford operations.">İhtiyaç, analiz, geliştirme ve geri bildirim tek teslimat ritminde birleşir; Ford operasyonları için karar süresi kısalır, sahiplik netleşir.</p>
+          </div>
+          <div class="collaboration-engine" data-reveal="right">
+            <div class="engine-center"><img src="assets/aygen-color.png" alt="Aygen" /><span>×</span><img src="assets/ford-otosan.webp" alt="Ford Otosan" /></div>
+            <div class="engine-ring ring-one"></div><div class="engine-ring ring-two"></div>
+            <button class="engine-node node-collaboration is-active" data-partnership="collaboration" type="button"><span>01</span><strong data-tr="Yakın Çalışma" data-en="Close Collaboration">Yakın Çalışma</strong></button>
+            <button class="engine-node node-feedback" data-partnership="feedback" type="button"><span>02</span><strong data-tr="Hızlı İterasyon" data-en="Fast Iteration">Hızlı İterasyon</strong></button>
+            <button class="engine-node node-architecture" data-partnership="architecture" type="button"><span>03</span><strong data-tr="Güvenli Mimari" data-en="Secure Architecture">Güvenli Mimari</strong></button>
+            <button class="engine-node node-visibility" data-partnership="visibility" type="button"><span>04</span><strong data-tr="Görünürlük" data-en="Visibility">Görünürlük</strong></button>
+          </div>
+          <div class="partnership-detail" id="partnershipDetail" data-reveal="up"><span>01 / COLLABORATION</span><h3>İş birimleriyle aynı masada</h3><p>İhtiyaçlar doğrudan operasyon ekiplerinden alınır; geri bildirim, analiz, geliştirme ve teslimat döngüsü birlikte yürütülür.</p></div>
+        </div>
+      </section>
+
+      <section class="slide slide-projects" data-title-tr="Aycube Nedir? / Ford Otosan Projeleri" data-title-en="What is Aycube? / Ford Otosan Projects">
+        <div class="content-wide">
+          <div class="heading-row compact-heading" data-reveal="up">
+            <div><p class="kicker" data-tr="04 — AYCUBE & PROJELER" data-en="04 — AYCUBE & PROJECTS">04 — AYCUBE & PROJELER</p><h2 data-tr="29 proje, tek platform mantığıyla ölçekleniyor." data-en="29 projects scale through one platform logic.">29 proje, tek platform mantığıyla ölçekleniyor.</h2></div>
+            <div class="aycube-lockup"><img src="assets/aycube.png" alt="Aycube" /></div>
+          </div>
+          <div class="projects-layout">
+            <div class="aycube-statement" data-reveal="left">
+              <span class="eyebrow-chip" data-tr="AYCUBE NEDİR?" data-en="WHAT IS AYCUBE?">AYCUBE NEDİR?</span>
+              <h3 data-tr="İş akışları, entegrasyonlar ve raporlamayı tek çatı altında toplayan modüler platform." data-en="A modular platform that brings workflows, integrations and reporting under one roof.">İş akışları, entegrasyonlar ve raporlamayı tek çatı altında toplayan modüler platform.</h3>
+              <ul><li data-tr="Otomatik bildirim ve raporlarla anlık takip" data-en="Real-time tracking through automated notifications and reports">Otomatik bildirim ve raporlarla anlık takip</li><li data-tr="Denetlenebilir kayıt ve uçtan uca izlenebilirlik" data-en="Auditable records and end-to-end traceability">Denetlenebilir kayıt ve uçtan uca izlenebilirlik</li><li data-tr="Yeni iş ihtiyaçlarına uyarlanabilen modüler mimari" data-en="Modular architecture adaptable to new business needs">Yeni iş ihtiyaçlarına uyarlanabilen modüler mimari</li></ul>
+              <div class="aycube-preview-rail">
+                <article class="aycube-preview-card"><img src="assets/aycube_screens/aycube-ana-ekran.png" alt="Aycube ana ekran" /><div><strong data-tr="Aycube Ana Ekran" data-en="Aycube Home Screen">Aycube Ana Ekran</strong><small data-tr="Platform giriş noktası, menüler ve haber akışı" data-en="Platform entry point, menus and news feed">Platform giriş noktası, menüler ve haber akışı</small></div></article>
+                <article class="aycube-preview-card"><img src="assets/aycube_screens/all-bi.png" alt="All BI ekranı" /><div><strong>All BI</strong><small data-tr="Yönetim için canlı KPI ve istatistiki özetler" data-en="Live KPI and statistical summaries for management">Yönetim için canlı KPI ve istatistiki özetler</small></div></article>
+              <!-- </div> -->
+              <div class="catalog-metrics"><span><strong>29</strong><small data-tr="Ford projesi" data-en="Ford projects">Ford projesi</small></span><span><strong>5</strong><small data-tr="yetkinlik grubu" data-en="capability groups">yetkinlik grubu</small></span></div>
+              <p class="demo-note" data-tr="Kartlar gerçek proje listenize göre gruplandırıldı." data-en="Cards are grouped using the confirmed project list.">Kartlar gerçek proje listenize göre gruplandırıldı.</p>
+              <button class="secondary-button compact-button catalog-button" id="allProjectsBtn" type="button"><span data-tr="29 Projenin Tamamını Gör" data-en="View All 29 Projects">29 Projenin Tamamını Gör</span><b>↗</b></button>
+            </div>
+            <div class="project-gallery" data-reveal="right">
+              <button class="project-card project-card-large tone-customs" data-project="customs" type="button">
+                <span class="project-code">01 / CUSTOMS</span>
+                <div class="project-card-media"><img src="assets/aycube_screens/gecici-ithalat-takip.png" alt="Geçici İthalat Takip ekranı" /><span class="project-card-badge">LIVE SCREEN</span></div>
+                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Gümrük & Takip" data-en="Customs & Tracking">Gümrük & Takip</strong><span class="project-card-count">6+</span></div><small data-tr="Beyan, evrak ve süre risklerini tek ekranda kontrol altına alan operasyon merkezi" data-en="An operational center that controls declaration, document and deadline risks on one screen">Beyan, evrak ve süre risklerini tek ekranda kontrol altına alan operasyon merkezi</small></div>
+                <b>↗</b>
+              </button>
+              <button class="project-card tone-integration" data-project="integration" type="button">
+                <span class="project-code">02 / DATA</span>
+                <div class="project-card-media"><img src="assets/aycube_screens/ithalat-beyanname-raporu.png" alt="İthalat Beyanname Raporu ekranı" /><span class="project-card-badge">INTEGRATION</span></div>
+                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Entegrasyon & Veri" data-en="Integration & Data">Entegrasyon & Veri</strong><span class="project-card-count">7</span></div><small data-tr="Manuel veri girişini azaltan, doğru alanı doğru anda getiren entegrasyon katmanı" data-en="An integration layer that reduces manual entry and brings the right field at the right time">Manuel veri girişini azaltan, doğru alanı doğru anda getiren entegrasyon katmanı</small></div>
+                <b>↗</b>
+              </button>
+              <button class="project-card tone-automation" data-project="automation" type="button">
+                <span class="project-code">03 / AUTOMATION</span>
+                <div class="project-card-media"><img src="assets/aycube_screens/arsiv-dosya-yukleme.png" alt="Dosya yükleme ve arşiv ekranı" /><span class="project-card-badge">OCR / RPA</span></div>
+                <div class="project-card-content"><div class="project-card-heading"><strong>RPA & OCR</strong><span class="project-card-count">5</span></div><small data-tr="Tekrarlı işleri robotlaştıran, belge verisini okunabilir aksiyona çeviren akışlar" data-en="Flows that robotize repetitive tasks and convert document data into action">Tekrarlı işleri robotlaştıran, belge verisini okunabilir aksiyona çeviren akışlar</small></div>
+                <b>↗</b>
+              </button>
+              <button class="project-card tone-finance" data-project="finance" type="button">
+                <span class="project-code">04 / FINANCE</span>
+                <div class="project-card-media"><img src="assets/aycube_screens/all-bi.png" alt="All BI ekranı" /><span class="project-card-badge">BI / REPORT</span></div>
+                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Finans & Komisyon" data-en="Finance & Commission">Finans & Komisyon</strong><span class="project-card-count">8</span></div><small data-tr="Finansal kontrol, komisyon doğruluğu ve ödeme görünürlüğü sağlayan akışlar" data-en="Flows that provide financial control, commission accuracy and payment visibility">Finansal kontrol, komisyon doğruluğu ve ödeme görünürlüğü sağlayan akışlar</small></div>
+                <b>↗</b>
+              </button>
+              <button class="project-card tone-archive" data-project="archive" type="button">
+                <span class="project-code">05 / DOCUMENT</span>
+                <div class="project-card-media"><img src="assets/aycube_screens/arsiv-fihrist.png" alt="Arşiv Fihrist ekranı" /><span class="project-card-badge">ARCHIVE</span></div>
+                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Arşiv & Doküman" data-en="Archive & Document">Arşiv & Doküman</strong><span class="project-card-count">3</span></div><small data-tr="Evrak arama süresini kısaltan, denetlenebilir doküman hafızası" data-en="Auditable document memory that reduces document search time">Evrak arama süresini kısaltan, denetlenebilir doküman hafızası</small></div>
+                <b>↗</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide-otomail" data-title-tr="Otomail Raporlama Servisi" data-title-en="Otomail Reporting Service">
+        <div class="content-wide otomail-layout">
+          <div class="otomail-copy" data-reveal="left">
+            <p class="kicker">05 — OTOMAIL</p><h2 data-tr="37 rapor akışı. Tek teslim ritmi." data-en="37 report flows. One delivery rhythm.">37 rapor akışı. Tek teslim ritmi.</h2>
+            <p data-tr="Planlı tetikleme, standart şablon, kural bazlı alıcı listeleri, teslim logları ve hata uyarılarıyla raporlama ritmini otomatikleştirir." data-en="Automates reporting through scheduled triggers, standard templates, rule-based recipients, delivery logs and error alerts.">Planlı tetikleme, standart şablon, kural bazlı alıcı listeleri, teslim logları ve hata uyarılarıyla raporlama ritmini otomatikleştirir.</p>
+            <div class="otomail-actions"><button class="primary-button compact-button" id="runOtomailBtn" type="button"><span data-tr="Akışı Çalıştır" data-en="Run Flow">Akışı Çalıştır</span><b>▶</b></button><button class="secondary-button compact-button" id="allReportsBtn" type="button"><span data-tr="37 Rapor Kaydını Gör" data-en="View 37 Report Entries">37 Rapor Kaydını Gör</span><b>↗</b></button>
+          </div>
+          <div class="mail-machine" data-reveal="right">
+            <div class="mail-machine-header">
+              <span class="live-dot"></span>
+              <strong>OTOMAIL SERVICE</strong>
+              <small id="otomailRunMeta" data-state="ready">Hazır</small>
+            </div>
+
+            <div class="mail-pipeline" id="mailPipeline">
+              <div class="pipeline-track"></div>
+              <div class="pipeline-progress-track"><span id="mailPipelineProgress"></span></div>
+              <div class="pipeline-packet" id="mailPacket" aria-hidden="true">
+                <img id="mailPacketIcon" src="assets/icons/excel.svg" alt="" />
+                <span id="mailPacketLabel">XLSX</span>
+              </div>
+              <div class="pipeline-node" data-stage="generate"><span>01</span><strong data-tr="Üret" data-en="Generate">Üret</strong></div>
+              <div class="pipeline-node" data-stage="validate"><span>02</span><strong data-tr="Doğrula" data-en="Validate">Doğrula</strong></div>
+              <div class="pipeline-node" data-stage="deliver"><span>03</span><strong data-tr="Dağıt" data-en="Deliver">Dağıt</strong></div>
+            </div>
+
+            <div class="report-list" id="reportList">
+              <div class="report-row" data-report-id="missing-docs-weekly" data-file-type="xlsx" data-file-name="ford_eksik_evrak_haftalik.xlsx" data-state="ready">
+                <span class="report-icon"><img src="assets/icons/excel.svg" alt="Excel" /></span>
+                <div><strong>Ford Eksik Evrak Raporu Haftalık</strong><small>Weekly · Documentation · XLSX</small></div>
+                <span class="report-status state-ready">Hazır</span>
+              </div>
+              <div class="report-row" data-report-id="detailed-import" data-file-type="xlsx" data-file-name="detayli_ithalat_raporu.xlsx" data-state="queued">
+                <span class="report-icon"><img src="assets/icons/excel.svg" alt="Excel" /></span>
+                <div><strong>Detaylı İthalat Raporları</strong><small>Daily · Import · XLSX</small></div>
+                <span class="report-status state-queued">Sırada</span>
+              </div>
+              <div class="report-row" data-report-id="declaration-report" data-file-type="pdf" data-file-name="ford_beyanname_raporu.pdf" data-state="queued">
+                <span class="report-icon"><img src="assets/icons/pdf.svg" alt="PDF" /></span>
+                <div><strong>Ford Beyanname Raporu</strong><small>Daily · Customs · PDF</small></div>
+                <span class="report-status state-queued">Sırada</span>
+              </div>
+              <div class="report-row" data-report-id="export-0100" data-file-type="xlsx" data-file-name="ford_ihracat_0100.xlsx" data-state="queued">
+                <span class="report-icon"><img src="assets/icons/excel.svg" alt="Excel" /></span>
+                <div><strong>Ford İhracat Raporu (0100)</strong><small>Daily · Export · XLSX</small></div>
+                <span class="report-status state-queued">Sırada</span>
+              </div>
+              <div class="report-row" data-report-id="payment-report" data-file-type="xlsx" data-file-name="ford_odeme_raporu.xlsx" data-state="queued">
+                <span class="report-icon"><img src="assets/icons/excel.svg" alt="Excel" /></span>
+                <div><strong>Ford Ödeme Raporu</strong><small>Event-based · Finance · XLSX</small></div>
+                <span class="report-status state-queued">Sırada</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide-integrations" data-title-tr="Entegrasyonlar" data-title-en="Integrations">
+        <div class="content-wide">
+          <div class="heading-row compact-heading" data-reveal="up">
+            <div><p class="kicker" data-tr="06 — ENTEGRASYONLAR" data-en="06 — INTEGRATIONS">06 — ENTEGRASYONLAR</p><h2 data-tr="Dört kritik akış, aynı veri omurgasında birleşiyor." data-en="Four critical flows converge on one data backbone.">Dört kritik akış, aynı veri omurgasında birleşiyor.</h2></div>
+            <p class="side-note" data-tr="İthalat, ihracat, arşiv ve banka akışları; ortak veri, doğrulama ve izleme prensipleriyle yönetilir." data-en="Import, export, archive and banking flows share common data, validation and monitoring principles.">İthalat, ihracat, arşiv ve banka akışları; ortak veri, doğrulama ve izleme prensipleriyle yönetilir.</p>
+          </div>
+          <div class="integration-showcase">
+            <div class="integration-selector" data-reveal="left">
+              <button class="integration-tab is-active" data-integration-tab="import" type="button"><span>01</span><strong data-tr="İthalat" data-en="Import">İthalat</strong></button>
+              <button class="integration-tab" data-integration-tab="export" type="button"><span>02</span><strong data-tr="İhracat" data-en="Export">İhracat</strong></button>
+              <button class="integration-tab" data-integration-tab="archive" type="button"><span>03</span><strong data-tr="Arşiv" data-en="Archive">Arşiv</strong></button>
+              <button class="integration-tab" data-integration-tab="bank" type="button"><span>04</span><strong data-tr="Banka" data-en="Banking">Banka</strong></button>
+            </div>
+            <div class="integration-stage" data-reveal="right">
+              <div class="integration-stage-top">
+                <div><span id="integrationCode">IMPORT INTEGRATION</span><h3 id="integrationTitle">İthalat Entegrasyonu</h3><p id="integrationDescription">Araç ve yedek parça operasyonları; farklı veri alanları, kontrol kuralları, bütçeler ve geliştirme süreçleri nedeniyle ayrı akışlar olarak yönetilir.</p></div>
+                <div class="integration-orbit"><div class="gauge-center"><strong>4</strong><span data-tr="kritik akış" data-en="critical flows">kritik akış</span><small data-tr="TEK OMURGA" data-en="ONE BACKBONE">TEK OMURGA</small></div></div>
+              </div>
+              <div class="flow-columns" id="flowColumns"><article class="flow-card"><span>01 / VEHICLE</span><h4>İthalat Araç</h4><p>Araç operasyonuna özel veri modeli, doğrulama alanları ve beyanname senaryoları.</p></article><article class="flow-card"><span>02 / SPARE PARTS</span><h4>İthalat Yedek Parça</h4><p>Yedek parça operasyonuna özgü kalem, alan ve kontrol ihtiyaçları.</p></article></div>
+              <div class="integration-facts"><div><span>DATA</span><strong data-tr="Kaynak verinin merkezi alımı" data-en="Central source-data intake">Kaynak verinin merkezi alımı</strong><small data-tr="Kaynak sistemde sunulan alanlar" data-en="Fields exposed by the source system">Kaynak sistemde sunulan alanlar</small></div><div><span>CONFIG</span><strong data-tr="Konfigüre edilebilir alan seçimi" data-en="Configurable field selection">Konfigüre edilebilir alan seçimi</strong><small data-tr="İhtiyaca göre istenen alanlar" data-en="Fields selected according to need">İhtiyaca göre istenen alanlar</small></div><div><span>DELIVERY</span><strong data-tr="Akış bazlı teslimat" data-en="Flow-based delivery">Akış bazlı teslimat</strong><small data-tr="Her operasyon için ayrı kural ve kontrol" data-en="Rules and controls tailored to each operation">Her operasyon için ayrı kural ve kontrol</small></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide-rpa" data-title-tr="RPA & OCR" data-title-en="RPA & OCR">
+        <div class="content-wide rpa-layout">
+          <div class="rpa-copy" data-reveal="left">
+            <p class="kicker">07 — RPA & OCR</p><h2 data-tr="Robot tekrar eder. OCR doğrular. Ekip istisnayı yönetir." data-en="Robots repeat. OCR validates. The team manages exceptions.">Robot tekrar eder. OCR doğrular. Ekip istisnayı yönetir.</h2>
+            <p data-tr="Toplu İNTAÇ sorgulama ve İNTAÇ tarihinin entegrasyonla aktarılması, TAREKS işlemlerinin RPA üzerinde yürütülmesi, Ford Fatura OCR ve fatura kontrollerinin otomatikleştirilmesi." data-en="Bulk INTAÇ queries and integration of INTAÇ dates, RPA-based TAREKS operations, Ford Invoice OCR and automated invoice controls.">Toplu İNTAÇ sorgulama ve İNTAÇ tarihinin entegrasyonla aktarılması, TAREKS işlemlerinin RPA üzerinde yürütülmesi, Ford Fatura OCR ve fatura kontrollerinin otomatikleştirilmesi.</p>
+            <div class="rpa-tags"><span>Toplu İNTAÇ</span><span>TAREKS RPA</span><span>Ford Fatura OCR</span><span>0910 Kontrolü</span></div>
+            <div class="rpa-actions"><button class="primary-button compact-button" id="runRobotBtn" type="button"><span data-tr="Robot Akışını Çalıştır" data-en="Run Robot Flow">Robot Akışını Çalıştır</span><b>▶</b></button><button class="secondary-button compact-button" id="intacDetailBtn" type="button"><span data-tr="INTAÇ Detayı" data-en="INTAÇ Detail">INTAÇ Detayı</span></button></div>
+          </div>
+          <div class="automation-lab" data-reveal="right">
+            <div class="lab-header"><span class="live-dot"></span><strong>AYGEN AUTOMATION LAB</strong><small id="robotStatus" data-tr="Hazır" data-en="Ready">Hazır</small></div>
+            <div class="robot-flow">
+              <div class="robot-column"><div class="robot-avatar"><img src="assets/berkbot.png" alt="BerkBOT" /><span class="robot-pulse"></span></div><strong>RPA BOT</strong><small data-tr="Portal & INTAÇ sorgulama" data-en="Portal & INTAÇ query">Portal & INTAÇ sorgulama</small></div>
+              <div class="flow-arrow"><span></span><b>→</b><span></span></div>
+              <div class="scanner-machine"><div class="scanner-document"><span>INVOICE</span><i></i><i></i><i></i><i></i></div><div class="scan-beam"></div><strong>OCR ENGINE</strong><small data-tr="Alan bazlı veri yakalama" data-en="Field-level data capture">Alan bazlı veri yakalama</small></div>
+              <div class="flow-arrow"><span></span><b>→</b><span></span></div>
+              <div class="system-output"><div class="output-check">✓</div><strong>AYCUBE / ERP</strong><small data-tr="Doğrulanmış veri aktarımı" data-en="Validated data transfer">Doğrulanmış veri aktarımı</small></div>
+            </div>
+            <div class="robot-log" id="robotLog"><div><span>08:41:02</span><strong data-tr="Robot kuyruğu hazır" data-en="Robot queue ready">Robot kuyruğu hazır</strong><small>READY</small></div><div><span>08:41:04</span><strong data-tr="INTAÇ oturumu bekleniyor" data-en="Waiting for INTAÇ session">INTAÇ oturumu bekleniyor</strong><small>WAIT</small></div><div><span>08:41:06</span><strong data-tr="OCR motoru hazır" data-en="OCR engine ready">OCR motoru hazır</strong><small>READY</small></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide-special" data-title-tr="Özel Projeler" data-title-en="Special Projects">
+        <div class="content-wide">
+          <div class="heading-row" data-reveal="up"><div><p class="kicker" data-tr="08 — ÖZEL PROJELER" data-en="08 — SPECIAL PROJECTS">08 — ÖZEL PROJELER</p><h2 data-tr="Özel ihtiyaç, modüler çözüme dönüşüyor." data-en="Specific needs become modular solutions.">Özel ihtiyaç, modüler çözüme dönüşüyor.</h2></div><p class="side-note" data-tr="Her çözüm gerçek bir operasyon temasına odaklanır: belge, saha güvenliği veya finansal akış." data-en="Each solution targets a concrete operational theme: documents, field security or financial flow.">Her çözüm gerçek bir operasyon temasına odaklanır: belge, saha güvenliği veya finansal akış.</p></div>
+          <div class="special-grid" data-reveal="up">
+            <button class="special-card" data-special="archiveIndex" type="button"><span class="special-code">01 / DOCUMENT</span><div class="special-visual screenshot-visual"><img src="assets/aycube_screens/arsiv-fihrist.png" alt="Arşiv Fihrist ekranı" /><span class="special-visual-badge">INDEX</span></div><h3 data-tr="Arşiv Fihrist" data-en="Archive Index">Arşiv Fihrist</h3><p data-tr="Belgeye tarih, referans, süreç ve tip bazlı hızlı erişim." data-en="Fast document access by date, reference, process and type.">Belgeye tarih, referans, süreç ve tip bazlı hızlı erişim.</p><b>Detay →</b></button>
+            <button class="special-card" data-special="gate" type="button"><span class="special-code">02 / SECURITY</span><div class="special-visual screenshot-visual"><img src="assets/aycube_screens/supalan-liste.png" alt="Supalan liste ekranı" /><span class="special-visual-badge">FIELD FLOW</span></div><h3 data-tr="Kapı Bildirimleri" data-en="Gate Notifications">Kapı Bildirimleri</h3><p data-tr="Tır, araç ve ziyaretçi giriş-çıkışlarının kontrollü takibi." data-en="Controlled tracking of truck, vehicle and visitor entry-exit.">Tır, araç ve ziyaretçi giriş-çıkışlarının kontrollü takibi.</p><b>Detay →</b></button>
+            <button class="special-card" data-special="declarationImage" type="button"><span class="special-code">03 / FINANCE</span><div class="special-visual screenshot-visual"><img src="assets/aycube_screens/arsiv-dosya-yukleme.png" alt="Beyanname görüntüsü ve arşiv ekranı" /><span class="special-visual-badge">PDF → BANK</span></div><h3 data-tr="Beyanname Görüntüsü" data-en="Declaration Image">Beyanname Görüntüsü</h3><p data-tr="Bankaya gönderilen beyanname görüntülerinin kontrollü alınması, iletimi ve izlenmesi." data-en="Controlled retrieval, delivery and tracking of declaration images sent to the bank.">Bankaya gönderilen beyanname görüntülerinin kontrollü alınması, iletimi ve izlenmesi.</p><b>Detay →</b></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide-supalan" data-title-tr="Supalan" data-title-en="Supalan">
+        <div class="content-wide supalan-layout">
+          <div class="supalan-copy" data-reveal="left">
+            <p class="kicker">09 — SUPALAN</p><h2 data-tr="Sahanın ritmi, tek ekranda görünür ve yönetilebilir." data-en="The rhythm of the field, visible and manageable on one screen.">Sahanın ritmi, tek ekranda görünür ve yönetilebilir.</h2>
+            <p data-tr="Tır giriş-kayıt süreçleri, saha hareketleri ve bekleme süreleri Aycube üzerinden tek ekranda izlenir." data-en="Truck entry records, field movements and waiting times are monitored on one screen through Aycube.">Tır giriş-kayıt süreçleri, saha hareketleri ve bekleme süreleri Aycube üzerinden tek ekranda izlenir.</p>
+            <div class="supalan-actions"><button class="primary-button compact-button" id="addTruckBtn" type="button"><span data-tr="Demo Tır Girişi Ekle" data-en="Add Demo Truck Entry">Demo Tır Girişi Ekle</span><b>＋</b></button></div>
+          </div>
+          <div class="supalan-dashboard" data-reveal="right">
+            <div class="supalan-data-note"><span data-tr="Veriler örnektir." data-en="Data shown is illustrative.">Veriler örnektir.</span></div>
+            <div class="supalan-media">
+              <div class="supalan-hero">
+                <img id="supalanHero" src="assets/supalan/supalan-1.jpg" alt="Supalan Tır Parkı genel görünüm" />
+              </div>
+              <div class="supalan-thumbs">
+                <button class="supalan-thumb is-active" type="button" data-supalan-index="0" data-caption-tr="Drone çekimi • Genel saha görünümü" data-caption-en="Drone shot • Overall field view"><img src="assets/supalan/supalan-1.jpg" alt="Supalan görsel 1" /></button>
+                <button class="supalan-thumb" type="button" data-supalan-index="1" data-caption-tr="Sahaya giriş aksı ve park dizilimi" data-caption-en="Entry axis and parking layout"><img src="assets/supalan/supalan-2.jpg" alt="Supalan görsel 2" /></button>
+                <button class="supalan-thumb" type="button" data-supalan-index="2" data-caption-tr="Operasyon alanı ve çevresel görünürlük" data-caption-en="Operation area and surrounding visibility"><img src="assets/supalan/supalan-3.jpg" alt="Supalan görsel 3" /></button>
+                <button class="supalan-thumb" type="button" data-supalan-index="3" data-caption-tr="Aygen markalı saha görünümü" data-caption-en="Aygen-branded site view"><img src="assets/supalan/supalan-4.jpg" alt="Supalan görsel 4" /></button>
+              </div>
+              <button class="supalan-web-card" type="button" aria-label="Aycube Supalan web ekranlarını aç">
+                <span class="supalan-web-previews" aria-hidden="true"><img src="assets/aycube_screens/supalan-giris-formu.png" alt="" /><img src="assets/aycube_screens/supalan-liste.png" alt="" /></span>
+                <span class="supalan-web-copy"><small>AYCUBE WEB</small><strong data-tr="Supalan web ekranları" data-en="Supalan web screens">Supalan web ekranları</strong><em data-tr="2 ekranı görüntüle" data-en="View 2 screens">2 ekranı görüntüle</em></span>
+                <b aria-hidden="true">↗</b>
+              </button>
+            </div>
+            <div class="supalan-metrics"><article><span data-tr="Sahadaki Tır" data-en="Trucks On Site">Sahadaki Tır</span><strong id="truckCount">18</strong><small data-tr="anlık kayıt" data-en="live records">anlık kayıt</small></article><article><span data-tr="Bekleyen" data-en="Waiting">Bekleyen</span><strong id="waitingCount">05</strong><small data-tr="işlem sırası" data-en="operation queue">işlem sırası</small></article><article><span data-tr="Ort. Bekleme" data-en="Avg. Waiting">Ort. Bekleme</span><strong id="waitingTime">24</strong><small data-tr="dakika" data-en="minutes">dakika</small></article><article><span data-tr="Bugün Tamamlanan" data-en="Completed Today">Bugün Tamamlanan</span><strong id="completedCount">46</strong><small data-tr="giriş / çıkış" data-en="entry / exit">giriş / çıkış</small></article></div>
+            <div class="truck-table"><div class="truck-table-head"><span data-tr="Saat" data-en="Time">Saat</span><span data-tr="Plaka" data-en="Plate">Plaka</span><span data-tr="İşlem" data-en="Operation">İşlem</span><span data-tr="Durum" data-en="Status">Durum</span></div><div class="truck-table-body" id="truckTableBody"><div class="truck-row" data-operation="vehicleImport" data-status="processing"><span>10:42</span><strong>34 FOT 726</strong><span class="truck-operation">Araç İthalat</span><small class="truck-status status-processing">İşlemde</small></div><div class="truck-row" data-operation="spareParts" data-status="waiting"><span>10:36</span><strong>41 AY 1955</strong><span class="truck-operation">Yedek Parça</span><small class="truck-status status-waiting">Bekliyor</small></div><div class="truck-row" data-operation="vehicleExport" data-status="complete"><span>10:28</span><strong>34 GEN 071</strong><span class="truck-operation">Araç İhracat</span><small class="truck-status status-complete">Tamamlandı</small></div></div></div>
+            <div class="report-toast" id="reportToast"><span id="reportToastIcon">✓</span><div><strong id="reportToastTitle">Kayıt eklendi</strong><small id="reportToastText">Örnek veri güncellendi</small></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide slide-closing" data-title-tr="Kapanış" data-title-en="Closing">
+        <div class="closing-burst" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="closing-content">
+          <p class="kicker" data-reveal="up">AYGEN IT × FORD OTOSAN</p>
+          <h2 data-reveal="up"><span data-tr="Veriden aksiyona." data-en="From data to action.">Veriden aksiyona.</span><em data-tr="Birlikte geleceğe." data-en="Forward together.">Birlikte geleceğe.</em></h2>
+          <div class="closing-logos" data-reveal="scale"><img src="assets/aygen-color.png" alt="Aygen" /><span>×</span><img src="assets/ford-otosan.webp" alt="Ford Otosan" /></div>
+          <button class="primary-button" id="restartBtn" type="button" data-reveal="up"><span data-tr="Başa Dön" data-en="Restart">Başa Dön</span><b>↺</b></button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="controls">
+      <button id="prevBtn" type="button" aria-label="Önceki slayt">←</button>
+      <div class="progress"><span id="progressBar"></span></div>
+      <div class="counter"><strong id="currentNo">01</strong><span>/</span><span id="totalNo">11</span></div>
+      <button id="nextBtn" type="button" aria-label="Sonraki slayt">→</button>
+    </footer>
+
+    <div class="overview" id="overview" aria-hidden="true">
+      <button class="overview-close" id="overviewClose" type="button">×</button>
+      <div class="overview-inner"><p class="kicker" data-tr="SUNUM HARİTASI" data-en="PRESENTATION MAP">SUNUM HARİTASI</p><h2 data-tr="Bölümler" data-en="Chapters">Bölümler</h2><div class="overview-grid" id="overviewGrid"></div></div>
+    </div>
+
+    <aside class="speaker-notes" id="speakerNotes" aria-hidden="true">
+      <div class="speaker-notes-head"><span data-tr="KONUŞMA METNİ" data-en="SPEAKER SCRIPT">KONUŞMA METNİ</span><button id="notesClose" type="button" aria-label="Kapat">×</button></div>
+      <h3 id="speakerNotesTitle">Açılış</h3>
+      <p id="speakerNotesText"></p>
+      <small data-tr="N tuşu ile aç/kapat" data-en="Press N to toggle">N tuşu ile aç/kapat</small>
+    </aside>
+
+    <dialog class="modal" id="infoModal">
+      <button class="modal-close" id="modalClose" type="button">×</button>
+      <span class="modal-code" id="modalCode">PROJECT</span><h3 id="modalTitle">Başlık</h3><p id="modalText">Açıklama</p><div class="modal-gallery" id="modalGallery"></div><div class="modal-points" id="modalPoints"></div><div class="modal-demo" id="modalDemo"></div>
+    </dialog>
+  </div>
+    <div class="image-lightbox" id="imageLightbox" aria-hidden="true" role="dialog" aria-label="Görsel önizleme">
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Kapat">×</button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Önceki görsel">‹</button>
+      <figure class="lightbox-stage">
+        <img id="lightboxImage" src="" alt="" />
+        <figcaption>
+          <strong id="lightboxTitle">Görsel</strong>
+          <small id="lightboxCounter">1 / 1</small>
+        </figcaption>
+      </figure>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Sonraki görsel">›</button>
+      <a class="lightbox-open-file" id="lightboxOpenFile" href="#" target="_blank" rel="noopener" data-tr="Yeni sekmede aç" data-en="Open in new tab">Yeni sekmede aç</a>
+    </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
