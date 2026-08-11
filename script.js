@@ -284,7 +284,7 @@ const flowText={
 };
 const fileIconByType={xlsx:"assets/icons/excel.svg",pdf:"assets/icons/pdf.svg",csv:"assets/icons/csv.svg",log:"assets/icons/log.svg"};
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-let otomailRunning=false,otomailCompleted=false,otomailRunNo=0,robotRunning=false,robotCompleted=false;
+let otomailRunning=false,otomailRunNo=0,robotRunning=false;
 
 function setReportState(row,state){
   row.dataset.state=state;
@@ -322,45 +322,44 @@ function refreshOtomailLanguage(){
   $$(".report-row").forEach(row=>setReportState(row,row.dataset.state||"queued"));
   const meta=$("#otomailRunMeta");
   if(meta) updateOtomailMeta(meta.dataset.state||"ready",meta.dataset.fileName||"");
-  const button=$("#runOtomailBtn");
-  if(button){
-    button.querySelector("span").textContent=otomailRunning?flowText[lang].otomailRunning:(otomailCompleted?flowText[lang].runAgain:flowText[lang].runFlow);
-  }
 }
 async function runOtomailFlow(){
   if(otomailRunning) return;
-  otomailRunning=true;otomailCompleted=false;otomailRunNo+=1;
-  const button=$("#runOtomailBtn"),rows=$$(".report-row"),progress=$("#mailPipelineProgress"),packet=$("#mailPacket");
-  button.disabled=true;button.querySelector("span").textContent=flowText[lang].otomailRunning;
-  progress.style.width="0%";
-  setPipelineStage(-1);
-  packet.classList.remove("is-visible");
-  rows.forEach((row,index)=>setReportState(row,index===0?"ready":"queued"));
-  updateOtomailMeta("running",rows[0]?.dataset.fileName||"");
+  otomailRunning=true;
+  const rows=$$(".report-row"),progress=$("#mailPipelineProgress"),packet=$("#mailPacket");
+  if(!rows.length||!progress||!packet){otomailRunning=false;return;}
 
-  for(let i=0;i<rows.length;i+=1){
-    const row=rows[i];
-    rows.forEach(item=>item.classList.remove("is-current"));
-    row.classList.add("is-current");
-    updateOtomailMeta("running",row.dataset.fileName);
-
-    setReportState(row,"generating");setPipelineStage(0);setMailPacket(row,0,true);
-    await sleep(480);
-    setReportState(row,"validating");setPipelineStage(1);setMailPacket(row,1,true);
-    await sleep(500);
-    setReportState(row,"sending");setPipelineStage(2);setMailPacket(row,2,true);
-    await sleep(620);
-    setReportState(row,"sent");
-    row.classList.remove("is-current");
-    progress.style.width=`${((i+1)/rows.length)*100}%`;
-    await sleep(180);
+  while(otomailRunning){
+    otomailRunNo+=1;
+    progress.style.width="0%";
+    setPipelineStage(-1);
     packet.classList.remove("is-visible");
-  }
+    rows.forEach((row,index)=>setReportState(row,index===0?"ready":"queued"));
+    updateOtomailMeta("running",rows[0]?.dataset.fileName||"");
 
-  setPipelineStage(3);
-  updateOtomailMeta("complete");
-  otomailRunning=false;otomailCompleted=true;
-  button.disabled=false;button.querySelector("span").textContent=flowText[lang].runAgain;
+    for(let i=0;i<rows.length;i+=1){
+      const row=rows[i];
+      rows.forEach(item=>item.classList.remove("is-current"));
+      row.classList.add("is-current");
+      updateOtomailMeta("running",row.dataset.fileName);
+
+      setReportState(row,"generating");setPipelineStage(0);setMailPacket(row,0,true);
+      await sleep(480);
+      setReportState(row,"validating");setPipelineStage(1);setMailPacket(row,1,true);
+      await sleep(500);
+      setReportState(row,"sending");setPipelineStage(2);setMailPacket(row,2,true);
+      await sleep(620);
+      setReportState(row,"sent");
+      row.classList.remove("is-current");
+      progress.style.width=`${((i+1)/rows.length)*100}%`;
+      await sleep(180);
+      packet.classList.remove("is-visible");
+    }
+
+    setPipelineStage(3);
+    updateOtomailMeta("complete");
+    await sleep(1400);
+  }
 }
 
 function formatClock(date=new Date()){
@@ -374,29 +373,37 @@ function appendRobotLog(message,state){
 }
 async function runRobotFlow(){
   if(robotRunning) return;
-  robotRunning=true;robotCompleted=false;
-  const lab=$(".automation-lab"),status=$("#robotStatus"),log=$("#robotLog"),button=$("#runRobotBtn");
-  button.disabled=true;button.querySelector("span").textContent=flowText[lang].robotRunning;
-  status.dataset.state="running";status.textContent=flowText[lang].robotRunning;
-  lab.classList.add("is-running");log.innerHTML="";
+  robotRunning=true;
+  const lab=$(".automation-lab"),status=$("#robotStatus"),log=$("#robotLog");
+  if(!lab||!status||!log){robotRunning=false;return;}
 
-  const steps=lang==="tr"?[
-    ["Robot kuyruğu başlatıldı","START"],["INTAÇ oturumu güvenli şekilde açıldı","OK"],["Toplu sorgu parametreleri gönderildi","RUN"],
-    ["Belge görüntüsü ve İNTAÇ tarihi alındı","OK"],["OCR alanları doğrulandı","OK"],["Veri Aycube entegrasyonuna aktarıldı","DONE"]
-  ]:[
-    ["Robot queue started","START"],["INTAÇ session opened securely","OK"],["Bulk query parameters submitted","RUN"],
-    ["Document image and INTAÇ date retrieved","OK"],["OCR fields validated","OK"],["Data transferred to Aycube integration","DONE"]
-  ];
-  for(const step of steps){appendRobotLog(step[0],step[1]);await sleep(430)}
-  lab.classList.remove("is-running");
-  status.dataset.state="complete";status.textContent=flowText[lang].robotComplete;
-  robotRunning=false;robotCompleted=true;button.disabled=false;button.querySelector("span").textContent=flowText[lang].robotAgain;
+  while(robotRunning){
+    status.dataset.state="running";
+    status.textContent=flowText[lang].robotRunning;
+    lab.classList.add("is-running");
+    log.innerHTML="";
+
+    const steps=lang==="tr"?[
+      ["Robot kuyruğu başlatıldı","START"],["INTAÇ oturumu güvenli şekilde açıldı","OK"],["Toplu sorgu parametreleri gönderildi","RUN"],
+      ["Belge görüntüsü ve İNTAÇ tarihi alındı","OK"],["OCR alanları doğrulandı","OK"],["Veri Aycube entegrasyonuna aktarıldı","DONE"]
+    ]:[
+      ["Robot queue started","START"],["INTAÇ session opened securely","OK"],["Bulk query parameters submitted","RUN"],
+      ["Document image and INTAÇ date retrieved","OK"],["OCR fields validated","OK"],["Data transferred to Aycube integration","DONE"]
+    ];
+
+    for(const step of steps){appendRobotLog(step[0],step[1]);await sleep(430)}
+    lab.classList.remove("is-running");
+    status.dataset.state="complete";
+    status.textContent=flowText[lang].robotComplete;
+    await sleep(1400);
+  }
 }
 
 const plateCodes=["06","16","34","35","41","42","54","67","81"];
 const plateLetters="ABCDEFGHJKLMNPRSTUVYZ";
 const usedPlates=new Set($$(".truck-row strong").map(node=>node.textContent.trim()));
 const truckOperations=["vehicleImport","vehicleExport","spareParts","documentTransfer"];
+let supalanTruckTimer=null;
 function randomFrom(items){return items[Math.floor(Math.random()*items.length)]}
 function randomLetters(length){let result="";for(let i=0;i<length;i+=1)result+=plateLetters[Math.floor(Math.random()*plateLetters.length)];return result}
 function randomDigits(length){const min=10**(length-1),max=10**length-1;return String(Math.floor(min+Math.random()*(max-min+1)))}
@@ -429,20 +436,16 @@ function showSupalanToast(title,text,type="success",icon="✓"){
   if(type==="error")toast.classList.add("is-error");else if(type==="info")toast.classList.add("is-info");
   void toast.offsetWidth;toast.classList.add("is-visible");
 }
-function trimTruckRows(){
+function trimTruckRows(maxRows=3){
   const rows=$$("#truckTableBody .truck-row");
-  if(rows.length<=8)return;
-  for(let i=rows.length-1;i>=0&&$$("#truckTableBody .truck-row").length>8;i-=1){
-    if(rows[i].dataset.status==="complete")rows[i].remove();
-  }
+  rows.slice(maxRows).forEach(row=>row.remove());
 }
 function addTruckEntry(){
-  const button=$("#addTruckBtn");
-  button.disabled=true;setTimeout(()=>button.disabled=false,550);
   const body=$("#truckTableBody"),row=document.createElement("div"),plate=generateUniquePlate(),operation=randomFrom(truckOperations);
+  if(!body)return;
   row.className="truck-row is-new is-transitioning";row.dataset.operation=operation;row.dataset.status="registered";
   row.innerHTML=`<span>${new Date().toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})}</span><strong>${plate}</strong><span class="truck-operation"></span><small class="truck-status status-registered"></small>`;
-  body.prepend(row);updateTruckRowLanguage(row);
+  body.prepend(row);trimTruckRows(3);updateTruckRowLanguage(row);
   setMetric("#truckCount",activeTruckValue()+1);
   showSupalanToast(flowText[lang].truckAdded,`${plate} · ${flowText[lang][operation]}`,"info","+");
 
@@ -461,6 +464,12 @@ function addTruckEntry(){
     setMetric("#completedCount",(Number($("#completedCount").textContent)||0)+1);trimTruckRows();
   },9000);
 }
+function startSupalanTruckFlow(){
+  if(!$("#truckTableBody"))return;
+  if(supalanTruckTimer)clearInterval(supalanTruckTimer);
+  addTruckEntry();
+  supalanTruckTimer=setInterval(addTruckEntry,10500);
+}
 function refreshDynamicLanguage(){
   refreshOtomailLanguage();
   $$(".truck-row").forEach(updateTruckRowLanguage);
@@ -469,8 +478,6 @@ function refreshDynamicLanguage(){
     const state=robotStatus.dataset.state||"ready";
     robotStatus.textContent=state==="running"?flowText[lang].robotRunning:state==="complete"?flowText[lang].robotComplete:flowText[lang].robotReady;
   }
-  const robotButton=$("#runRobotBtn");
-  if(robotButton)robotButton.querySelector("span").textContent=robotRunning?flowText[lang].robotRunning:(robotCompleted?flowText[lang].robotAgain:flowText[lang].robotRun);
 }
 
 function updateLanguage(){
@@ -479,6 +486,23 @@ $$("[data-tr][data-en]").forEach(n=>n.textContent=n.dataset[lang]);sectionName.t
 const p=$(".engine-node.is-active");if(p)renderPartnership(p.dataset.partnership);
 const i=$(".integration-tab.is-active");if(i)renderIntegration(i.dataset.integrationTab);
 setSupalanImage(supalanCurrent);refreshDynamicLanguage();
+}
+
+async function copyTeamEmail(button){
+  const email=button.dataset.copyEmail;
+  let copied=false;
+  try{
+    await navigator.clipboard.writeText(email);
+    copied=true;
+  }catch{
+    const field=document.createElement("textarea");
+    field.value=email;field.setAttribute("readonly","");field.style.position="fixed";field.style.opacity="0";
+    document.body.appendChild(field);field.select();
+    copied=document.execCommand("copy");field.remove();
+  }
+  button.textContent=copied?"✓":"!";
+  button.classList.toggle("is-copied",copied);
+  setTimeout(()=>{button.textContent="⧉";button.classList.remove("is-copied")},1300);
 }
 
 
@@ -646,15 +670,16 @@ $$(".project-card").forEach(b=>b.addEventListener("click",()=>openInfo(projectDa
 $("#allProjectsBtn").addEventListener("click",()=>openCatalog("FORD PROJECT CATALOG",lang==="tr"?"Ford Otosan Proje Kataloğu":"Ford Otosan Project Catalogue",lang==="tr"?"Kullanıcı tarafından paylaşılan 29 proje, operasyonel yetkinliklere göre gruplandırılmıştır.":"The 29 projects supplied by the user are grouped by operational capability.",projectCatalog[lang]));
 $$(".integration-tab").forEach(b=>b.addEventListener("click",()=>{$$(".integration-tab").forEach(x=>x.classList.remove("is-active"));b.classList.add("is-active");renderIntegration(b.dataset.integrationTab)}));
 $$(".special-card").forEach(b=>b.addEventListener("click",()=>openInfo(specialData[lang][b.dataset.special],specialScreens[b.dataset.special]||[])));
+$$("[data-copy-email]").forEach(button=>button.addEventListener("click",()=>copyTeamEmail(button)));
 startSupalanAutoplay();
+startSupalanTruckFlow();
+runOtomailFlow();
+runRobotFlow();
 
-$("#runOtomailBtn").addEventListener("click",runOtomailFlow);
 $("#allReportsBtn").addEventListener("click",()=>openCatalog("OTOMAIL REPORT CATALOG",lang==="tr"?"Ford Otomail Rapor Kataloğu":"Ford Otomail Report Catalogue",lang==="tr"?"Kullanıcı tarafından paylaşılan 37 rapor kaydı konu başlıklarına göre gruplanmıştır. Aynı adla tekrarlanan kayıtlar kaynak listedeki biçimiyle korunmuştur.":"The 37 report entries supplied by the user are grouped by subject. Repeated names are preserved as supplied.",reportCatalog[lang]));
 
-$("#runRobotBtn").addEventListener("click",runRobotFlow);
 $("#intacDetailBtn").addEventListener("click",()=>openInfo(lang==="tr"?["INTAÇ AUTOMATION","Ford INTAÇ Sorgulama","Robotun portal oturumu açması, sorgu parametrelerini girmesi, sonucu alması ve sonraki sisteme kontrollü biçimde aktarması.",["Tekrarlı portal adımlarının otomasyonu","Sorgu sonuçlarının loglanması","Hata ve istisna durumlarının işaretlenmesi","Aycube ve ilgili sistemlere aktarım"],"flow"]:["INTAÇ AUTOMATION","Ford INTAÇ Query","The robot opens the portal session, enters query parameters, retrieves the result and transfers it to the next system in a controlled flow.",["Automation of repetitive portal steps","Query-result logging","Error and exception marking","Transfer to Aycube and related systems"],"flow"],projectScreens.intac));
 
-$("#addTruckBtn").addEventListener("click",addTruckEntry);
 $("#modalClose").addEventListener("click",()=>infoModal.close());infoModal.addEventListener("click",e=>{if(e.target===infoModal)infoModal.close()});
 $("#modalGallery")?.addEventListener("click",event=>{
   const figure=event.target.closest("figure");
