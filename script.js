@@ -3,6 +3,8 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const prevBtn=$("#prevBtn"),nextBtn=$("#nextBtn"),progressBar=$("#progressBar"),currentNo=$("#currentNo"),totalNo=$("#totalNo"),sectionName=$("#sectionName");
 const transitionStage=$("#transitionStage"),transitionNumber=$("#transitionNumber"),transitionName=$("#transitionName");
 const overview=$("#overview"),overviewGrid=$("#overviewGrid"),infoModal=$("#infoModal"),notesPanel=$("#speakerNotes"),notesBtn=$("#notesBtn"),notesClose=$("#notesClose"),notesTitle=$("#speakerNotesTitle"),notesText=$("#speakerNotesText");
+const projectSolutionModal=$("#projectSolutionModal");
+const solutionModals={integration:$("#integrationSolutionModal"),automation:$("#rpaSolutionModal"),customs:projectSolutionModal,finance:projectSolutionModal,archive:projectSolutionModal};
 let current=0,lang="tr",busy=false,touchStartX=null;
 totalNo.textContent=String(slides.length).padStart(2,"0");
 
@@ -40,24 +42,30 @@ const partnershipKeys=["collaboration","analysis","development","architecture","
 
 const projectData={
 tr:{
-customs:["CUSTOMS & TRACKING","Gümrük ve Takip Projeleri","Ford operasyonlarında beyan, evrak, süre ve geçici rejim risklerini tek platformda kontrol altına alan yönetim katmanı.",["Beyanname Tescil Kontrolü","Yedek Parça Dekont ve Beyanname Görüntüsü","Bankaya Gönderilen Beyanname Görüntüsü","Ford'a Özel Aycube BI'lar","Kapı Bildirimleri<br>•Yedek parça dosyaları için Ford nakliye ve malzeme kabule bilgi gönderir."],"flow"],
+customs:["CUSTOMS & TRACKING","Gümrük ve Takip Projeleri","Ford operasyonlarında beyan, evrak, süre ve geçici rejim risklerini 11 ayrı proje üzerinden tek platformda kontrol altına alan yönetim katmanı.",["Geçici İthalat Takip","İthalat Beyanname Raporu Detaylı","İthalat Beyanname Raporu","İhracat Beyanname Raporu","İhracat Beyanname Raporu Detaylı","Beyanname Durum Bilgisi","Beyanname Tescil Kontrolü","Yedek Parça Dekont ve Beyanname Görüntüsü","Bankaya Gönderilen Beyanname Görüntüsü","Ford'a Özel Aycube BI'lar — 14 özel BI","Kapı Bildirimleri"],"flow"],
 integration:["INTEGRATION & DATA","Entegrasyon ve Veri Projeleri","Kaynak sistem verisini Ford operasyon kurallarıyla birleştirip manuel girişleri azaltan, veri kalitesini yükselten entegrasyon omurgası.",["Ford Vergi","Ford İthalat","Ford Araç","Ford Araç İhracat","Ford İntaç Entegrasyon","Ford Kamyon İhracat","Ford Parça İhracat","Ford Arşiv Entegrasyon","GetApp Entegrasyon","TPS Entegrasyon"],"flow"],
 automation:["RPA & OCR","RPA ve OCR Projeleri","Tekrarlı portal ve belge işlerini robotlaştırarak operasyon ekiplerine hız, standart ve hata kontrolü kazandıran otomasyon katmanı.",["Tareks","tareks işlemlerinin rpa üzerinde yapılması","Ford Fatura OCR","Ford Faturalarında 0910 Tekrarlanmasının Önlenmesi","Otomatik Fatura Ekranına Ford Firmalarının Dosyalarının Gelmesi"],"flow"],
 finance:["FINANCE & COMMISSION","Finans ve Komisyon Projeleri","Vergi, para, dekont, ekstre ve komisyon akışlarında finansal görünürlük ve denetlenebilir kontrol sağlayan çözüm paketi.",[],"flow"],
-archive:["ARCHIVE & DOCUMENT","Arşiv ve Doküman Projeleri","Ford evrak hafızasını standartlaştıran, arama süresini kısaltan ve denetim gücünü artıran doküman omurgası.",["Arşiv Fihrist","Aycube İthalat Raporu","Aycube İhracat Raporu","Toplu Evrak Talep"],"search"]},
+archive:["ARCHIVE & DOCUMENT","Arşiv ve Doküman Projeleri","Ford evrak hafızasını standartlaştıran, arama süresini kısaltan ve denetim gücünü artıran doküman omurgası.",["Arşiv Fihrist","Arşiv Doküman Yönetim Sistemi","Toplu Evrak Talep"],"search"]},
 en:{
-customs:["CUSTOMS & TRACKING","Customs and Tracking Projects","An executive control layer for declaration, document, deadline and temporary-regime risks across Ford operations.",["Temporary import","Bulk Documents","Summary Declaration Tracking","Temporary Import / Export Tracking","Summary-declaration deadline warning","GetApp"],"flow"],
+customs:["CUSTOMS & TRACKING","Customs and Tracking Projects","An executive control layer managing declaration, document, deadline and temporary-regime risks across Ford operations through 11 distinct projects.",["Temporary Import Tracking","Detailed Import Declaration Report","Import Declaration Report","Export Declaration Report","Detailed Export Declaration Report","Declaration Status Information","Declaration Registration Check","Spare-Part Receipt and Declaration Image","Declaration Image Sent to the Bank","Ford-Specific Aycube BI Dashboards — 14 custom BI dashboards","Gate Notifications"],"flow"],
 integration:["INTEGRATION & DATA","Integration and Data Projects","An integration backbone that combines source-system data with Ford-specific rules, reducing manual entry and improving data quality.",["Ford Integration","Bulk INTAÇ Query with date integration","Bulk INTAÇ date query","GTIP Update","Automatically populated export fields","Automatic post-registration tax-field entry","Accounting Office Information"],"flow"],
 automation:["RPA & OCR","RPA and OCR Projects","An automation layer that robotizes repetitive portal and document tasks, giving teams speed, standards and error control.",["TAREKS","TAREKS operations through RPA","Ford Invoice OCR","Prevention of repeated 0910 on Ford invoices","Automatic arrival of Ford company files on the invoice screen"],"flow"],
 finance:["FINANCE & COMMISSION","Finance and Commission Projects","A solution suite that provides financial visibility and auditable control across tax, cash, receipt, statement and commission flows.",[],"flow"],
-archive:["ARCHIVE & DOCUMENT","Archive and Document Projects","A document backbone that standardizes Ford’s document memory, reduces search time and strengthens audit readiness.",["Archive Index","Aycube Import Report","Aycube Export Report","Bulk Document Request"],"search"]}};
+archive:["ARCHIVE & DOCUMENT","Archive and Document Projects","A document backbone that standardizes Ford’s document memory, reduces search time and strengthens audit readiness.",["Archive Index","Archive Document Management System","Bulk Document Request"],"search"]}};
 
 const projectItems={
 customs:[
+  {title:{tr:"Geçici İthalat Takip",en:"Temporary Import Tracking"},image:"assets/aycube_screens/gecici-ithalat-takip.png",description:{tr:"Geçici ithalat dosyalarının giriş, kapanış ve süre bilgilerini tek ekranda izler. Yaklaşan terminleri, açık kalan kayıtları ve aksiyon bekleyen işlemleri Ford ekipleri için görünür hâle getirir.",en:"Tracks entry, closure and deadline information for temporary import files on one screen, highlighting approaching deadlines, open records and actions awaiting Ford teams."}},
+  {title:{tr:"İthalat Beyanname Raporu Detaylı",en:"Detailed Import Declaration Report"},image:"assets/aycube_screens/ithalat-beyanname-raporu-detayli.png",description:{tr:"Ford ithalat beyannamelerini kalem, rejim, gümrük, ülke, vergi, kıymet ve belge bilgileriyle ayrıntılı biçimde sunar. Filtrelenebilir yapı sayesinde aranan kayıt hızlıca bulunur ve operasyonel kontrol kolaylaşır.",en:"Presents Ford import declarations in detail across item, regime, customs office, country, tax, value and document data. Its filterable structure makes records easy to find and control."}},
+  {title:{tr:"İthalat Beyanname Raporu",en:"Import Declaration Report"},image:"assets/aycube_screens/ithalat-beyanname-raporu.png",description:{tr:"İthalat dosyalarını beyanname numarası, tarih, rejim, gümrük ve durum bilgileriyle tek raporda toplar. Güncel operasyon tablosu sayesinde bekleyen ve tamamlanan işlemler karşılaştırılabilir.",en:"Collects import files in one report with declaration number, date, regime, customs office and status data, making pending and completed operations easy to compare."}},
+  {title:{tr:"İhracat Beyanname Raporu",en:"Export Declaration Report"},image:"assets/aycube_screens/ihracat-beyanname-raporu.png",description:{tr:"İhracat beyannamelerini sevkiyat, çıkış, ülke ve kapanış bilgileriyle tek görünümde izler. Ford ekipleri dosya durumunu ve sonuç bilgisini aynı ekran üzerinden takip eder.",en:"Tracks export declarations in one view with shipment, exit, country and closure information, allowing Ford teams to follow file status and results from the same screen."}},
+  {title:{tr:"İhracat Beyanname Raporu Detaylı",en:"Detailed Export Declaration Report"},image:"assets/aycube_screens/ihracat-beyanname-raporu-detayli.png",description:{tr:"Ford ihracat beyannamelerini dosya, firma, rejim, gümrük, ülke, ödeme, fatura ve kur bilgileriyle satır bazında ayrıntılı gösterir. Tarih, referans, firma, rejim, gümrük ve ticaret ülkesi filtreleriyle aranan kayıt hızla bulunur; sonuçlar XLSX veya CSV olarak dışa aktarılabilir.",en:"Displays Ford export declarations at line level with file, company, regime, customs office, country, payment, invoice and exchange-rate data. Date and operational filters locate records quickly, and results can be exported as XLSX or CSV."}},
+  {title:{tr:"Beyanname Durum Bilgisi",en:"Declaration Status Information"},description:{tr:"Beyannamenin hazırlık, tescil, muayene, çıkış ve kapanış/intaç durumunu tek kayıtta gösterir. Bekleyen, hata alan veya aksiyon gerektiren dosyaları görünür kılar; ekiplerin güncel duruma göre hızlı aksiyon almasını sağlar.",en:"Shows preparation, registration, inspection, exit and closure status in one record. It highlights pending, failed and action-required files so teams can respond to the latest status quickly."}},
   {title:{tr:"Beyanname Tescil Kontrolü",en:"Declaration Registration Check"},description:{tr:"Beyanname tescilinden önce zorunlu alanları ve Ford operasyon kurallarını kontrol eder; eksik veya tutarsız kayıtları işlem tamamlanmadan görünür kılar.",en:"Checks mandatory fields and Ford operational rules before declaration registration, exposing missing or inconsistent records before the transaction is completed."}},
   {title:{tr:"Yedek Parça Dekont ve Beyanname Görüntüsü",en:"Spare-Part Receipt and Declaration Image"},description:{tr:"Yedek parça dosyalarındaki dekontları beyanname görüntüleriyle eşleştirir; belgeye tek noktadan ve izlenebilir biçimde erişim sağlar.",en:"Matches receipts in spare-part files with declaration images, providing traceable access to the document from a single point."}},
   {title:{tr:"Bankaya Gönderilen Beyanname Görüntüsü",en:"Declaration Image Sent to the Bank"},description:{tr:"Tescilli beyanname görüntüsünü kontrollü şekilde alır, yetkili banka akışına iletir ve gönderim sonucunu kayıt altına alır.",en:"Retrieves the registered declaration image in a controlled flow, sends it to the authorised bank channel and records the delivery result."}},
-  {title:{tr:"Ford’a Özel Aycube BI’lar",en:"Ford-Specific Aycube BI Dashboards"},description:{tr:"İthalat, ihracat ve gümrük operasyonlarını Ford’a özel KPI, durum ve istisna ekranlarında bir araya getirir.",en:"Brings import, export and customs operations together in Ford-specific KPI, status and exception dashboards."}},
+  {title:{tr:"Ford’a Özel Aycube BI’lar",en:"Ford-Specific Aycube BI Dashboards"},metric:{tr:"14 özel BI",en:"14 custom BI dashboards"},description:{tr:"Ford operasyonlarına özel hazırlanan 14 Aycube BI; ithalat, ihracat, gümrük, finans ve performans göstergelerini KPI, durum ve istisna görünümlerinde bir araya getirir.",en:"Fourteen Aycube BI dashboards built specifically for Ford bring import, export, customs, finance and performance indicators together in KPI, status and exception views."}},
   {title:{tr:"Kapı Bildirimleri",en:"Gate Notifications"},description:{tr:"Yedek parça dosyaları için Ford nakliye ve malzeme kabul ekiplerine zamanında bilgi gönderir; kapı ve teslim hareketlerini izlenebilir hâle getirir.",en:"Sends timely information to Ford transport and material-acceptance teams for spare-part files, making gate and delivery movements traceable."}}
 ],
 integration:[
@@ -81,9 +89,8 @@ automation:[
 ],
 finance:[],
 archive:[
-  {title:{tr:"Arşiv Fihrist",en:"Archive Index"},description:{tr:"Beyanname arşivindeki kaydın Ford arşivinde bulunduğu konumu gösterir; finansal belgeye hızlı ve denetlenebilir erişim sağlar.",en:"Shows where a declaration-archive record is held in the Ford archive, enabling fast and auditable access to financial documents."}},
-  {title:{tr:"Aycube İthalat Raporu",en:"Aycube Import Report"},description:{tr:"İthalat işlemlerini vergi, kıymet, dosya ve beyanname boyutlarıyla tek raporda birleştirir.",en:"Combines import transactions in one report across tax, value, file and declaration dimensions."}},
-  {title:{tr:"Aycube İhracat Raporu",en:"Aycube Export Report"},description:{tr:"İhracat süreçlerini sevkiyat, beyanname ve sonuç bilgileriyle izlenebilir bir yönetim görünümüne taşır.",en:"Turns export processes into a traceable management view with shipment, declaration and result information."}},
+  {title:{tr:"Arşiv Fihrist",en:"Archive Index"},image:"assets/aycube_screens/arsiv-fihrist.png",description:{tr:"Beyanname ve ek belgelerin Ford arşivindeki konumunu indeksler. Dosya numarası, beyanname veya referans üzerinden hızlı ve denetlenebilir belge erişimi sağlar.",en:"Indexes the location of declarations and supporting documents in the Ford archive, enabling fast and auditable access by file number, declaration or reference."}},
+  {title:{tr:"Arşiv Doküman Yönetim Sistemi",en:"Archive Document Management System"},image:"assets/aycube_screens/arsiv-dosya-yukleme.png",description:{tr:"Belgeleri doğru dosya ve işlem kaydıyla ilişkilendirerek standart isim ve referans bilgileriyle arşive aktarır. Dokümanların merkezi, düzenli ve izlenebilir biçimde yönetilmesini sağlar; eksik veya hatalı kayıt riskini azaltır.",en:"Links documents to the correct file and transaction record, then archives them with standard names and references. It provides central, orderly and traceable document management while reducing missing or incorrect records."}},
   {title:{tr:"Toplu Evrak Talep",en:"Bulk Document Request"},description:{tr:"Birden fazla dosya için evrak taleplerini tek işlemde Beyanname No. ya da Dosya No. ile Aycube üzerinden oluşturur, durumlarını izler ve tamamlanan belgeleri ilgili kayda bağlar.",en:"Creates document requests for multiple files in one operation, tracks their status and links completed documents to the relevant record."}}
 ]};
 
@@ -92,7 +99,8 @@ const projectScreens={
     {src:"assets/aycube_screens/gecici-ithalat-takip.png",label:{tr:"Geçici İthalat Takip",en:"Temporary Import Tracking"}},
     {src:"assets/aycube_screens/ithalat-beyanname-raporu-detayli.png",label:{tr:"İthalat Beyanname Raporu Detaylı",en:"Detailed Import Declaration Report"}},
     {src:"assets/aycube_screens/ithalat-beyanname-raporu.png",label:{tr:"İthalat Beyanname Raporu",en:"Import Declaration Report"}},
-    {src:"assets/aycube_screens/ihracat-beyanname-raporu.png",label:{tr:"İhracat Beyanname Raporu",en:"Export Declaration Report"}}
+    {src:"assets/aycube_screens/ihracat-beyanname-raporu.png",label:{tr:"İhracat Beyanname Raporu",en:"Export Declaration Report"}},
+    {src:"assets/aycube_screens/ihracat-beyanname-raporu-detayli.png",label:{tr:"İhracat Beyanname Raporu Detaylı",en:"Detailed Export Declaration Report"}}
   ],
   integration:[
     {src:"assets/aycube_screens/ithalat-beyanname-raporu.png",label:{tr:"İthalat Beyanname Raporu",en:"Import Declaration Report"}},
@@ -101,21 +109,12 @@ const projectScreens={
     {src:"assets/aycube_screens/bi-ihracat-ithalat-grafik.png",label:{tr:"İhracat / İthalat Grafik Ekranı",en:"Export / Import Dashboard"}}
   ],
   automation:[
-    {src:"assets/aycube_screens/arsiv-dosya-yukleme.png",label:{tr:"Arşiv Dosya Yükleme",en:"Archive File Upload"}},
+    {src:"assets/aycube_screens/arsiv-dosya-yukleme.png",label:{tr:"Arşiv Doküman Yönetim Sistemi",en:"Archive Document Management System"}},
     {src:"assets/aycube_screens/aycube-ana-ekran.png",label:{tr:"Aycube Ana Ekran",en:"Aycube Home Screen"}},
     {src:"assets/aycube_screens/gecici-ithalat-takip.png",label:{tr:"Takip Akışı",en:"Tracking Flow"}}
   ],
-  finance:[
-    {src:"assets/aycube_screens/all-bi.png",label:{tr:"All BI",en:"All BI"}},
-    {src:"assets/aycube_screens/bi-ihracat-ithalat-grafik.png",label:{tr:"İhracat / İthalat Grafik",en:"Export / Import Dashboard"}},
-    {src:"assets/aycube_screens/bi-gtip-analiz.png",label:{tr:"GTİP ve İstatistiki Kıymet",en:"GTIP and Statistical Value"}},
-    {src:"assets/aycube_screens/aycube-ana-ekran.png",label:{tr:"Aycube Haber ve KPI Alanı",en:"Aycube News and KPI Area"}}
-  ],
-  archive:[
-    {src:"assets/aycube_screens/arsiv-fihrist.png",label:{tr:"Arşiv Fihrist",en:"Archive Index"}},
-    {src:"assets/aycube_screens/arsiv-dosya-yukleme.png",label:{tr:"Arşiv Dosya Yükleme",en:"Archive File Upload"}},
-    {src:"assets/aycube_screens/bi-gtip-analiz.png",label:{tr:"Ford GTİP Raporu",en:"Ford GTIP Report"}}
-  ],
+  finance:[],
+  archive:[],
   intac:[
     {src:"assets/aycube_screens/ithalat-beyanname-raporu-detayli.png",label:{tr:"Detaylı Sorgu Sonuçları",en:"Detailed Query Results"}},
     {src:"assets/aycube_screens/ithalat-beyanname-raporu.png",label:{tr:"Toplu İthalat Görünümü",en:"Bulk Import View"}}
@@ -124,8 +123,8 @@ const projectScreens={
 
 const projectScreenDetails={
   "assets/aycube_screens/gecici-ithalat-takip.png":{
-    tr:"Geçici ithalat ve ihracat dosyalarının giriş, kapanış ve süre bilgilerini tek ekranda izler. Yaklaşan terminleri, açık kalan kayıtları ve aksiyon bekleyen işlemleri Ford ekipleri için görünür hâle getirir.",
-    en:"Tracks entry, closure and deadline information for temporary import and export files on one screen. It makes approaching deadlines, open records and actions awaiting attention visible to Ford teams."
+    tr:"Geçici ithalat dosyalarının giriş, kapanış ve süre bilgilerini tek ekranda izler. Yaklaşan terminleri, açık kalan kayıtları ve aksiyon bekleyen işlemleri Ford ekipleri için görünür hâle getirir.",
+    en:"Tracks entry, closure and deadline information for temporary import files on one screen. It makes approaching deadlines, open records and actions awaiting attention visible to Ford teams."
   },
   "assets/aycube_screens/ithalat-beyanname-raporu-detayli.png":{
     tr:"İthalat beyannamesini kalem, GTİP, vergi, kıymet ve belge referanslarıyla ayrıntılı gösterir. Operasyon ekiplerinin tek kayıttan geriye doğru kontrol ve karşılaştırma yapmasını kolaylaştırır.",
@@ -178,11 +177,11 @@ archive:{code:"ARCHIVE INTEGRATION",title:"Archive Integration",description:"Man
 bank:{code:"BANK INTEGRATION",title:"Bank Integration",description:"Makes payments, collections, receipts and declaration-image flows standard, controlled and traceable.",rate:99.2,rateText:"99.2%",cards:[["01 / TRANSFER","Controlled Delivery","Automatic recorded delivery of declaration images to the bank."],["02 / CONTROL","Reconciliation & Exception","Monitoring successful, pending and failed states."]]}}};
 
 const projectCatalog={
-tr:[["Gümrük & Takip",["Geçici ithalat","Toplu Evrak","Özet Beyan Takip","GetApp","Geçici İthalat / İhracat Takibi","Özet beyan süresi yaklaştığında uyarı gelmesi"]],["Entegrasyon & Veri",["Toplu İntaç Sorgulama (intaç tarihi entegrasyonla gitmesi)","intaç tarihi toplu sorgulama","Gtip Güncelleme","İhracatta Oto. Getirilen bazı alanlar","Ford Entegrasyon","Saymanlık Bilgisi","İhracat Sisteminde vergi alanı dolu ise tescil sonrası bilgi girişine oto. gelmesi"]],["RPA & OCR",["Tareks","tareks işlemlerinin rpa üzerinde yapılması","Ford Fatura OCR","Ford Faturalarında 0910 Tekrarlanmasının Önlenmesi","Otomatik Fatura Ekranına Ford Firmalarının Dosyalarının Gelmesi"]],["Finans & Komisyon",["Bankaya gönderilen Byn. Görüntüsü","Müşteri komisyonları","Dekont Edilmeyen Dosyaların tespiti","Ekstre gönderimi otomatize edilmesi","Vergi Talep","Para Talep","komisyon hesaplama","öz-3 işaretlemerinde komisyon işaretlemeleri kontrolü"]],["Arşiv & Rapor",["Ford Gtip Raporu","Ford Arşiv Entegrasyon","Arşiv Fihrist"]]],
-en:[["Customs & Tracking",["Temporary import","Bulk Documents","Summary Declaration Tracking","GetApp","Temporary Import / Export Tracking","Summary-declaration deadline warning"]],["Integration & Data",["Bulk INTAÇ Query with date integration","Bulk INTAÇ date query","GTIP Update","Automatically populated export fields","Ford Integration","Accounting Office Information","Automatic post-registration tax-field entry"]],["RPA & OCR",["TAREKS","TAREKS operations through RPA","Ford Invoice OCR","Prevention of repeated 0910 on Ford invoices","Automatic arrival of Ford company files on invoice screen"]],["Finance & Commission",["Declaration image sent to bank","Customer commissions","Detection of files without receipts","Automated statement delivery","Tax Request","Cash Request","Commission calculation","Commission-marking control for ÖZ-3"]],["Archive & Reporting",["Ford GTIP Report","Ford Archive Integration","Archive Index"]]]};
+tr:[["Gümrük & Takip",["Geçici ithalat","Toplu Evrak","Özet Beyan Takip","GetApp","Geçici İthalat / İhracat Takibi","Özet beyan süresi yaklaştığında uyarı gelmesi"]],["Entegrasyon & Veri",["Toplu İntaç Sorgulama (intaç tarihi entegrasyonla gitmesi)","intaç tarihi toplu sorgulama","Gtip Güncelleme","İhracatta Oto. Getirilen bazı alanlar","Ford Entegrasyon","Saymanlık Bilgisi","İhracat Sisteminde vergi alanı dolu ise tescil sonrası bilgi girişine oto. gelmesi"]],["RPA & OCR",["Tareks","tareks işlemlerinin rpa üzerinde yapılması","Ford Fatura OCR","Ford Faturalarında 0910 Tekrarlanmasının Önlenmesi","Otomatik Fatura Ekranına Ford Firmalarının Dosyalarının Gelmesi"]],["Finans & Komisyon",["Bankaya gönderilen Byn. Görüntüsü","Müşteri komisyonları","Dekont Edilmeyen Dosyaların tespiti","Ekstre gönderimi otomatize edilmesi","Vergi Talep","Para Talep","komisyon hesaplama","öz-3 işaretlemerinde komisyon işaretlemeleri kontrolü"]],["Arşiv & Doküman",["Arşiv Fihrist","Arşiv Doküman Yönetim Sistemi","Toplu Evrak Talep"]]],
+en:[["Customs & Tracking",["Temporary import","Bulk Documents","Summary Declaration Tracking","GetApp","Temporary Import / Export Tracking","Summary-declaration deadline warning"]],["Integration & Data",["Bulk INTAÇ Query with date integration","Bulk INTAÇ date query","GTIP Update","Automatically populated export fields","Ford Integration","Accounting Office Information","Automatic post-registration tax-field entry"]],["RPA & OCR",["TAREKS","TAREKS operations through RPA","Ford Invoice OCR","Prevention of repeated 0910 on Ford invoices","Automatic arrival of Ford company files on invoice screen"]],["Finance & Commission",["Declaration image sent to bank","Customer commissions","Detection of files without receipts","Automated statement delivery","Tax Request","Cash Request","Commission calculation","Commission-marking control for ÖZ-3"]],["Archive & Document",["Archive Index","Archive Document Management System","Bulk Document Request"]]]};
 const reportCatalog={
-tr:[["İthalat & Beyanname",["Ford Eksik evrak raporu haftalık","ford eksik evrak raporu","Detaylı ithalat raporları","Ford beyanname raporu","ford serbest dolaşıma giriş listesi YP","ford ithalat raporu","ford ithalat","ford istatistiki kıymet","ford ötv mail","ford navlun mail","ford imei mail","ikileme"]],["İhracat",["ford ihracat gtip bazlı rapor","ford ihracat raporu (0100)","Ford İhracat Raporu 0100-cargo","Ford İhracat","Ford parça ihracat raporu","Ford geçici ihracat","Ford intaç mail","Ford Günlük Araç İhracat","Ford ihracat ceza","ford sandık","ford vw ihracat","ford araç ihracat"]],["Finans & Ödeme",["ford dekont raporu","Ford Ödeme Raporu","ford samandıra dekont","aygen ford ödeme listesi"]],["Uyum & Teşvik",["ceza takip raporu (ford)","ford ar-ge raporu","ford yatırım teşvik raporu","ford nihai kullanım raporu","ford ihracat gtip bazlı rapor"]],["Saha & Arşiv",["gümrüklü saha listesi","gümrüklü saha listesi ford dışı antrepo","yp kapı bildirim","arşiv kontrol ford mail"]]],
-en:[["Import & Declaration",["Weekly Ford missing-document report","Ford missing-document report","Detailed import reports","Ford declaration report","Ford free-circulation entry list — spare parts","Ford import report","Ford import","Ford statistical value","Ford SCT mail","Ford freight mail","Ford IMEI mail","Duplication control"]],["Export",["Ford export report by GTIP","Ford export report (0100)","Ford Export Report 0100-cargo","Ford Export","Ford spare-parts export report","Ford temporary export","Ford INTAÇ mail","Ford Daily Vehicle Export","Ford export penalty","Ford crate","Ford VW export","Ford vehicle export"]],["Finance & Payment",["Ford receipt report","Ford Payment Report","Ford Samandıra receipt","Aygen Ford payment list"]],["Compliance & Incentives",["Ford penalty tracking report","Ford R&D report","Ford investment-incentive report","Ford end-use report","Ford export report by GTIP"]],["Field & Archive",["Customs field list","Customs field list — non-Ford warehouse","Spare-parts gate notification","Ford archive-control mail"]]]};
+tr:[["İthalat & Beyanname",["Ford Haftalık Eksik Evrak Raporu","Ford Eksik Evrak Raporu","Detaylı İthalat Raporları","Ford Beyanname Raporu","Ford Serbest Dolaşıma Giriş Listesi YP Raporu","Ford İthalat Raporu","Ford İthalat Raporu","Ford İstatistiki Kıymet Raporu","Ford ÖTV Raporu","Ford Navlun Raporu","Ford IMEI Raporu","İkileme Raporu"]],["İhracat",["Ford İhracat GTİP Bazlı Raporu","Ford İhracat Raporu (0100)","Ford İhracat Raporu 0100-Cargo","Ford İhracat Raporu","Ford Parça İhracat Raporu","Ford Geçici İhracat Raporu","Ford İntaç Raporu","Ford Günlük Araç İhracat Raporu","Ford İhracat Ceza Raporu","Ford Sandık Raporu","Ford VW İhracat Raporu","Ford Araç İhracat Raporu"]],["Finans & Ödeme",["Ford Dekont Raporu","Ford Ödeme Raporu","Ford Samandıra Dekont Raporu","Aygen Ford Ödeme Listesi Raporu"]],["Uyum & Teşvik",["Ford Ceza Takip Raporu","Ford Ar-Ge Raporu","Ford Yatırım Teşvik Raporu","Ford Nihai Kullanım Raporu","Ford İhracat GTİP Bazlı Raporu"]],["Saha & Arşiv",["Gümrüklü Saha Listesi Raporu","Gümrüklü Saha Listesi Ford Dışı Antrepo Raporu","YP Kapı Bildirim Raporu","Ford Arşiv Kontrol Raporu"]]],
+en:[["Import & Declaration",["Ford Weekly Missing-Document Report","Ford Missing-Document Report","Detailed Import Reports","Ford Declaration Report","Ford Free-Circulation Entry List — Spare Parts Report","Ford Import Report","Ford Import Report","Ford Statistical Value Report","Ford SCT Report","Ford Freight Report","Ford IMEI Report","Duplication Control Report"]],["Export",["Ford GTIP-Based Export Report","Ford Export Report (0100)","Ford Export Report 0100-Cargo","Ford Export Report","Ford Spare-Parts Export Report","Ford Temporary Export Report","Ford INTAÇ Report","Ford Daily Vehicle Export Report","Ford Export Penalty Report","Ford Crate Report","Ford VW Export Report","Ford Vehicle Export Report"]],["Finance & Payment",["Ford Receipt Report","Ford Payment Report","Ford Samandıra Receipt Report","Aygen Ford Payment List Report"]],["Compliance & Incentives",["Ford Penalty Tracking Report","Ford R&D Report","Ford Investment-Incentive Report","Ford End-Use Report","Ford GTIP-Based Export Report"]],["Field & Archive",["Customs Field List Report","Customs Field List — Non-Ford Warehouse Report","Spare-Parts Gate Notification Report","Ford Archive-Control Report"]]]};
 const otomailReports=reportCatalog.tr.flatMap((trGroup,categoryIndex)=>trGroup[1].map((trTitle,itemIndex)=>({
   title:{tr:trTitle,en:reportCatalog.en[categoryIndex]?.[1]?.[itemIndex]||trTitle},
   category:{tr:trGroup[0],en:reportCatalog.en[categoryIndex]?.[0]||trGroup[0]}
@@ -203,13 +202,13 @@ declarationImage:["DECLARATION IMAGE","Declaration Image Sent to Bank","Controll
 
 const rpaProjectData={
 tr:{
-berkbot:["AI-POWERED RPA PLATFORM","BerkBOT | Akıllı Otomasyon Platformu","BerkBOT, şirketimiz bünyesinde geliştirdiğimiz yapay zekâ destekli RPA otomasyon platformudur. Tekrarlayan operasyonel süreçleri uçtan uca otomatikleştirirken iş gücü ve zaman tasarrufu sağlar, kullanıcı kaynaklı hataları minimum seviyeye indirmeyi hedefler. Süreçte karşılaştığı hata ve istisnalardan öğrenen yapısı; kontrol setleri, çapraz doğrulama mekanizmaları ve yapay zekâ destekli kontrollerle olası sorunları işlem gerçekleşmeden önce tespit eder, değerlendirir ve mümkün olan durumlarda otomatik olarak düzeltir. Böylece yalnızca işleri otomatikleştiren değil, operasyonel kaliteyi sürekli geliştiren akıllı bir altyapı sunar.",["Tekrarlayan operasyonel işlemlerin uçtan uca otomasyonu","Kullanıcı kaynaklı hataların işlem öncesinde tespiti","Kontrol setleri ve çapraz doğrulama mekanizmaları","Hata ve istisnalardan öğrenen gelişen yapı","Uygun senaryolarda otomatik düzeltme ve kesintisiz tamamlama"],"flow"],
-fordBilling:["FORD BULK BILLING AUTOMATION","Ford Toplu Fatura Kesim Sistemi","Ford Toplu Fatura Kesim Sistemi, ay boyunca oluşan masraf ve fatura kalemlerini otomatik analiz eden; verileri cari kod bazında konsolide ederek ay sonunda tek seferde toplu faturalandıran akıllı bir otomasyon çözümüdür. BerkBOT altyapısı üzerinde çalışan sistem, OCR ve yapay zekâ destekli kontrollerle eksik, hatalı veya tutarsız kayıtları belirler; mümkün olan durumlarda otomatik düzeltme uygulayarak süreci kullanıcı müdahalesine ihtiyaç duymadan tamamlar. Faturalandırma sonrasında Muhasebe, Operasyon ve Yönetim ekiplerine cari tutarlar, işlem adetleri, masraf dağılımları ile hata ve istisna kayıtlarını içeren ayrıntılı ve izlenebilir raporlar sunar.",["Aylık masraf ve fatura kalemlerinin otomatik analizi","Cari kod bazında konsolidasyon ve tek seferde toplu faturalandırma","OCR ve yapay zekâ destekli eksik, hata ve tutarsızlık kontrolü","Uygun kayıtlarda otomatik düzeltme ve müdahalesiz tamamlama","Muhasebe, Operasyon ve Yönetim için cari bazlı izlenebilir raporlama"],"flow"],
-invoiceOcr:["SMART INVOICE OCR","Akıllı Fatura Ayrıştırma – OCR Servisi","Toplu PDF faturalar OCR teknolojisiyle otomatik olarak analiz edilir ve her belgedeki fatura numarası tespit edilir. Sistem, faturaları Ford, Otokar, Türk Traktör ve Diğerleri klasörlerine ayırır; her faturayı kendi numarasıyla ayrı bir PDF olarak kaydeder. Böylece manuel dosyalama ihtiyacı ortadan kalkar, belge karışıklığı azalır ve operasyon ekipleri işlenmeye hazır faturalara daha hızlı ulaşır.",["Toplu PDF faturaların tek işlemde OCR ile analizi","Fatura numarasının belge üzerinden otomatik tespiti","Ford ve ilgili firma klasörlerine kural bazlı ayrıştırma","Her faturanın kendi numarasıyla ayrı PDF olarak kaydedilmesi","Manuel dosyalamanın kaldırılması ve operasyon süresinin kısalması"],"flow"]},
+berkbot:["","BerkBOT | Akıllı Otomasyon Platformu","BerkBOT, şirketimiz bünyesinde geliştirdiğimiz yapay zekâ destekli RPA otomasyon platformudur. Tekrarlayan operasyonel süreçleri uçtan uca otomatikleştirirken iş gücü ve zaman tasarrufu sağlar, kullanıcı kaynaklı hataları minimum seviyeye indirmeyi hedefler. Süreçte karşılaştığı hata ve istisnalardan öğrenen yapısı; kontrol setleri, çapraz doğrulama mekanizmaları ve yapay zekâ destekli kontrollerle olası sorunları işlem gerçekleşmeden önce tespit eder, değerlendirir ve mümkün olan durumlarda otomatik olarak düzeltir. Böylece yalnızca işleri otomatikleştiren değil, operasyonel kaliteyi sürekli geliştiren akıllı bir altyapı sunar.",["Tekrarlayan operasyonel işlemlerin uçtan uca otomasyonu","Kullanıcı kaynaklı hataların işlem öncesinde tespiti","Kontrol setleri ve çapraz doğrulama mekanizmaları","Hata ve istisnalardan öğrenen gelişen yapı","Uygun senaryolarda otomatik düzeltme ve kesintisiz tamamlama"],"flow"],
+fordBilling:["FORD TOPLU FATURA PROJESİ","Ford Toplu Fatura Kesim Sistemi","Ford Toplu Fatura Kesim Sistemi, ay boyunca oluşan masraf ve fatura kalemlerini otomatik analiz eden; verileri cari kod bazında konsolide ederek ay sonunda tek seferde toplu faturalandıran akıllı bir otomasyon çözümüdür. BerkBOT altyapısı üzerinde çalışan sistem, OCR ve yapay zekâ destekli kontrollerle eksik, hatalı veya tutarsız kayıtları belirler; mümkün olan durumlarda otomatik düzeltme uygulayarak süreci kullanıcı müdahalesine ihtiyaç duymadan tamamlar. Faturalandırma sonrasında Muhasebe, Operasyon ve Yönetim ekiplerine cari tutarlar, işlem adetleri, masraf dağılımları ile hata ve istisna kayıtlarını içeren ayrıntılı ve izlenebilir raporlar sunar.",["Aylık masraf ve fatura kalemlerinin otomatik analizi","Cari kod bazında konsolidasyon ve tek seferde toplu faturalandırma","OCR ve yapay zekâ destekli eksik, hata ve tutarsızlık kontrolü","Uygun kayıtlarda otomatik düzeltme ve müdahalesiz tamamlama","Muhasebe, Operasyon ve Yönetim için cari bazlı izlenebilir raporlama"],"flow"],
+invoiceOcr:["AKILLI FATURA OCR PROJESİ","Akıllı Fatura Ayrıştırma – OCR Servisi","Toplu PDF faturalar OCR teknolojisiyle otomatik olarak analiz edilir ve her belgedeki fatura numarası tespit edilir. Sistem, faturaları Ford için tanımlanan klasör yapısına göre ayrıştırır; her faturayı kendi numarasıyla ayrı bir PDF olarak kaydeder. Böylece manuel dosyalama ihtiyacı ortadan kalkar, belge karışıklığı azalır ve Ford operasyon ekipleri işlenmeye hazır faturalara daha hızlı ulaşır.",["Toplu PDF faturaların tek işlemde OCR ile analizi","Fatura numarasının belge üzerinden otomatik tespiti","Ford için tanımlanan klasörlere kural bazlı ayrıştırma","Her faturanın kendi numarasıyla ayrı PDF olarak kaydedilmesi","Manuel dosyalamanın kaldırılması ve operasyon süresinin kısalması"],"flow"]},
 en:{
-berkbot:["AI-POWERED RPA PLATFORM","BerkBOT | Intelligent Automation Platform","BerkBOT is our in-house AI-powered RPA automation platform. It automates repetitive operational processes end to end, saving workforce capacity and time while minimising user-driven errors. Its learning structure evaluates errors and exceptions encountered during a process; control sets, cross-validation mechanisms and AI-assisted checks identify potential issues before execution and automatically correct them whenever possible. BerkBOT therefore provides an intelligent foundation that continuously improves operational quality rather than simply automating tasks.",["End-to-end automation of repetitive operational tasks","Pre-transaction detection of user-driven errors","Control sets and cross-validation mechanisms","A structure that learns from errors and exceptions","Automatic correction and unattended completion where applicable"],"flow"],
+berkbot:["","BerkBOT | Intelligent Automation Platform","BerkBOT is our in-house AI-powered RPA automation platform. It automates repetitive operational processes end to end, saving workforce capacity and time while minimising user-driven errors. Its learning structure evaluates errors and exceptions encountered during a process; control sets, cross-validation mechanisms and AI-assisted checks identify potential issues before execution and automatically correct them whenever possible. BerkBOT therefore provides an intelligent foundation that continuously improves operational quality rather than simply automating tasks.",["End-to-end automation of repetitive operational tasks","Pre-transaction detection of user-driven errors","Control sets and cross-validation mechanisms","A structure that learns from errors and exceptions","Automatic correction and unattended completion where applicable"],"flow"],
 fordBilling:["FORD BULK BILLING AUTOMATION","Ford Bulk Billing System","The Ford Bulk Billing System automatically analyses expense and invoice items accumulated throughout the month, consolidates them by account code and generates bulk billing in a single month-end run. Operating on the BerkBOT platform, the system uses OCR and AI-assisted controls to detect missing, incorrect or inconsistent records and applies automatic corrections whenever possible, completing the process without user intervention. After billing, it provides Accounting, Operations and Management teams with detailed, traceable reports covering account-based amounts, transaction counts, expense distributions, errors and exceptions.",["Automated analysis of monthly expense and invoice items","Account-code consolidation and single-run bulk billing","OCR and AI-assisted checks for missing, incorrect or inconsistent data","Automatic correction and unattended completion where applicable","Traceable account-based reporting for Accounting, Operations and Management"],"flow"],
-invoiceOcr:["SMART INVOICE OCR","Smart Invoice Separation – OCR Service","Bulk PDF invoices are analysed automatically with OCR technology and the invoice number on each document is detected. The service separates invoices into Ford, Otokar, Türk Traktör and Other folders, then saves every invoice as an individual PDF named with its invoice number. This removes manual filing, reduces document mix-ups and helps operations teams reach processing-ready invoices faster.",["OCR analysis of bulk PDF invoices in a single run","Automatic detection of the invoice number","Rule-based separation into Ford and related company folders","Each invoice saved as an individual PDF with its own number","Removal of manual filing and a shorter operational cycle"],"flow"]}};
+invoiceOcr:["SMART INVOICE OCR","Smart Invoice Separation – OCR Service","Bulk PDF invoices are analysed automatically with OCR technology and the invoice number on each document is detected. The service separates invoices according to the folder structure defined for Ford, then saves every invoice as an individual PDF named with its invoice number. This removes manual filing, reduces document mix-ups and helps Ford operations teams reach processing-ready invoices faster.",["OCR analysis of bulk PDF invoices in a single run","Automatic detection of the invoice number","Rule-based separation into folders defined for Ford","Each invoice saved as an individual PDF with its own number","Removal of manual filing and a shorter operational cycle"],"flow"]}};
 
 const rpaProjectScreens={
   invoiceOcr:[{
@@ -241,29 +240,25 @@ const specialScreens={
 
 const speakerScripts={
 tr:[
-"Açılış mesajı tek: Aygen IT; entegrasyon, otomasyon, raporlama ve saha görünürlüğünü Ford operasyonları için tek dijital omurgada birleştiriyor. 29 proje ve 37 rapor akışı, dağınık çözümler değil, aynı ölçeklenebilir ekosistemin parçalarıdır.",
+"Açılış mesajı tek: Aygen IT; entegrasyon, otomasyon, raporlama ve saha görünürlüğünü Ford operasyonları için tek dijital omurgada birleştiriyor. 29 proje ve 37 dijital iş akışı, dağınık çözümler değil, aynı ölçeklenebilir ekosistemin parçalarıdır.",
 "Hikâyeyi beş eksende kuruyoruz: net sahiplik, tek platform, otomasyonla güçlenen karar ritmi, güvenlik ve sürdürülebilirlik. Her eksen, bir sonrakinin zeminini hazırlıyor.",
-"Bu bölüm teknolojiyi kimin taşıdığını gösteriyor. Beş farklı uzmanlık aynı teslimat sorumluluğunda birleşiyor: liderlik, yazılım, analiz, RPA ve yapay zekâ. Kartları açarak her ekip üyesinin ana katkısını vurgulayabilirsiniz.",
+"Bu bölüm teknolojiyi taşıyan altı kişilik IT kadromuzu gösteriyor. Liderlik, yazılım geliştirme, iş analizi, RPA, yapay zekâ ve yetişen yeni yetenekler aynı ekip yapısı içinde Ford operasyonlarına uçtan uca dijital çözümler sunuyor.",
 "İş birliği modelimizin farkı ortak ve sürdürülebilir sonuç üretme ritmidir. Yakın çalışma ile başlayan süreç; analiz, geliştirme, güvenli mimari, hızlı iterasyon ve kontrollü teslimat adımlarıyla ilerler. Böylece Ford operasyonlarında karar süresi kısalır, güvenilir ve anlamlı veriye daha hızlı ulaşılır.",
-"Aycube bölümünde ana mesaj tek platform mantığı. Ford için geliştirilen 29 proje; gümrük takip, entegrasyon, otomasyon, finans ve arşiv başlıklarında toplanıyor. Kartlara tıklandığında gerçek ekranlar ve proje detayları açılıyor.",
+"Aycube bölümünde ana mesaj tek platform mantığı. Ford için geliştirilen projeler; gümrük takip, entegrasyon, otomasyon, finans ve arşiv başlıklarında toplanıyor. Gümrük & Takip kartında ekranların her biri ayrı proje olarak sayılır ve 11 proje numaralı biçimde sunulur; Ford’a özel 14 Aycube BI da bu kapsamda görünür. Arşiv & Doküman alanı üç projeden oluşur. Finans & Komisyon alanı ise yeni projeler eklenene kadar yalnızca başlık ve kapsam açıklamasıyla sunulur.",
 "Otomail, Ford Otosan ekipleri için hazırlanan 37 operasyonel raporu zamanında üreten, doğrulayan ve yalnızca yetkili alıcılara güvenle ulaştıran otomatik rapor dağıtım servisidir. Akış 37 raporun tamamını sırayla gösterir. Günlük yaklaşık 40, haftalık 280, aylık ortalama 1.223 ve yıllık yaklaşık 14.671 rapor gönderimi; teslim kayıtları, hata uyarıları ve izlenebilir yeniden denemelerle yönetilir.",
-"BerkBOT, Aygen bünyesinde geliştirdiğimiz yapay zekâ destekli RPA platformudur. Tekrarlayan süreçleri otomatikleştirirken kontrol setleri, çapraz doğrulama ve öğrenen hata yönetimiyle operasyonel kaliteyi artırır. Ford Toplu Fatura Kesim Sistemi, aylık masraf ve fatura kalemlerini cari bazında konsolide edip ay sonunda toplu faturalandırır. Akıllı Fatura Ayrıştırma OCR Servisi ise toplu PDF faturaları analiz eder, fatura numarasını bulur, belgeleri firma klasörlerine ayırır ve her faturayı kendi numarasıyla ayrı bir PDF olarak kaydeder. Sağdaki ana akış, robotun işlemi yürüttüğü, OCR’ın veriyi doğruladığı ve sonucun Aycube veya ERP’ye aktarıldığı yapıyı gösteriyor.",
-"Dört kritik entegrasyon alanı aynı veri prensipleri üzerinde çalışıyor: ortak veri, kural bazlı doğrulama ve izlenebilir teslimat. İhracat sekmesindeki kamyon akışı; araç, sevkiyat ve beyanname verilerini tek kayıtta eşleştiriyor, zorunlu alanları doğruluyor ve tescilden çıkış ile intaç durumuna kadar süreci Ford ekipleri için görünür hâle getiriyor. Yüzde yerine kapsamı göstererek doğrulanmamış KPI’larla güven zedelemiyoruz.",
 "Özel projelerde sahadaki somut ihtiyaçlara üretilen nokta çözümleri gösteriyoruz: arşiv fihrist, gümrük kapı bildirimleri ve bankaya giden beyanname görüntüleri. Buradaki kapı bildirimi Supalan süreci değildir; gümrüklü sahaya giren veya sahadan çıkan aracın plaka, beyanname ya da taşıma kaydı, kapı ve zaman bilgileriyle eşleştirilerek ilgili gümrük dosyasına bağlanmasıdır. Böylece eksik veya uyumsuz hareketler görünür, yetkili ekipler için denetlenebilir bir işlem izi oluşur.",
-"Supalan bölümünde fiziksel saha ile dijital kontrolü birlikte görüyoruz. Araç ve şoför bilgileri tır giriş formunda toplanıp Aycube’da kayıt altında tutuluyor; giriş ve çıkışlar plaka tanıma, güvenlik kontrolü ve sisteme entegre 40 kameralı altyapıyla izleniyor. Gümrüklü araçlarda vergi ödemesi ve ilgili gümrük adımları tamamlanana kadar bekleme statüsü takip ediliyor. Giriş, çıkış ve transit sürelerini içeren raporlarımız Ford’a zaman görünürlüğü sağlıyor; demurajı Aygen veya Aycube hesaplamıyor, Ford ekipleri değerlendirmeyi bu raporlardaki verilerle yapıyor. Olay bildirimleri ile ithalat ve ihracat raporları yetkili ekiplere e-posta yoluyla iletiliyor. Ekrandaki sayısal veriler örnektir.",
+"Supalan bölümünde fiziksel saha ile dijital kontrolü birlikte görüyoruz. Araç ve şoför bilgileri tır giriş formunda toplanıp Aycube’da kayıt altında tutuluyor; giriş ve çıkışlar plaka tanıma, güvenlik kontrolü ve sisteme entegre 40 kameralı altyapıyla izleniyor. Gümrüklü araçlarda vergi ödemesi ve ilgili gümrük adımları tamamlanana kadar bekleme statüsü takip ediliyor. Giriş, çıkış ve transit sürelerini içeren raporlarımız Ford’a zaman görünürlüğü sağlıyor; Ford ekipleri demuraj değerlendirmesini bu raporlardaki verilerle yapıyor. Olay bildirimleri ile ithalat ve ihracat raporları yetkili ekiplere e-posta yoluyla iletiliyor. Ekrandaki sayısal veriler örnektir.",
 "Kapanış, veriyle görünür hale gelen operasyonun artık somut aksiyona dönüşebileceğini vurguluyor. Aygen IT ve Ford Otosan iş birliğini, geleceği birlikte şekillendiren uzun vadeli bir ortaklık mesajıyla tamamlıyoruz."
 ],
 en:[
 "The opening message is simple: Aygen IT unifies integration, automation, reporting and field visibility into one digital backbone for Ford operations. The 29 projects and 37 report flows are parts of the same scalable ecosystem.",
 "The story follows five pillars: clear ownership, one platform, an automation-powered decision rhythm, security and sustainability. Each pillar creates the foundation for the next.",
-"This section shows who carries the work. Five disciplines share one delivery responsibility: leadership, software, analysis, RPA and AI. Open the cards to highlight each person’s core contribution.",
+"This section introduces our six-person IT team. Leadership, software development, business analysis, RPA, AI and emerging talent come together to deliver end-to-end digital solutions for Ford operations.",
 "The differentiator is a shared rhythm focused on sustainable outcomes. Starting with close collaboration, the process moves through analysis, development, secure architecture, fast iteration and controlled delivery. This shortens decision cycles and provides Ford operations with faster access to reliable, meaningful data.",
-"The Aycube section communicates the single-platform logic. The 29 Ford projects are grouped under customs tracking, integration, automation, finance and archive capabilities. Each card opens real screens and project details.",
+"The Aycube section communicates the single-platform logic. Ford projects are grouped under customs tracking, integration, automation, finance and archive capabilities. In Customs & Tracking, every screen is counted as a distinct project and the 11 projects are numbered individually; the scope also makes Ford’s 14 custom Aycube BI dashboards explicit. Archive & Document contains three projects. Finance & Commission presents only its title and scope description until new projects are added.",
 "Otomail is the automated report-distribution service that generates and validates 37 operational reports for Ford Otosan teams, then securely delivers them only to authorised recipients. The flow cycles through all 37 reports in sequence. Approximately 40 daily, 280 weekly, 1,223 monthly and 14,671 yearly deliveries are managed with delivery logs, error alerts and traceable retries.",
-"BerkBOT is the AI-powered RPA platform developed in-house at Aygen. It automates repetitive processes while improving operational quality through control sets, cross-validation and learning-based exception handling. The Ford Bulk Billing System consolidates monthly expense and invoice items by account and completes bulk billing at month end. The Smart Invoice Separation OCR Service analyses bulk PDF invoices, detects invoice numbers, separates documents into company folders and saves each invoice as an individual PDF named with its own number. The main flow on the right shows the robot executing the process, OCR validating the data and the verified result being transferred to Aycube or ERP.",
-"Four critical integration areas share the same principles: common data, rule-based validation and traceable delivery. The truck-export flow matches vehicle, shipment and declaration data in one record, validates mandatory fields and gives Ford teams visibility from registration through exit and closure. The slide shows scope instead of unverified percentages, preserving executive credibility.",
 "Special projects show targeted solutions for concrete operational needs: archive index, customs gate notifications and declaration images sent to the bank. The gate notification shown here is not the Supalan process; it links a vehicle entering or leaving a customs-controlled site to its customs file through plate, declaration or transport record, gate and timestamp data. Missing or inconsistent movements become visible and authorised teams receive an auditable transaction trail.",
-"The Supalan section brings the physical site and digital control together. Vehicle and driver data is collected through the truck-entry form and retained in Aycube; entry and exit are monitored through plate recognition, security checks and an integrated 40-camera infrastructure. Customs-controlled vehicles remain in a waiting status until tax payment and the relevant customs steps are complete. Our entry, exit and transit-duration reports give Ford time visibility; Aygen and Aycube do not calculate demurrage, and Ford teams make that assessment using the report data. Event notifications and import / export reports are delivered to authorised teams by email. The figures shown are illustrative.",
+"The Supalan section brings the physical site and digital control together. Vehicle and driver data is collected through the truck-entry form and retained in Aycube; entry and exit are monitored through plate recognition, security checks and an integrated 40-camera infrastructure. Customs-controlled vehicles remain in a waiting status until tax payment and the relevant customs steps are complete. Our entry, exit and transit-duration reports give Ford time visibility, and Ford teams make the demurrage assessment using the report data. Event notifications and import / export reports are delivered to authorised teams by email. The figures shown are illustrative.",
 "The close emphasizes that operational visibility can now become concrete action. It completes the Aygen IT and Ford Otosan story with a long-term partnership message focused on shaping the future together."
 ]
 };
@@ -384,15 +379,106 @@ function resetInfoModalMode(){
   delete infoModal.dataset.projectKey;
 }
 function projectItemsMarkup(key){
-  return (projectItems[key]||[]).map((item,index)=>`
-    <article class="project-detail-card">
+  return (projectItems[key]||[]).map((item,index)=>{
+    const title=item.title[lang];
+    const metric=item.metric?`<small>${item.metric[lang]}</small>`:"";
+    const media=item.image?`<button class="project-detail-media" type="button" data-project-image="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}"><img src="${item.image}" alt="${title}" loading="lazy" decoding="async" /><span>${lang==="tr"?"Görseli büyüt":"Enlarge image"}</span></button>`:"";
+    return `
+    <article class="project-detail-card${item.image?" has-project-image":""}">
       <button class="project-detail-toggle" type="button" aria-expanded="false">
         <span>${String(index+1).padStart(2,"0")}</span>
-        <strong>${item.title[lang]}</strong>
+        <strong>${title}${metric}</strong>
         <i aria-hidden="true"></i>
       </button>
-      <div class="project-detail-body"><div><p>${item.description[lang]}</p></div></div>
-    </article>`).join("");
+      <div class="project-detail-body"><div class="project-detail-content">${media}<p>${item.description[lang]}</p></div></div>
+    </article>`;
+  }).join("");
+}
+function projectSolutionCardsMarkup(key){
+  return (projectItems[key]||[]).map((item,index)=>{
+    const title=item.title[lang],number=String(index+1).padStart(2,"0"),detailId=`project-solution-${key}-${index}`;
+    const typeLabel=item.metric?.[lang]||(item.image?(lang==="tr"?"Ekranlı proje":"Project with screen"):(lang==="tr"?"Operasyon projesi":"Operations project"));
+    const media=item.image?`<button class="solution-project-media" type="button" data-solution-image="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}"><img src="${item.image}" alt="${title}" loading="lazy" decoding="async" /><span>${lang==="tr"?"Ekranı büyüt":"Enlarge screen"}</span></button>`:"";
+    return `<article class="solution-project-card${item.image?" has-screen":""}">
+      <button class="solution-project-toggle" type="button" aria-expanded="false" aria-controls="${detailId}">
+        <span class="solution-project-index">${number}</span>
+        <span class="solution-project-copy"><strong>${title}</strong><small>${typeLabel}</small></span>
+        <i aria-hidden="true"></i>
+      </button>
+      <div class="solution-project-body" id="${detailId}"><div>${media}<p>${item.description[lang]}</p></div></div>
+    </article>`;
+  }).join("");
+}
+function renderProjectSolution(key){
+  if(!projectSolutionModal||!projectData[lang]?.[key])return;
+  const d=projectData[lang][key],items=projectItems[key]||[],panel=$("#projectSolutionPanel"),grid=$("#projectSolutionGrid"),toolbar=$("#projectSolutionToolbar");
+  projectSolutionModal.dataset.solutionMode="project";
+  projectSolutionModal.dataset.projectKey=key;
+  delete projectSolutionModal.dataset.featureScope;
+  delete projectSolutionModal.dataset.featureKey;
+  panel.classList.remove("theme-customs","theme-finance","theme-archive","theme-supalan","is-empty");
+  panel.classList.add(`theme-${key}`);
+  panel.classList.toggle("is-empty",items.length===0);
+  $("#projectSolutionCode").textContent=d[0];
+  $("#projectSolutionTitle").textContent=d[1];
+  $("#projectSolutionDescription").textContent=d[2];
+  $("#projectSolutionPortfolioLabel").textContent=lang==="tr"?"FORD PROJE PORTFÖYÜ":"FORD PROJECT PORTFOLIO";
+  $("#projectSolutionCount").hidden=false;
+  $("#projectSolutionCount").textContent=`${items.length} ${lang==="tr"?"proje":"projects"}`;
+  $("#projectSolutionHint").textContent=lang==="tr"?"Her kart ayrı bir projedir. Detay ve ekran için kartı açın.":"Each card is a distinct project. Open it for details and its screen.";
+  toolbar.hidden=items.length===0;
+  grid.hidden=items.length===0;
+  grid.classList.remove("is-feature-layout");
+  grid.classList.toggle("is-compact",items.length<=3);
+  grid.innerHTML=projectSolutionCardsMarkup(key);
+}
+function featureSolutionScreens(scope,key){
+  return scope==="special"?(specialScreens[key]||[]):supalanFeatureGallery(key);
+}
+function featureSolutionScreenMarkup(items){
+  return items.map((item,index)=>{
+    const title=item.label?.[lang]||item.title?.[lang]||(lang==="tr"?"Ekran görünümü":"Screen view");
+    const meta=item.meta?.[lang]||(lang==="tr"?"Gerçek operasyon ekranı":"Real operational screen");
+    const detail=item.description?.[lang]||projectScreenDetails[item.src]?.[lang]||"";
+    return `<button class="feature-screen-card" type="button" data-feature-screen="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}">
+      <span class="feature-screen-media"><img src="${item.src}" alt="${title}" loading="lazy" decoding="async" /><i>${lang==="tr"?"Büyüt":"Enlarge"}</i></span>
+      <span class="feature-screen-copy"><small>${String(index+1).padStart(2,"0")} / ${meta}</small><strong>${title}</strong>${detail?`<p>${detail}</p>`:""}</span>
+    </button>`;
+  }).join("");
+}
+function renderFeatureSolution(scope,key){
+  const data=scope==="special"?specialData[lang]?.[key]:supalanFeatureData[lang]?.[key];
+  if(!projectSolutionModal||!data)return;
+  const screens=featureSolutionScreens(scope,key),points=data[3]||[],panel=$("#projectSolutionPanel"),grid=$("#projectSolutionGrid"),toolbar=$("#projectSolutionToolbar");
+  const specialTheme={archiveIndex:"archive",gate:"customs",declarationImage:"finance"};
+  const theme=scope==="supalan"?"supalan":specialTheme[key]||"customs";
+  projectSolutionModal.dataset.solutionMode="feature";
+  projectSolutionModal.dataset.featureScope=scope;
+  projectSolutionModal.dataset.featureKey=key;
+  delete projectSolutionModal.dataset.projectKey;
+  panel.classList.remove("theme-customs","theme-finance","theme-archive","theme-supalan","is-empty");
+  panel.classList.add(`theme-${theme}`);
+  $("#projectSolutionCode").textContent=data[0];
+  $("#projectSolutionTitle").textContent=data[1];
+  $("#projectSolutionDescription").textContent=data[2];
+  $("#projectSolutionPortfolioLabel").textContent=scope==="supalan"?(lang==="tr"?"SAHA KONTROL KAPSAMI":"FIELD CONTROL SCOPE"):(lang==="tr"?"ÇÖZÜM KAPSAMI":"SOLUTION SCOPE");
+  $("#projectSolutionCount").hidden=true;
+  $("#projectSolutionHint").textContent=screens.length?(lang==="tr"?"Ekran kartlarını seçerek büyük görüntüleyebilirsiniz.":"Select a screen card to enlarge it."):(lang==="tr"?"Kontrol adımları tek çözüm görünümünde sunulur.":"Control steps are presented in one solution view.");
+  toolbar.hidden=false;
+  grid.hidden=false;
+  grid.classList.remove("is-compact");
+  grid.classList.add("is-feature-layout");
+  grid.innerHTML=`<div class="feature-solution-layout${screens.length?"":" no-screens"}">
+    <section class="feature-solution-block feature-solution-points">
+      <header><span>${scope==="supalan"?(lang==="tr"?"OPERASYON KONTROLLERİ":"OPERATIONAL CONTROLS"):(lang==="tr"?"ÇÖZÜM BİLEŞENLERİ":"SOLUTION COMPONENTS")}</span></header>
+      <div class="feature-point-grid">${points.map(point=>`<article><i aria-hidden="true"></i><p>${point}</p></article>`).join("")}</div>
+    </section>
+    ${screens.length?`<section class="feature-solution-block feature-solution-screens"><header><span>${lang==="tr"?"EKRANLAR":"SCREENS"}</span></header><div class="feature-screen-grid">${featureSolutionScreenMarkup(screens)}</div></section>`:""}
+  </div>`;
+}
+function openFeatureSolution(scope,key){
+  renderFeatureSolution(scope,key);
+  if(!projectSolutionModal?.open){projectSolutionModal.showModal();projectSolutionModal.scrollTop=0;requestAnimationFrame(()=>projectSolutionModal.classList.add("is-open"))}
 }
 function openProjectGroup(key){
   const d=projectData[lang][key],items=projectItems[key]||[],screens=projectScreens[key]||[];
@@ -402,13 +488,32 @@ function openProjectGroup(key){
   $("#modalCode").textContent=d[0];
   $("#modalTitle").textContent=d[1];
   $("#modalText").textContent=d[2];
-  renderModalGallery(screens);
+  renderModalGallery(key==="customs"?[]:screens);
   $("#modalPoints").innerHTML=projectItemsMarkup(key);
+  const hasProjectContent=items.length>0||screens.length>0;
   const summaryTitle=items.length?`${items.length} ${lang==="tr"?"proje":"projects"}`:`${screens.length} ${lang==="tr"?"ekran örneği":"screen examples"}`;
-  $("#modalDemo").innerHTML=`<div class="project-group-summary"><strong>${summaryTitle}</strong><span>${lang==="tr"?"Açıklama için detay düğmesini, ekranı büyütmek için görseli seçin.":"Select the details button for context or the image to enlarge the screen."}</span></div>`;
+  $("#modalDemo").innerHTML=hasProjectContent?`<div class="project-group-summary"><strong>${summaryTitle}</strong><span>${lang==="tr"?"Her numara ayrı bir projedir. Kartı açın; ekranlı projelerde görseli ayrıca büyütebilirsiniz.":"Each number is a separate project. Open a card and enlarge the image where a project includes a screen."}</span></div>`:"";
   infoModal.showModal();
 }
+function openSolutionModal(key){
+  const modal=solutionModals[key];
+  if(!modal)return;
+  if(modal===projectSolutionModal)renderProjectSolution(key);
+  if(modal.open)return;
+  modal.showModal();
+  modal.scrollTop=0;
+  requestAnimationFrame(()=>modal.classList.add("is-open"));
+}
+function closeSolutionModal(modal){
+  if(!modal?.open)return;
+  modal.classList.remove("is-open");
+  modal.close();
+}
 function openInfo(d,galleryItems=[]){resetInfoModalMode();$("#modalCode").textContent=d[0];$("#modalTitle").textContent=d[1];$("#modalText").textContent=d[2];renderModalGallery(galleryItems);$("#modalPoints").innerHTML=d[3].map(p=>`<div>${p}</div>`).join("");$("#modalDemo").innerHTML=demoMarkup(d[4]);infoModal.showModal()}
+function openRpaInfo(d,galleryItems=[]){
+  openInfo(d,galleryItems);
+  $("#modalDemo").innerHTML="";
+}
 function openCatalog(code,title,description,groups){resetInfoModalMode();infoModal.classList.add("catalog-mode");$("#modalCode").textContent=code;$("#modalTitle").textContent=title;$("#modalText").textContent=description;renderModalGallery([]);$("#modalPoints").innerHTML=groups.map(g=>`<section class="catalog-group"><h4>${g[0]} <span>${g[1].length}</span></h4><div class="catalog-items">${g[1].map((item,index)=>`<div><b>${String(index+1).padStart(2,"0")}</b><span>${item}</span></div>`).join("")}</div></section>`).join("");$("#modalDemo").innerHTML="";infoModal.showModal()}
 
 const supalanImages=[
@@ -436,13 +541,13 @@ const supalanFeatureData={
   tr:{
     security:["SAHA GÜVENLİĞİ","Güvenlik & Giriş–Çıkış Kontrolü","Supalan sahasında araç hareketleri, fiziksel güvenlik kontrol noktaları, plaka tanıma ve sisteme entegre 40 kameralı yoğun güvenlik altyapısıyla izlenir. Giriş ve çıkış zamanları kayıt altına alınarak yetkili ekipler için geriye dönük, denetlenebilir bir olay izi oluşturulur.",["Plaka tanıma ile araç ve kayıt eşleştirmesi","40 kamera ile yoğun saha gözetimi","Yetkili güvenlik kontrolü ve kontrollü geçiş","Giriş–çıkış saatlerinin Aycube kaydına bağlanması","İnceleme gerektiğinde geriye dönük olay görünürlüğü"],"flow"],
     registration:["AYCUBE SAHA KAYDI","Tır, Araç & Şoför Bilgileri","Supalan tır giriş formunda çekici ve dorse plakası, araç tipi, nakliye firması, sürücü bilgileri, yükleme noktası, gümrük tipi ve ilgili operasyon alanı tek kayıtta toplanır. Bilgiler Aycube’da saklanır; saha ekipleri aynı güncel kayıt üzerinden ilerler.",["Tır çekici ve dorse plaka bilgileri","Araç tipi, marka ve nakliye firması","Şoför adı ve gerekli iletişim bilgileri","Gümrük tipi, statüsü ve ilgili lokasyon","Tekil evrak numarasıyla izlenebilir Aycube kaydı"],"flow"],
-    customs:["GÜMRÜK & BEKLEME","Vergi Onayı ve Demuraj Görünürlüğü","Gümrüklü araçlarda süreç, gerekli vergi ödemesi ve gümrük adımları tamamlanana kadar bekleme statüsünde izlenir. Giriş, çıkış ve transit sürelerini içeren raporlarımız Ford tarafına zaman ve hareket görünürlüğü sağlar. Demurajı Aygen veya Aycube hesaplamaz; demuraj tespiti ve değerlendirmesi, sunduğumuz raporlardaki veriler kullanılarak Ford tarafından yapılır.",["Gümrük statüsü ve vergi ödeme beklemesinin takibi","Giriş, çıkış ve transit zaman damgaları","Bekleyen araçların operasyonel görünürlüğü","Ford ekiplerine düzenli süre ve hareket raporu","Demuraj hesabı değil, karara temel olan güvenilir veri"],"flow"],
+    customs:["GÜMRÜK & BEKLEME","Vergi Onayı ve Demuraj Görünürlüğü","Gümrüklü araçlarda süreç, gerekli vergi ödemesi ve gümrük adımları tamamlanana kadar bekleme statüsünde izlenir. Giriş, çıkış ve transit sürelerini içeren raporlarımız Ford tarafına zaman ve hareket görünürlüğü sağlar. Demuraj tespiti ve değerlendirmesi, sunduğumuz raporlardaki veriler kullanılarak Ford tarafından yapılır.",["Gümrük statüsü ve vergi ödeme beklemesinin takibi","Giriş, çıkış ve transit zaman damgaları","Bekleyen araçların operasyonel görünürlüğü","Ford ekiplerine düzenli süre ve hareket raporu","Ford’un demuraj değerlendirmesine temel olan güvenilir veri"],"flow"],
     reporting:["GÜVENLİ RAPORLAMA","E-posta Bildirimleri & Rapor Akışı","Aycube’da kaydedilen saha olayları, supalan@aycube.com üzerinden yetkili ekiplere bildirim olarak iletilir. Araç ve şoför detayları olay e-postasında görünür; ithalat ve ihracat kayıtları ayrıca Excel raporlarıyla paylaşılır. Böylece Ford ekipleri saha hareketlerini güncel, izlenebilir ve kanıta dayalı biçimde takip eder.",["Olay bazlı araç ve saha bildirimleri","Supalan ithalat raporunun Excel olarak iletimi","Supalan ihracat raporunun Excel olarak iletimi","Yetkili alıcılarla kontrollü bilgi paylaşımı","E-posta ve raporlar üzerinden izlenebilir operasyon kaydı"],"mail"]
   },
   en:{
     security:["FIELD SECURITY","Security & Entry–Exit Control","Vehicle movements at the Supalan site are monitored through physical checkpoints, plate recognition and an integrated high-security network of 40 cameras. Entry and exit timestamps are recorded, creating an auditable event trail for authorised teams.",["Vehicle-to-record matching through plate recognition","Intensive field monitoring with 40 cameras","Authorised security checks and controlled access","Linking entry–exit timestamps to the Aycube record","Retrospective event visibility when review is required"],"flow"],
     registration:["AYCUBE FIELD RECORD","Truck, Vehicle & Driver Data","The Supalan truck-entry form collects tractor and trailer plates, vehicle type, carrier, driver details, loading point, customs type and the relevant operational location in a single record. The data is retained in Aycube so field teams work from the same current record.",["Tractor and trailer plate data","Vehicle type, make and carrier","Driver name and required contact details","Customs type, status and relevant location","Traceable Aycube record with a unique document number"],"flow"],
-    customs:["CUSTOMS & WAITING","Tax Approval and Demurrage Visibility","For customs-controlled vehicles, the process remains in a waiting status until the required tax payment and customs steps are completed. Reports containing entry, exit and transit durations give Ford visibility into time and movement. Aygen and Aycube do not calculate demurrage; Ford determines and evaluates demurrage using the data supplied in these reports.",["Tracking customs status and tax-payment waiting","Entry, exit and transit timestamps","Operational visibility for waiting vehicles","Regular duration and movement reports for Ford teams","Reliable decision data rather than a demurrage calculation"],"flow"],
+    customs:["CUSTOMS & WAITING","Tax Approval and Demurrage Visibility","For customs-controlled vehicles, the process remains in a waiting status until the required tax payment and customs steps are completed. Reports containing entry, exit and transit durations give Ford visibility into time and movement. Ford determines and evaluates demurrage using the data supplied in these reports.",["Tracking customs status and tax-payment waiting","Entry, exit and transit timestamps","Operational visibility for waiting vehicles","Regular duration and movement reports for Ford teams","Reliable data supporting Ford’s demurrage assessment"],"flow"],
     reporting:["SECURE REPORTING","Email Notifications & Report Flow","Field events recorded in Aycube are sent to authorised teams from supalan@aycube.com. Vehicle and driver details appear in event emails, while import and export records are also shared as Excel reports. Ford teams can therefore track field movements through current, traceable and evidence-based records.",["Event-based vehicle and field notifications","Supalan import report delivered as Excel","Supalan export report delivered as Excel","Controlled information sharing with authorised recipients","Traceable operational record through emails and reports"],"mail"]
   }
 };
@@ -453,9 +558,7 @@ function supalanFeatureGallery(key){
   return [];
 }
 function openSupalanFeature(key){
-  openInfo(supalanFeatureData[lang][key],supalanFeatureGallery(key));
-  infoModal.classList.add("supalan-feature-mode");
-  if(key==="reporting") infoModal.classList.add("supalan-report-mode");
+  openFeatureSolution("supalan",key);
 }
 let supalanCurrent=0,supalanTimer=null;
 function setSupalanImage(index){
@@ -716,6 +819,10 @@ document.documentElement.lang=lang;$("#langBtn").textContent=lang.toUpperCase();
 $$("[data-tr][data-en]").forEach(n=>n.textContent=n.dataset[lang]);sectionName.textContent=titleFor(current);buildOverview();
 const p=$(".engine-node.is-active");if(p)renderPartnership(p.dataset.partnership,false);
 const i=$(".integration-tab.is-active");if(i)renderIntegration(i.dataset.integrationTab);
+if(projectSolutionModal?.open){
+  if(projectSolutionModal.dataset.solutionMode==="feature")renderFeatureSolution(projectSolutionModal.dataset.featureScope,projectSolutionModal.dataset.featureKey);
+  else if(projectSolutionModal.dataset.projectKey)renderProjectSolution(projectSolutionModal.dataset.projectKey);
+}
 setSupalanImage(supalanCurrent);refreshDynamicLanguage();
 }
 
@@ -748,7 +855,7 @@ async function copyTeamEmail(button){
 
 
 const lightbox=$("#imageLightbox"),lightboxImage=$("#lightboxImage"),lightboxTitle=$("#lightboxTitle"),lightboxCounter=$("#lightboxCounter"),lightboxOpenFile=$("#lightboxOpenFile");
-let lightboxItems=[],lightboxIndex=0,lightboxReturnFocus=null,reopenInfoModalAfterLightbox=false;
+let lightboxItems=[],lightboxIndex=0,lightboxReturnFocus=null,reopenInfoModalAfterLightbox=false,reopenSolutionModalAfterLightbox=null;
 
 function normalizeLightboxItem(item){
   if(typeof item==="string") return {src:item,title:"Görsel"};
@@ -760,6 +867,8 @@ function openLightbox(items,index=0){
   lightboxReturnFocus=document.activeElement;
   reopenInfoModalAfterLightbox=Boolean(infoModal?.open);
   if(reopenInfoModalAfterLightbox) infoModal.close();
+  reopenSolutionModalAfterLightbox=Object.values(solutionModals).find(modal=>modal?.open)||null;
+  if(reopenSolutionModalAfterLightbox)closeSolutionModal(reopenSolutionModalAfterLightbox);
   lightboxIndex=Math.max(0,Math.min(index,lightboxItems.length-1));
   renderLightbox();
   lightbox.classList.add("is-open");
@@ -787,11 +896,14 @@ function closeLightbox(){
   lightbox.setAttribute("aria-hidden","true");
   document.body.classList.remove("has-open-lightbox");
   const shouldReopenInfoModal=reopenInfoModalAfterLightbox;
+  const solutionModalToReopen=reopenSolutionModalAfterLightbox;
   reopenInfoModalAfterLightbox=false;
+  reopenSolutionModalAfterLightbox=null;
   setTimeout(()=>{
     if(lightbox.classList.contains("is-open")) return;
     lightboxImage.src="";
     if(shouldReopenInfoModal && !infoModal.open) infoModal.showModal();
+    if(solutionModalToReopen&&!solutionModalToReopen.open){solutionModalToReopen.showModal();requestAnimationFrame(()=>solutionModalToReopen.classList.add("is-open"))}
     lightboxReturnFocus?.focus?.();
   },240);
 }
@@ -826,6 +938,7 @@ function resolveImageOpenRequest(target){
   const specialVisual=target.closest(".screenshot-visual");
   if(specialVisual){
     const card=specialVisual.closest(".special-card"),img=specialVisual.querySelector("img");
+    if(card?.getAttribute("aria-controls")==="projectSolutionModal")return null;
     const gallery=galleryForSpecialKey(card?.dataset.special);
     const items=gallery.length?gallery:[{src:img?.getAttribute("src"),title:img?.alt||"Proje görseli"}];
     return {items,index:indexForSource(items,img?.getAttribute("src"))};
@@ -902,14 +1015,46 @@ notesBtn?.addEventListener("click",()=>toggleSpeakerNotes());notesClose?.addEven
 $$("[data-team-card]").forEach(card=>card.addEventListener("click",()=>{const open=!card.classList.contains("is-open");$$("[data-team-card]").forEach(x=>{x.classList.remove("is-open");x.setAttribute("aria-expanded","false")});if(open){card.classList.add("is-open");card.setAttribute("aria-expanded","true")}}));
 $$(".engine-node").forEach(b=>b.addEventListener("click",()=>togglePartnership(b)));
 $("#partnershipClose")?.addEventListener("click",closePartnership);
-$$(".project-card").forEach(b=>b.addEventListener("click",()=>openProjectGroup(b.dataset.project)));
+$$(".project-card").forEach(b=>b.addEventListener("click",()=>{
+  const key=b.dataset.project;
+  if(solutionModals[key])openSolutionModal(key);
+  else openProjectGroup(key);
+}));
+$("#projectSolutionGrid")?.addEventListener("click",event=>{
+  const featureScreen=event.target.closest(".feature-screen-card");
+  if(featureScreen){
+    const scope=projectSolutionModal.dataset.featureScope,key=projectSolutionModal.dataset.featureKey,screens=featureSolutionScreens(scope,key);
+    const images=screens.map(item=>({src:item.src,title:item.label?.[lang]||item.title?.[lang]||(lang==="tr"?"Ekran görünümü":"Screen view")}));
+    openLightbox(images,Number(featureScreen.dataset.featureScreen)||0);
+    return;
+  }
+  const media=event.target.closest(".solution-project-media");
+  if(media){
+    const key=projectSolutionModal.dataset.projectKey,index=Number(media.dataset.solutionImage),items=projectItems[key]||[],selected=items[index];
+    if(selected?.image){
+      const images=items.filter(item=>item.image).map(item=>({src:item.image,title:item.title[lang]}));
+      openLightbox(images,Math.max(0,images.findIndex(item=>item.src===selected.image)));
+    }
+    return;
+  }
+  const toggle=event.target.closest(".solution-project-toggle");
+  if(!toggle)return;
+  const card=toggle.closest(".solution-project-card"),willOpen=!card.classList.contains("is-open"),grid=$("#projectSolutionGrid");
+  grid.querySelectorAll(".solution-project-card").forEach(item=>{item.classList.remove("is-open");item.querySelector(".solution-project-toggle")?.setAttribute("aria-expanded","false")});
+  if(willOpen){card.classList.add("is-open");toggle.setAttribute("aria-expanded","true")}
+});
 $("#allProjectsBtn").addEventListener("click",()=>openCatalog("FORD PROJECT CATALOG",lang==="tr"?"Ford Otosan Proje Kataloğu":"Ford Otosan Project Catalogue",lang==="tr"?"Kullanıcı tarafından paylaşılan 29 proje, operasyonel yetkinliklere göre gruplandırılmıştır.":"The 29 projects supplied by the user are grouped by operational capability.",projectCatalog[lang]));
 $$(".integration-tab").forEach(b=>b.addEventListener("click",()=>{$$(".integration-tab").forEach(x=>x.classList.remove("is-active"));b.classList.add("is-active");renderIntegration(b.dataset.integrationTab)}));
-$$(".special-card").forEach(b=>b.addEventListener("click",()=>openInfo(specialData[lang][b.dataset.special],specialScreens[b.dataset.special]||[])));
+$$(".special-card").forEach(b=>b.addEventListener("click",()=>openFeatureSolution("special",b.dataset.special)));
 $$("[data-rpa-project]").forEach(b=>b.addEventListener("click",()=>{
   const key=b.dataset.rpaProject;
-  openInfo(rpaProjectData[lang][key],rpaProjectScreens[key]||[]);
+  openRpaInfo(rpaProjectData[lang][key],rpaProjectScreens[key]||[]);
 }));
+$$("[data-solution-close]").forEach(button=>button.addEventListener("click",()=>closeSolutionModal(button.closest(".solution-modal"))));
+$$(".solution-modal").forEach(modal=>{
+  modal.addEventListener("click",event=>{if(event.target===modal)closeSolutionModal(modal)});
+  modal.addEventListener("close",()=>modal.classList.remove("is-open"));
+});
 $$("[data-supalan-feature]").forEach(b=>b.addEventListener("click",()=>openSupalanFeature(b.dataset.supalanFeature)));
 $$("[data-copy-email]").forEach(button=>button.addEventListener("click",()=>copyTeamEmail(button)));
 startSupalanAutoplay();
@@ -919,7 +1064,7 @@ runRobotFlow();
 
 $("#allReportsBtn").addEventListener("click",()=>openCatalog("OTOMAIL REPORT CATALOG",lang==="tr"?"Ford Otomail Rapor Kataloğu":"Ford Otomail Report Catalogue",lang==="tr"?"37 rapor kaydı konu başlıklarına göre gruplanmıştır. Otomail akışında raporlar güvenli biçimde üretilir, doğrulanır ve yalnızca yetkili Ford Otosan alıcılarına iletilir.":"The 37 report entries are grouped by subject. In the Otomail flow, reports are securely generated, validated and delivered only to authorised Ford Otosan recipients.",reportCatalog[lang]));
 
-$("#intacDetailBtn").addEventListener("click",()=>openInfo(lang==="tr"?["INTAÇ AUTOMATION","Ford INTAÇ Sorgulama","Robotun portal oturumu açması, sorgu parametrelerini girmesi, sonucu alması ve sonraki sisteme kontrollü biçimde aktarması.",["Tekrarlı portal adımlarının otomasyonu","Sorgu sonuçlarının loglanması","Hata ve istisna durumlarının işaretlenmesi","Aycube ve ilgili sistemlere aktarım"],"flow"]:["INTAÇ AUTOMATION","Ford INTAÇ Query","The robot opens the portal session, enters query parameters, retrieves the result and transfers it to the next system in a controlled flow.",["Automation of repetitive portal steps","Query-result logging","Error and exception marking","Transfer to Aycube and related systems"],"flow"],projectScreens.intac));
+$("#intacDetailBtn").addEventListener("click",()=>openRpaInfo(lang==="tr"?["FORD İNTAÇ PROJESİ","Ford İNTAÇ Sorgulama","Robotun portal oturumu açması, sorgu parametrelerini girmesi, sonucu alması ve sonraki sisteme kontrollü biçimde aktarması.",["Tekrarlı portal adımlarının otomasyonu","Sorgu sonuçlarının loglanması","Hata ve istisna durumlarının işaretlenmesi","Aycube ve ilgili sistemlere aktarım"],"flow"]:["INTAÇ AUTOMATION","Ford INTAÇ Query","The robot opens the portal session, enters query parameters, retrieves the result and transfers it to the next system in a controlled flow.",["Automation of repetitive portal steps","Query-result logging","Error and exception marking","Transfer to Aycube and related systems"],"flow"],projectScreens.intac));
 
 $("#modalClose").addEventListener("click",()=>infoModal.close());infoModal.addEventListener("click",e=>{if(e.target===infoModal)infoModal.close()});
 $("#modalGallery")?.addEventListener("click",event=>{
@@ -940,6 +1085,15 @@ $("#modalGallery")?.addEventListener("click",event=>{
   openLightbox(items,idx>=0?idx:0);
 });
 $("#modalPoints")?.addEventListener("click",event=>{
+  const imageButton=event.target.closest(".project-detail-media");
+  if(imageButton){
+    const key=infoModal.dataset.projectKey,index=Number(imageButton.dataset.projectImage),items=projectItems[key]||[],item=items[index];
+    if(item?.image){
+      const imageItems=items.filter(project=>project.image).map(project=>({src:project.image,title:project.title[lang]}));
+      openLightbox(imageItems,Math.max(0,imageItems.findIndex(project=>project.src===item.image)));
+    }
+    return;
+  }
   const toggle=event.target.closest(".project-detail-toggle");
   if(!toggle) return;
   const card=toggle.closest(".project-detail-card"),isOpen=!card.classList.contains("is-open");
@@ -955,6 +1109,11 @@ document.addEventListener("keydown",e=>{
     return;
   }
   if(infoModal.open)return;
+  const activeSolutionModal=Object.values(solutionModals).find(modal=>modal?.open);
+  if(activeSolutionModal){
+    if(e.key==="Escape"){e.preventDefault();closeSolutionModal(activeSolutionModal)}
+    return;
+  }
   if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();navigate(current+1)}
   if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();navigate(current-1)}
   if(e.key.toLowerCase()==="f")document.fullscreenElement?document.exitFullscreen?.():document.documentElement.requestFullscreen?.();
@@ -972,6 +1131,7 @@ document.addEventListener("touchend",e=>{
   if(Math.abs(d)<=60)return;
   if(lightbox?.classList.contains("is-open")){moveLightbox(d<0?1:-1);return}
   if(infoModal.open)return;
+  if(Object.values(solutionModals).some(modal=>modal?.open))return;
   d<0?navigate(current+1):navigate(current-1);
 },{passive:true});
 document.addEventListener("mousemove",e=>{$("#cursorAura").style.left=`${e.clientX}px`;$("#cursorAura").style.top=`${e.clientY}px`});
