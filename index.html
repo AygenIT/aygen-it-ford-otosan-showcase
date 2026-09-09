@@ -8,7 +8,7 @@
   <link rel="preload" as="image" href="assets/cinematic-backbone-v15.jpg" fetchpriority="high" />
   <link rel="preload" as="image" href="assets/cinematic-integration-v15.jpg" />
   <link rel="preload" as="image" href="assets/cinematic-rpa-v15.jpg" />
-  <link rel="stylesheet" href="styles.css?v=20260904-9" />
+  <link rel="stylesheet" href="styles.css?v=20260909-8" />
 </head>
 <body>
   <div class="app" id="app">
@@ -30,11 +30,14 @@
       </button>
       <div class="topbar-center">
         <span class="section-name" id="sectionName">Açılış</span>
+        <div class="topbar-slide-status" aria-label="Slayt ilerlemesi">
+          <div class="progress"><span id="progressBar"></span></div>
+          <div class="counter"><strong id="currentNo">01</strong><span>/</span><span id="totalNo">09</span></div>
+        </div>
       </div>
       <div class="topbar-actions">
         <button class="top-btn" id="overviewBtn" type="button" aria-label="Bölüm menüsü">☷</button>
         <button class="top-btn" id="langBtn" type="button" aria-label="Dili değiştir">TR</button>
-        <button class="top-btn notes-toggle" id="notesBtn" type="button" aria-label="Konuşma notları">⌁</button>
         <button class="top-btn" id="fullscreenBtn" type="button" aria-label="Tam ekran">⛶</button>
       </div>
     </header>
@@ -67,7 +70,7 @@
       <section class="slide slide-agenda" data-title-tr="Toplantı Gündemi" data-title-en="Meeting Agenda">
         <div class="content-wide">
           <div class="heading-row" data-reveal="up">
-            <div><p class="kicker" data-tr="01 — YÖNETİCİ AKIŞI" data-en="01 — EXECUTIVE FLOW">01 — YÖNETİCİ AKIŞI</p><h2 data-tr="Değer beş eksende büyüyor." data-en="Value scales across five pillars.">Değer beş eksende büyüyor.</h2></div>
+            <div><p class="kicker" data-tr="YÖNETİCİ AKIŞI" data-en="EXECUTIVE FLOW">YÖNETİCİ AKIŞI</p><h2 data-tr="Değer beş eksende büyüyor." data-en="Value scales across five pillars.">Değer beş eksende büyüyor.</h2></div>
             <p class="side-note" data-tr="Ekip ve iş birliğinden platform, otomasyon, güvenlik ve sürdürülebilir sonuca uzanan tek hikâye." data-en="One connected story—from team and partnership to platform, automation, security and sustainable outcomes.">Ekip ve iş birliğinden platform, otomasyon, güvenlik ve sürdürülebilir sonuca uzanan tek hikâye.</p>
           </div>
           <div class="agenda-rail" data-reveal="up">
@@ -83,7 +86,7 @@
       <section class="slide slide-team" data-title-tr="IT Ekibimiz" data-title-en="Our IT Team">
         <div class="content-wide">
           <div class="heading-row compact-heading" data-reveal="up">
-            <div><p class="kicker" data-tr="02 — IT EKİBİMİZ" data-en="02 — OUR IT TEAM">02 — IT EKİBİMİZ</p><h2 data-tr="Alanında Uzman IT Kadromuz" data-en="Our Expert IT Team">Alanında Uzman IT Kadromuz</h2></div>
+            <div><p class="kicker" data-tr="IT EKİBİMİZ" data-en="OUR IT TEAM">IT EKİBİMİZ</p><h2 data-tr="Alanında Uzman IT Kadromuz" data-en="Our Expert IT Team">Alanında Uzman IT Kadromuz</h2></div>
             <p class="side-note" data-tr="Farklı uzmanlıklarıyla Ford operasyonlarına uçtan uca dijital çözümler sunan IT ekibimiz." data-en="Our IT team delivers end-to-end digital solutions for Ford operations through complementary expertise.">Farklı uzmanlıklarıyla Ford operasyonlarına uçtan uca dijital çözümler sunan IT ekibimiz.</p>
           </div>
           <div class="team-grid" data-reveal="up">
@@ -123,7 +126,7 @@
       <section class="slide slide-partnership" data-title-tr="Aygen & Ford Otosan İş Birliği" data-title-en="Aygen & Ford Otosan Partnership">
         <div class="content-wide partnership-layout">
           <div class="partnership-copy" data-reveal="left">
-            <p class="kicker" data-tr="03 — İŞ BİRLİĞİ" data-en="03 — PARTNERSHIP">03 — İŞ BİRLİĞİ</p>
+            <p class="kicker" data-tr="İŞ BİRLİĞİ" data-en="PARTNERSHIP">İŞ BİRLİĞİ</p>
             <h2><em data-tr="Ortak Sürdürülebilir Sonuç" data-en="Shared Sustainable Outcome">Ortak Sürdürülebilir Sonuç</em></h2>
             <p data-tr="İhtiyaç, analiz, geliştirme ve geri bildirim tek teslimat ritminde birleşir; Ford operasyonlarında karar süresi kısalır, güvenilir ve anlamlı veriye daha hızlı ulaşılır." data-en="Needs, analysis, development and feedback come together in one delivery rhythm—shortening decision cycles and providing faster access to reliable, meaningful data for Ford operations.">İhtiyaç, analiz, geliştirme ve geri bildirim tek teslimat ritminde birleşir; Ford operasyonlarında karar süresi kısalır, güvenilir ve anlamlı veriye daha hızlı ulaşılır.</p>
           </div>
@@ -152,7 +155,7 @@
       <section class="slide slide-projects" data-title-tr="Aycube Nedir? / Ford Otosan Projeleri" data-title-en="What is Aycube? / Ford Otosan Projects">
         <div class="content-wide">
           <div class="heading-row compact-heading" data-reveal="up">
-            <div><p class="kicker" data-tr="04 — AYCUBE & PROJELER" data-en="04 — AYCUBE & PROJECTS">04 — AYCUBE & PROJELER</p><h2 data-tr="29 proje, tek platform mantığıyla ölçekleniyor." data-en="29 projects scale through one platform logic.">29 proje, tek platform mantığıyla ölçekleniyor.</h2></div>
+            <div><p class="kicker" data-tr="AYCUBE & PROJELER" data-en="AYCUBE & PROJECTS">AYCUBE & PROJELER</p><h2 data-tr="29 proje, tek platform mantığıyla ölçekleniyor." data-en="29 projects scale through one platform logic.">29 proje, tek platform mantığıyla ölçekleniyor.</h2></div>
             <div class="aycube-lockup"><img src="assets/aycube.png" alt="Aycube" /></div>
           </div>
           <div class="projects-layout">
@@ -169,29 +172,24 @@
             </div>
             <div class="project-gallery" data-reveal="right">
               <button class="project-card project-card-large tone-customs" data-project="customs" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal">
-                <div class="project-card-media"><img src="assets/aycube_screens/gecici-ithalat-takip.png" alt="Geçici İthalat Takip ekranı" loading="lazy" decoding="async" /></div>
-                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Gümrük & Takip" data-en="Customs & Tracking">Gümrük & Takip</strong><span class="project-card-count">11</span></div><small data-tr="11 ayrı proje ile beyan, evrak ve süre risklerini tek merkezden yöneten operasyon görünümü" data-en="An operational view managing declaration, document and deadline risks through 11 distinct projects">11 ayrı proje ile beyan, evrak ve süre risklerini tek merkezden yöneten operasyon görünümü</small></div>
-                <b>↗</b>
+                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Gümrük & Takip" data-en="Customs & Tracking">Gümrük & Takip</strong><span class="project-card-count"><b>11</b><small data-tr="proje" data-en="projects">proje</small></span></div><small data-tr="11 ayrı proje ile beyan, evrak ve süre risklerini tek merkezden yöneten operasyon görünümü" data-en="An operational view managing declaration, document and deadline risks through 11 distinct projects">11 ayrı proje ile beyan, evrak ve süre risklerini tek merkezden yöneten operasyon görünümü</small></div>
+                <b class="project-card-open"><i aria-hidden="true">↗</i></b>
               </button>
               <button class="project-card tone-integration" data-project="integration" type="button" aria-haspopup="dialog" aria-controls="integrationSolutionModal">
-                <div class="project-card-media"><img src="assets/aycube_screens/ithalat-beyanname-raporu.png" alt="İthalat Beyanname Raporu ekranı" loading="lazy" decoding="async" /></div>
-                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Entegrasyon & Veri" data-en="Integration & Data">Entegrasyon & Veri</strong><span class="project-card-count">4</span></div><small data-tr="İthalat, ihracat, arşiv ve banka entegrasyonlarını tek çözüm kartında görüntüle" data-en="Explore import, export, archive and banking integrations in one solution card">İthalat, ihracat, arşiv ve banka entegrasyonlarını tek çözüm kartında görüntüle</small></div>
-                <b>↗</b>
+                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Entegrasyon & Veri" data-en="Integration & Data">Entegrasyon & Veri</strong><span class="project-card-count"><b>4</b><small data-tr="proje" data-en="projects">proje</small></span></div><small data-tr="İthalat, ihracat, arşiv ve banka entegrasyonlarını tek çözüm kartında görüntüle" data-en="Explore import, export, archive and banking integrations in one solution card">İthalat, ihracat, arşiv ve banka entegrasyonlarını tek çözüm kartında görüntüle</small></div>
+                <b class="project-card-open"><i aria-hidden="true">↗</i></b>
               </button>
               <button class="project-card tone-automation" data-project="automation" type="button" aria-haspopup="dialog" aria-controls="rpaSolutionModal">
-                <div class="project-card-media"><img src="assets/aycube_screens/arsiv-dosya-yukleme.png" alt="Dosya yükleme ve arşiv ekranı" loading="lazy" decoding="async" /></div>
-                <div class="project-card-content"><div class="project-card-heading"><strong>RPA & OCR</strong><span class="project-card-count">3</span></div><small data-tr="BerkBOT ürününü ve onunla geliştirilen otomasyon projelerini tek çözüm kartında görüntüle" data-en="Explore the BerkBOT product and the automation projects built with it in one solution card">BerkBOT ürününü ve onunla geliştirilen otomasyon projelerini tek çözüm kartında görüntüle</small></div>
-                <b>↗</b>
+                <div class="project-card-content"><div class="project-card-heading"><strong>RPA & OCR</strong><span class="project-card-count"><b>3</b><small data-tr="proje" data-en="projects">proje</small></span></div><small data-tr="BerkBOT ürününü ve onunla geliştirilen otomasyon projelerini tek çözüm kartında görüntüle" data-en="Explore the BerkBOT product and the automation projects built with it in one solution card">BerkBOT ürününü ve onunla geliştirilen otomasyon projelerini tek çözüm kartında görüntüle</small></div>
+                <b class="project-card-open"><i aria-hidden="true">↗</i></b>
               </button>
               <button class="project-card tone-finance" data-project="finance" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal">
-                <div class="project-card-media"><img src="assets/aycube_screens/all-bi.png" alt="All BI ekranı" loading="lazy" decoding="async" /></div>
-                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Finans & Komisyon" data-en="Finance & Commission">Finans & Komisyon</strong><span class="project-card-count">0</span></div><small data-tr="Finansal kontrol, komisyon doğruluğu ve ödeme görünürlüğü sağlayan akışlar" data-en="Flows that provide financial control, commission accuracy and payment visibility">Finansal kontrol, komisyon doğruluğu ve ödeme görünürlüğü sağlayan akışlar</small></div>
-                <b>↗</b>
+                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Finans & Komisyon" data-en="Finance & Commission">Finans & Komisyon</strong><span class="project-card-count"><b>0</b><small data-tr="proje" data-en="projects">proje</small></span></div><small data-tr="Finansal kontrol, komisyon doğruluğu ve ödeme görünürlüğü sağlayan akışlar" data-en="Flows that provide financial control, commission accuracy and payment visibility">Finansal kontrol, komisyon doğruluğu ve ödeme görünürlüğü sağlayan akışlar</small></div>
+                <b class="project-card-open"><i aria-hidden="true">↗</i></b>
               </button>
               <button class="project-card tone-archive" data-project="archive" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal">
-                <div class="project-card-media"><img src="assets/aycube_screens/arsiv-fihrist.png" alt="Arşiv Fihrist ekranı" loading="lazy" decoding="async" /></div>
-                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Arşiv & Doküman" data-en="Archive & Document">Arşiv & Doküman</strong><span class="project-card-count">3</span></div><small data-tr="Üç proje ile evrak arama süresini kısaltan, denetlenebilir doküman hafızası" data-en="Auditable document memory that reduces document search time through three projects">Üç proje ile evrak arama süresini kısaltan, denetlenebilir doküman hafızası</small></div>
-                <b>↗</b>
+                <div class="project-card-content"><div class="project-card-heading"><strong data-tr="Arşiv & Doküman" data-en="Archive & Document">Arşiv & Doküman</strong><span class="project-card-count"><b>3</b><small data-tr="proje" data-en="projects">proje</small></span></div><small data-tr="Üç proje ile evrak arama süresini kısaltan, denetlenebilir doküman hafızası" data-en="Auditable document memory that reduces document search time through three projects">Üç proje ile evrak arama süresini kısaltan, denetlenebilir doküman hafızası</small></div>
+                <b class="project-card-open"><i aria-hidden="true">↗</i></b>
               </button>
             </div>
           </div>
@@ -201,7 +199,7 @@
       <section class="slide slide-otomail" data-title-tr="Otomail Raporlama Servisi" data-title-en="Otomail Reporting Service">
         <div class="content-wide otomail-layout">
           <div class="otomail-copy" data-reveal="left">
-            <p class="kicker" data-tr="05 — OTOMAIL NEDİR?" data-en="05 — WHAT IS OTOMAIL?">05 — OTOMAIL NEDİR?</p><h2 data-tr="37 rapor. Güvenli, otomatik rapor teslimatı." data-en="37 reports. Secure, automated report delivery.">37 rapor. Güvenli, otomatik rapor teslimatı.</h2>
+            <p class="kicker" data-tr="OTOMAIL NEDİR?" data-en="WHAT IS OTOMAIL?">OTOMAIL NEDİR?</p><h2 data-tr="37 rapor. Güvenli, otomatik rapor teslimatı." data-en="37 reports. Secure, automated report delivery.">37 rapor. Güvenli, otomatik rapor teslimatı.</h2>
             <p data-tr="Otomail; Ford Otosan ekipleri için hazırlanan 37 operasyonel raporu belirlenen zamanlarda üreten, doğrulayan ve yalnızca yetkili alıcılara güvenle ulaştıran otomatik rapor dağıtım servisidir." data-en="Otomail is an automated report-distribution service that generates and validates 37 operational reports for Ford Otosan teams on schedule, then securely delivers them only to authorised recipients.">Otomail; Ford Otosan ekipleri için hazırlanan 37 operasyonel raporu belirlenen zamanlarda üreten, doğrulayan ve yalnızca yetkili alıcılara güvenle ulaştıran otomatik rapor dağıtım servisidir.</p>
             <div class="otomail-security-note"><span class="otomail-lock" aria-hidden="true"><i></i></span><div><strong data-tr="Güvenli ve izlenebilir dağıtım" data-en="Secure and traceable distribution">Güvenli ve izlenebilir dağıtım</strong><p data-tr="Raporlar yalnızca tanımlı Ford Otosan alıcılarına iletilir; teslim kayıtları, hata uyarıları ve yeniden denemeler izlenebilir biçimde tutulur." data-en="Reports are delivered only to authorised Ford Otosan recipients; delivery records, error alerts and retries remain fully traceable.">Raporlar yalnızca tanımlı Ford Otosan alıcılarına iletilir; teslim kayıtları, hata uyarıları ve yeniden denemeler izlenebilir biçimde tutulur.</p></div></div>
             <p class="otomail-volume-title" data-tr="Ford Otosan’a sağlanan yaklaşık gönderim hacmi" data-en="Approximate delivery volume provided to Ford Otosan">Ford Otosan’a sağlanan yaklaşık gönderim hacmi</p>
@@ -268,7 +266,7 @@
         <button class="solution-modal-close" type="button" data-solution-close aria-label="RPA ve OCR çözüm kartını kapat">×</button>
         <div class="content-wide rpa-layout">
           <div class="rpa-copy" data-reveal="left">
-            <p class="kicker" data-tr="RPA & OCR ÇÖZÜMLERİ" data-en="RPA & OCR SOLUTIONS">RPA & OCR ÇÖZÜMLERİ</p><h2 id="rpaSolutionTitle" data-tr="BerkBOT tekrar eder, öğrenir ve süreci güvenle tamamlar." data-en="BerkBOT repeats, learns and completes the process securely.">BerkBOT tekrar eder, öğrenir ve süreci güvenle tamamlar.</h2>
+            <h2 id="rpaSolutionTitle" data-tr="BerkBOT tekrar eder, öğrenir ve süreci güvenle tamamlar." data-en="BerkBOT repeats, learns and completes the process securely.">BerkBOT tekrar eder, öğrenir ve süreci güvenle tamamlar.</h2>
             <p data-tr="BerkBOT, şirketimiz bünyesinde geliştirdiğimiz yapay zekâ destekli RPA otomasyon platformudur. Tekrarlayan operasyonel işlemleri otomatikleştirir, kullanıcı kaynaklı hataları azaltır ve günlük iş süreçlerini hızlandırır." data-en="BerkBOT is our in-house AI-powered RPA automation platform. It automates repetitive operational tasks, reduces user-driven errors and accelerates daily business processes.">BerkBOT, şirketimiz bünyesinde geliştirdiğimiz yapay zekâ destekli RPA otomasyon platformudur. Tekrarlayan operasyonel işlemleri otomatikleştirir, kullanıcı kaynaklı hataları azaltır ve günlük iş süreçlerini hızlandırır.</p>
             <div class="rpa-product-showcase">
               <button class="rpa-project-card rpa-product-card" data-rpa-project="berkbot" type="button"><strong>BerkBOT</strong><small data-tr="Öğrenen kontrol ve otomasyon altyapısı" data-en="Learning control and automation platform">Öğrenen kontrol ve otomasyon altyapısı</small><b data-tr="Ürünü incele →" data-en="Explore product →">Ürünü incele →</b></button>
@@ -301,7 +299,7 @@
         <button class="solution-modal-close" type="button" data-solution-close aria-label="Entegrasyon çözüm kartını kapat">×</button>
         <div class="content-wide">
           <div class="heading-row compact-heading" data-reveal="up">
-            <div><p class="kicker" data-tr="ENTEGRASYON ÇÖZÜMLERİ" data-en="INTEGRATION SOLUTIONS">ENTEGRASYON ÇÖZÜMLERİ</p><h2 id="integrationSolutionTitle" data-tr="Dört kritik akış, aynı veri omurgasında birleşiyor." data-en="Four critical flows converge on one data backbone.">Dört kritik akış, aynı veri omurgasında birleşiyor.</h2></div>
+            <div><h2 id="integrationSolutionTitle" data-tr="Dört kritik akış, aynı veri omurgasında birleşiyor." data-en="Four critical flows converge on one data backbone.">Dört kritik akış, aynı veri omurgasında birleşiyor.</h2></div>
             <p class="side-note" data-tr="İthalat, ihracat, arşiv ve banka akışları; ortak veri, doğrulama ve izleme prensipleriyle yönetilir." data-en="Import, export, archive and banking flows share common data, validation and monitoring principles.">İthalat, ihracat, arşiv ve banka akışları; ortak veri, doğrulama ve izleme prensipleriyle yönetilir.</p>
           </div>
           <div class="integration-showcase">
@@ -313,9 +311,9 @@
             </div>
             <div class="integration-stage" data-reveal="right">
               <div class="integration-stage-top">
-                <div><span id="integrationCode">IMPORT INTEGRATION</span><h3 id="integrationTitle">İthalat Entegrasyonu</h3><p id="integrationDescription">Araç ve yedek parça operasyonları; farklı veri alanları, kontrol kuralları, bütçeler ve geliştirme süreçleri nedeniyle ayrı akışlar olarak yönetilir.</p></div>
+                <div><h3 id="integrationTitle">İthalat Entegrasyonu</h3><p id="integrationDescription">Araç ve yedek parça operasyonları; farklı veri alanları, kontrol kuralları, bütçeler ve geliştirme süreçleri nedeniyle ayrı akışlar olarak yönetilir.</p></div>
               </div>
-              <div class="flow-columns" id="flowColumns"><article class="flow-card"><span>01 / VEHICLE</span><h4>İthalat Araç</h4><p>Araç operasyonuna özel veri modeli, doğrulama alanları ve beyanname senaryoları.</p></article><article class="flow-card"><span>02 / SPARE PARTS</span><h4>İthalat Yedek Parça</h4><p>Yedek parça operasyonuna özgü kalem, alan ve kontrol ihtiyaçları.</p></article></div>
+              <div class="flow-columns" id="flowColumns"><article class="flow-card"><span>1</span><h4>İthalat Araç</h4><p>Araç operasyonuna özel veri modeli, doğrulama alanları ve beyanname senaryoları.</p></article><article class="flow-card"><span>2</span><h4>İthalat Yedek Parça</h4><p>Yedek parça operasyonuna özgü kalem, alan ve kontrol ihtiyaçları.</p></article></div>
               <div class="integration-facts"><div><span>DATA</span><strong data-tr="Kaynak verinin merkezi alımı" data-en="Central source-data intake">Kaynak verinin merkezi alımı</strong><small data-tr="Kaynak sistemde sunulan alanlar" data-en="Fields exposed by the source system">Kaynak sistemde sunulan alanlar</small></div><div><span>CONFIG</span><strong data-tr="Konfigüre edilebilir alan seçimi" data-en="Configurable field selection">Konfigüre edilebilir alan seçimi</strong><small data-tr="İhtiyaca göre istenen alanlar" data-en="Fields selected according to need">İhtiyaca göre istenen alanlar</small></div><div><span>DELIVERY</span><strong data-tr="Akış bazlı teslimat" data-en="Flow-based delivery">Akış bazlı teslimat</strong><small data-tr="Her operasyon için ayrı kural ve kontrol" data-en="Rules and controls tailored to each operation">Her operasyon için ayrı kural ve kontrol</small></div></div>
             </div>
           </div>
@@ -329,7 +327,6 @@
         <div class="content-wide">
           <div class="heading-row compact-heading project-solution-heading" data-reveal="up">
             <div>
-              <p class="kicker" id="projectSolutionCode">CUSTOMS & TRACKING</p>
               <h2 id="projectSolutionTitle">Gümrük ve Takip Projeleri</h2>
             </div>
             <p class="side-note" id="projectSolutionDescription">Ford operasyonlarında beyan, evrak ve süre risklerini tek merkezden yöneten çözüm alanı.</p>
@@ -345,11 +342,11 @@
 
       <section class="slide slide-special" data-title-tr="Özel Projeler" data-title-en="Special Projects">
         <div class="content-wide">
-          <div class="heading-row" data-reveal="up"><div><p class="kicker" data-tr="06 — ÖZEL PROJELER" data-en="06 — SPECIAL PROJECTS">06 — ÖZEL PROJELER</p><h2 data-tr="Özel ihtiyaç, modüler çözüme dönüşüyor." data-en="Specific needs become modular solutions.">Özel ihtiyaç, modüler çözüme dönüşüyor.</h2></div><p class="side-note" data-tr="Her çözüm gerçek bir operasyon temasına odaklanır: belge, gümrük kontrolü veya operasyonel akış." data-en="Each solution targets a concrete operational theme: documents, customs control or operational flow.">Her çözüm gerçek bir operasyon temasına odaklanır: belge, gümrük kontrolü veya operasyonel akış.</p></div>
+          <div class="heading-row" data-reveal="up"><div><p class="kicker" data-tr="ÖZEL PROJELER" data-en="SPECIAL PROJECTS">ÖZEL PROJELER</p><h2 data-tr="Özel ihtiyaç, modüler çözüme dönüşüyor." data-en="Specific needs become modular solutions.">Özel ihtiyaç, modüler çözüme dönüşüyor.</h2></div><p class="side-note" data-tr="Her çözüm gerçek bir operasyon temasına odaklanır: belge, gümrük kontrolü veya operasyonel akış." data-en="Each solution targets a concrete operational theme: documents, customs control or operational flow.">Her çözüm gerçek bir operasyon temasına odaklanır: belge, gümrük kontrolü veya operasyonel akış.</p></div>
           <div class="special-grid" data-reveal="up">
-            <button class="special-card" data-special="archiveIndex" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal"><div class="special-visual screenshot-visual"><img src="assets/aycube_screens/arsiv-fihrist.png" alt="Arşiv Fihrist ekranı" loading="lazy" decoding="async" /></div><h3 data-tr="Arşiv Fihrist" data-en="Archive Index">Arşiv Fihrist</h3><p data-tr="Belgeye tarih, referans, süreç ve tip bazlı hızlı erişim." data-en="Fast document access by date, reference, process and type.">Belgeye tarih, referans, süreç ve tip bazlı hızlı erişim.</p><b>Detay →</b></button>
-            <button class="special-card" data-special="gate" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal"><div class="special-visual screenshot-visual"><img src="assets/aycube_screens/gecici-ithalat-takip.png" alt="Gümrük süreç ve kapı hareketi takip ekranı" loading="lazy" decoding="async" /></div><h3 data-tr="Gümrük Kapı Bildirimleri" data-en="Customs Gate Notifications">Gümrük Kapı Bildirimleri</h3><p data-tr="Gümrüklü sahaya giriş ve çıkış hareketlerinin plaka, beyanname ve zaman bilgileriyle kayıt altına alınması." data-en="Recording entry and exit movements at the customs-controlled site with plate, declaration and timestamp data.">Gümrüklü sahaya giriş ve çıkış hareketlerinin plaka, beyanname ve zaman bilgileriyle kayıt altına alınması.</p><b>Detay →</b></button>
-            <button class="special-card" data-special="declarationImage" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal"><div class="special-visual screenshot-visual"><img src="assets/aycube_screens/arsiv-dosya-yukleme.png" alt="Beyanname görüntüsü ve arşiv ekranı" loading="lazy" decoding="async" /></div><h3 data-tr="Beyanname Görüntüsü" data-en="Declaration Image">Beyanname Görüntüsü</h3><p data-tr="Bankaya gönderilen beyanname görüntülerinin kontrollü alınması, iletimi ve izlenmesi." data-en="Controlled retrieval, delivery and tracking of declaration images sent to the bank.">Bankaya gönderilen beyanname görüntülerinin kontrollü alınması, iletimi ve izlenmesi.</p><b>Detay →</b></button>
+            <button class="special-card" data-special="archiveIndex" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal"><h3 data-tr="Arşiv Fihrist" data-en="Archive Index">Arşiv Fihrist</h3><p data-tr="Belgeye tarih, referans, süreç ve tip bazlı hızlı erişim." data-en="Fast document access by date, reference, process and type.">Belgeye tarih, referans, süreç ve tip bazlı hızlı erişim.</p><b>Detay →</b></button>
+            <button class="special-card" data-special="gate" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal"><h3 data-tr="Gümrük Kapı Bildirimleri" data-en="Customs Gate Notifications">Gümrük Kapı Bildirimleri</h3><p data-tr="Araç veya taşıma işleminin gümrük kapısına giriş ya da çıkış yaptığının sisteme bildirilmesi ve kayıt altına alınması." data-en="Notification and recording of a vehicle or transport operation entering or leaving a customs gate.">Araç veya taşıma işleminin gümrük kapısına giriş ya da çıkış yaptığının sisteme bildirilmesi ve kayıt altına alınması.</p><b>Detay →</b></button>
+            <button class="special-card" data-special="declarationImage" type="button" aria-haspopup="dialog" aria-controls="projectSolutionModal"><h3 data-tr="Beyanname Görüntüsü" data-en="Declaration Image">Beyanname Görüntüsü</h3><p data-tr="Bankaya gönderilen beyanname görüntülerinin kontrollü alınması, iletimi ve izlenmesi." data-en="Controlled retrieval, delivery and tracking of declaration images sent to the bank.">Bankaya gönderilen beyanname görüntülerinin kontrollü alınması, iletimi ve izlenmesi.</p><b>Detay →</b></button>
           </div>
         </div>
       </section>
@@ -357,7 +354,7 @@
       <section class="slide slide-supalan" data-title-tr="Supalan" data-title-en="Supalan">
         <div class="content-wide supalan-layout">
           <div class="supalan-copy" data-reveal="left">
-            <p class="kicker">07 — SUPALAN</p><h2 data-tr="Sahanın ritmi, tek ekranda görünür ve yönetilebilir." data-en="The rhythm of the field, visible and manageable on one screen.">Sahanın ritmi, tek ekranda görünür ve yönetilebilir.</h2>
+            <p class="kicker">SUPALAN</p><h2 data-tr="Sahanın ritmi, tek ekranda görünür ve yönetilebilir." data-en="The rhythm of the field, visible and manageable on one screen.">Sahanın ritmi, tek ekranda görünür ve yönetilebilir.</h2>
             <p data-tr="Supalan; araç ve şoför bilgilerinin toplandığı, plaka tanıma ve 40 kameralı güvenlik altyapısıyla giriş–çıkışların kontrol edildiği, tüm saha hareketlerinin Aycube’da kayıt altında tutulduğu dijital saha yönetimidir." data-en="Supalan is a digital field-management operation where vehicle and driver data is collected, entries and exits are controlled through plate recognition and a 40-camera security infrastructure, and every field movement is recorded in Aycube.">Supalan; araç ve şoför bilgilerinin toplandığı, plaka tanıma ve 40 kameralı güvenlik altyapısıyla giriş–çıkışların kontrol edildiği, tüm saha hareketlerinin Aycube’da kayıt altında tutulduğu dijital saha yönetimidir.</p>
             <div class="supalan-feature-grid" aria-label="Supalan süreç detayları">
               <button class="supalan-feature-card" type="button" data-supalan-feature="security" aria-haspopup="dialog" aria-controls="projectSolutionModal"><span>01</span><div><strong data-tr="Güvenlik & Giriş–Çıkış" data-en="Security & Entry–Exit">Güvenlik & Giriş–Çıkış</strong><small data-tr="Plaka tanıma ve 40 kameralı sistem" data-en="Plate recognition and 40-camera system">Plaka tanıma ve 40 kameralı sistem</small></div><b aria-hidden="true">↗</b></button>
@@ -404,8 +401,7 @@
 
     <footer class="controls">
       <button id="prevBtn" type="button" aria-label="Önceki slayt">←</button>
-      <div class="progress"><span id="progressBar"></span></div>
-      <div class="counter"><strong id="currentNo">01</strong><span>/</span><span id="totalNo">09</span></div>
+      <span class="controls-spacer" aria-hidden="true"></span>
       <button id="nextBtn" type="button" aria-label="Sonraki slayt">→</button>
     </footer>
 
@@ -413,13 +409,6 @@
       <button class="overview-close" id="overviewClose" type="button">×</button>
       <div class="overview-inner"><p class="kicker" data-tr="SUNUM HARİTASI" data-en="PRESENTATION MAP">SUNUM HARİTASI</p><h2 data-tr="Bölümler" data-en="Chapters">Bölümler</h2><div class="overview-grid" id="overviewGrid"></div></div>
     </div>
-
-    <aside class="speaker-notes" id="speakerNotes" aria-hidden="true">
-      <div class="speaker-notes-head"><span data-tr="KONUŞMA METNİ" data-en="SPEAKER SCRIPT">KONUŞMA METNİ</span><button id="notesClose" type="button" aria-label="Kapat">×</button></div>
-      <h3 id="speakerNotesTitle">Açılış</h3>
-      <p id="speakerNotesText"></p>
-      <small data-tr="N tuşu ile aç/kapat" data-en="Press N to toggle">N tuşu ile aç/kapat</small>
-    </aside>
 
     <dialog class="modal" id="infoModal">
       <button class="modal-close" id="modalClose" type="button">×</button>
@@ -440,7 +429,7 @@
       <a class="lightbox-open-file" id="lightboxOpenFile" href="#" target="_blank" rel="noopener" data-tr="Yeni sekmede aç" data-en="Open in new tab">Yeni sekmede aç</a>
     </div>
 
-  <script src="script.js?v=20260904-9"></script>
+  <script src="script.js?v=20260909-7"></script>
 
 </body>
 </html>

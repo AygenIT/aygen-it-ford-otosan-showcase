@@ -115,10 +115,7 @@ const projectScreens={
   ],
   finance:[],
   archive:[],
-  intac:[
-    {src:"assets/aycube_screens/ithalat-beyanname-raporu-detayli.png",label:{tr:"Detaylı Sorgu Sonuçları",en:"Detailed Query Results"}},
-    {src:"assets/aycube_screens/ithalat-beyanname-raporu.png",label:{tr:"Toplu İthalat Görünümü",en:"Bulk Import View"}}
-  ]
+  intac:[]
 };
 
 const projectScreenDetails={
@@ -166,15 +163,15 @@ const projectScreenDetails={
 
 const integrationData={
 tr:{
-import:{title:"İthalat Entegrasyonu",description:"Ford Entegrasyon kapsamında araç ve yedek parça ithalatı; farklı veri alanları, saymanlık bilgisi, GTİP kuralları, bütçeler ve geliştirme süreçleri nedeniyle ayrı akışlarda yönetilir.",rate:96.4,rateText:"%96,4",cards:[["01 / VEHICLE","İthalat Araç","Araç operasyonuna özel veri modeli, doğrulama alanları, saymanlık bilgisi ve beyanname senaryoları."],["02 / SPARE PARTS","İthalat Yedek Parça","Yedek parça kalemleri, GTİP güncelleme, alan seçimi ve kontrol ihtiyaçları."]]},
-export:{code:"EXPORT INTEGRATION",title:"İhracat Entegrasyonu",description:"Araç, kamyon ve yedek parça ihracatı; otomatik getirilen alanlar, vergi bilgisinin tescil sonrası aktarımı, sevkiyat ve beyanname ihtiyaçları nedeniyle operasyona özel akışlarla yönetilir.",rate:94.8,rateText:"%94,8",cards:[["01 / VEHICLE","İhracat Araç","Araç ihracatına özel sevkiyat, beyanname ve otomatik alan akışı."],["02 / SPARE PARTS","İhracat Yedek Parça","Kalem bazlı veri, vergi alanı ve doğrulama ihtiyaçlarına özel akış."],["03 / TRUCK","İhracat Kamyon","Kamyon ihracatına ait araç, sevkiyat ve beyanname verileri tek akışta eşleştirilir. Zorunlu alanlar doğrulanır; tescil, çıkış ve intaç durumu Ford ekipleri için izlenebilir hâle gelir."]]},
-archive:{code:"ARCHIVE INTEGRATION",title:"Arşiv Entegrasyonu",description:"Ford Arşiv Entegrasyon ve Arşiv Fihrist ile evrakları tek havuzda, standart metaveri ve olay bazlı arşivleme yaklaşımıyla yönetir.",rate:100,rateText:"%100",cards:[["01 / INDEX","Hızlı Erişim","Anahtar alanlarla saniyeler içinde arama, görüntüleme ve kayıt ilişkilendirme."],["02 / AUDIT","Versiyon & Audit Trail","Tek doğru kayıt, versiyon geçmişi ve denetlenebilir işlem izi."]]},
-bank:{code:"BANK INTEGRATION",title:"Banka Entegrasyonu",description:"Bankaya gönderilen beyanname görüntüsü, dekont edilmeyen dosyaların tespiti ve ekstre gönderimi süreçlerini standart, kontrollü ve izlenebilir hâle getirir.",rate:99.2,rateText:"%99,2",cards:[["01 / TRANSFER","Kontrollü İletim","Bankaya gönderilen beyanname görüntüsünün kontrollü alınması ve iletilmesi."],["02 / CONTROL","Mutabakat & İstisna","Dekont edilmeyen dosyaların tespiti, otomatik ekstre ve hata durumlarının izlenmesi."]]}},
+import:{title:"İthalat Entegrasyonu",description:"Ford Entegrasyon kapsamında araç ve yedek parça ithalatı; farklı veri alanları, saymanlık bilgisi, GTİP kuralları, bütçeler ve geliştirme süreçleri nedeniyle ayrı akışlarda yönetilir.",rate:96.4,rateText:"%96,4",cards:[["1","İthalat Araç","Araç operasyonuna özel veri modeli, doğrulama alanları, saymanlık bilgisi ve beyanname senaryoları."],["2","İthalat Yedek Parça","Yedek parça kalemleri, GTİP güncelleme, alan seçimi ve kontrol ihtiyaçları."]]},
+export:{title:"İhracat Entegrasyonu",description:"Araç, kamyon ve yedek parça ihracatı; otomatik getirilen alanlar, vergi bilgisinin tescil sonrası aktarımı, sevkiyat ve beyanname ihtiyaçları nedeniyle operasyona özel akışlarla yönetilir.",rate:94.8,rateText:"%94,8",cards:[["1","İhracat Araç","Araç ihracatına özel sevkiyat, beyanname ve otomatik alan akışı."],["2","İhracat Yedek Parça","Kalem bazlı veri, vergi alanı ve doğrulama ihtiyaçlarına özel akış."],["3","İhracat Kamyon","Kamyon ihracatına ait araç, sevkiyat ve beyanname verileri tek akışta eşleştirilir. Zorunlu alanlar doğrulanır; tescil, çıkış ve intaç durumu Ford ekipleri için izlenebilir hâle gelir."]]},
+archive:{title:"Arşiv Entegrasyonu",description:"Ford Arşiv Entegrasyon ve Arşiv Fihrist ile evrakları tek havuzda, standart metaveri ve olay bazlı arşivleme yaklaşımıyla yönetir.",rate:100,rateText:"%100",cards:[["1","Hızlı Erişim","Anahtar alanlarla saniyeler içinde arama, görüntüleme ve kayıt ilişkilendirme."],["2","Versiyon & Audit Trail","Tek doğru kayıt, versiyon geçmişi ve denetlenebilir işlem izi."]]},
+bank:{title:"Banka Entegrasyonu",description:"Bankaya gönderilen beyanname görüntüsü, dekont edilmeyen dosyaların tespiti ve ekstre gönderimi süreçlerini standart, kontrollü ve izlenebilir hâle getirir.",rate:99.2,rateText:"%99,2",cards:[["1","Kontrollü İletim","Bankaya gönderilen beyanname görüntüsünün kontrollü alınması ve iletilmesi."],["2","Mutabakat & İstisna","Dekont edilmeyen dosyaların tespiti, otomatik ekstre ve hata durumlarının izlenmesi."]]}},
 en:{
-import:{title:"Import Integration",description:"Vehicle and spare-part operations are managed as separate flows because of different data fields, validation rules, budgets and delivery cycles.",rate:96.4,rateText:"96.4%",cards:[["01 / VEHICLE","Vehicle Import","Vehicle-specific data model, validation fields and declaration scenarios."],["02 / SPARE PARTS","Spare-Part Import","Line-item, field and validation needs specific to spare-part operations."]]},
-export:{code:"EXPORT INTEGRATION",title:"Export Integration",description:"Vehicle, truck and spare-part exports are managed through operation-specific flows because shipment, declaration, document and data-standardisation needs differ.",rate:94.8,rateText:"94.8%",cards:[["01 / VEHICLE","Vehicle Export","Vehicle-specific shipment, declaration and validation flow."],["02 / SPARE PARTS","Spare-Part Export","A flow tailored to line-level data, documents and validation needs."],["03 / TRUCK","Truck Export","Vehicle, shipment and declaration data for truck exports is matched in one flow. Mandatory fields are validated, making registration, exit and closure status traceable for Ford teams."]]},
-archive:{code:"ARCHIVE INTEGRATION",title:"Archive Integration",description:"Manages documents in one pool with standard metadata and event-based archiving.",rate:100,rateText:"100%",cards:[["01 / INDEX","Fast Access","Search and view within seconds using key fields."],["02 / AUDIT","Version & Audit Trail","Single source of truth, version history and auditable records."]]},
-bank:{code:"BANK INTEGRATION",title:"Bank Integration",description:"Makes payments, collections, receipts and declaration-image flows standard, controlled and traceable.",rate:99.2,rateText:"99.2%",cards:[["01 / TRANSFER","Controlled Delivery","Automatic recorded delivery of declaration images to the bank."],["02 / CONTROL","Reconciliation & Exception","Monitoring successful, pending and failed states."]]}}};
+import:{title:"Import Integration",description:"Vehicle and spare-part operations are managed as separate flows because of different data fields, validation rules, budgets and delivery cycles.",rate:96.4,rateText:"96.4%",cards:[["1","Vehicle Import","Vehicle-specific data model, validation fields and declaration scenarios."],["2","Spare-Part Import","Line-item, field and validation needs specific to spare-part operations."]]},
+export:{title:"Export Integration",description:"Vehicle, truck and spare-part exports are managed through operation-specific flows because shipment, declaration, document and data-standardisation needs differ.",rate:94.8,rateText:"94.8%",cards:[["1","Vehicle Export","Vehicle-specific shipment, declaration and validation flow."],["2","Spare-Part Export","A flow tailored to line-level data, documents and validation needs."],["3","Truck Export","Vehicle, shipment and declaration data for truck exports is matched in one flow. Mandatory fields are validated, making registration, exit and closure status traceable for Ford teams."]]},
+archive:{title:"Archive Integration",description:"Manages documents in one pool with standard metadata and event-based archiving.",rate:100,rateText:"100%",cards:[["1","Fast Access","Search and view within seconds using key fields."],["2","Version & Audit Trail","Single source of truth, version history and auditable records."]]},
+bank:{title:"Bank Integration",description:"Makes payments, collections, receipts and declaration-image flows standard, controlled and traceable.",rate:99.2,rateText:"99.2%",cards:[["1","Controlled Delivery","Automatic recorded delivery of declaration images to the bank."],["2","Reconciliation & Exception","Monitoring successful, pending and failed states."]]}}};
 
 const projectCatalog={
 tr:[["Gümrük & Takip",["Geçici ithalat","Toplu Evrak","Özet Beyan Takip","GetApp","Geçici İthalat / İhracat Takibi","Özet beyan süresi yaklaştığında uyarı gelmesi"]],["Entegrasyon & Veri",["Toplu İntaç Sorgulama (intaç tarihi entegrasyonla gitmesi)","intaç tarihi toplu sorgulama","Gtip Güncelleme","İhracatta Oto. Getirilen bazı alanlar","Ford Entegrasyon","Saymanlık Bilgisi","İhracat Sisteminde vergi alanı dolu ise tescil sonrası bilgi girişine oto. gelmesi"]],["RPA & OCR",["Tareks","tareks işlemlerinin rpa üzerinde yapılması","Ford Fatura OCR","Ford Faturalarında 0910 Tekrarlanmasının Önlenmesi","Otomatik Fatura Ekranına Ford Firmalarının Dosyalarının Gelmesi"]],["Finans & Komisyon",["Bankaya gönderilen Byn. Görüntüsü","Müşteri komisyonları","Dekont Edilmeyen Dosyaların tespiti","Ekstre gönderimi otomatize edilmesi","Vergi Talep","Para Talep","komisyon hesaplama","öz-3 işaretlemerinde komisyon işaretlemeleri kontrolü"]],["Arşiv & Doküman",["Arşiv Fihrist","Arşiv Doküman Yönetim Sistemi","Toplu Evrak Talep"]]],
@@ -193,11 +190,11 @@ const otomailReports=reportCatalog.tr.flatMap((trGroup,categoryIndex)=>trGroup[1
 const specialData={
 tr:{
 archiveIndex:["ARCHIVE INDEX","Arşiv Fihrist","Belgeye tarih, referans, süreç ve tip bazlı arama; saniyeler içinde bulma, görüntüleme ve ilgili kayıtla ilişkilendirme.",["Tekil doküman kimliği","Tutarlı metaveri alanları","Versiyon ve işlem geçmişi","Rol bazlı erişim"],"search"],
-gate:["CUSTOMS GATE NOTIFICATIONS","Gümrük Kapı Bildirimleri","Gümrük kapı bildirimi; gümrüklü sahaya giren veya sahadan çıkan araç hareketinin çekici ve dorse plakası, beyanname ya da taşıma kaydı, ilgili kapı ve zaman bilgileriyle eşleştirilerek kayıt altına alınmasıdır. Aycube, giriş–çıkış hareketini ilgili gümrük dosyasına bağlar; eksik veya uyumsuz kayıtları görünür hâle getirir ve yetkili ekipler için izlenebilir bir işlem geçmişi oluşturur.",["Çekici ve dorse plakalarının gümrük kaydıyla eşleştirilmesi","Beyanname veya taşıma belgesiyle dosya bağlantısı","Kapı giriş–çıkış tarih ve saatlerinin kayıt altına alınması","Eksik ya da uyumsuz bilgi için kontrol ve uyarı","Yetkili gümrük ve operasyon ekipleri için denetlenebilir işlem izi"],"flow"],
+gate:["CUSTOMS GATE NOTIFICATIONS","Gümrük Kapı Bildirimleri","Gümrükte kapı bildirimi, bir aracın veya taşıma işleminin gümrük kapısına giriş ya da çıkış yaptığının gümrük sistemine bildirilmesi ve kayıt altına alınmasıdır. Kısaca, ‘Araç gümrük kapısına geldi veya geçti’ bilgisinin sisteme işlenmesidir. Bu kayıt, taşıtın ve ilgili yükün sonraki gümrük işlemlerinin takip edilmesini sağlar.",["Araç veya taşıma işleminin gümrük kapısına geliş ya da geçiş kaydı","Giriş ve çıkış bilgisinin gümrük sistemine işlenmesi","Taşıt ile ilgili yükün sonraki gümrük işlemleriyle ilişkilendirilmesi","Kapı hareketinin kayıt üzerinden izlenebilmesi"],"flow"],
 declarationImage:["DECLARATION IMAGE","Bankaya Gönderilen Beyanname Görüntüsü","Tescil beyanname görüntüsünün kontrollü şekilde alınması, bankaya iletilmesi ve gönderim kayıtlarının izlenmesi.",["Manuel e-posta ve ek yönetimini azaltır","Gönderim zamanı ve alıcı logları","Tekrar deneme ve hata uyarısı","Ödeme ve teminat akışlarıyla bağlantı"],"flow"]},
 en:{
 archiveIndex:["ARCHIVE INDEX","Archive Index","Search by date, reference, process and type; find, view and link documents to the relevant record within seconds.",["Unique document identity","Consistent metadata","Version and activity history","Role-based access"],"search"],
-gate:["CUSTOMS GATE NOTIFICATIONS","Customs Gate Notifications","A customs gate notification records a vehicle entering or leaving a customs-controlled site by matching tractor and trailer plates with the declaration or transport record, the relevant gate and timestamps. Aycube links the movement to its customs file, highlights missing or inconsistent data and creates a traceable transaction history for authorised teams.",["Matching tractor and trailer plates with the customs record","Linking the declaration or transport document to the file","Recording gate entry and exit dates and times","Checks and alerts for missing or inconsistent information","Auditable transaction trail for authorised customs and operations teams"],"flow"],
+gate:["CUSTOMS GATE NOTIFICATIONS","Customs Gate Notifications","A customs gate notification is the notification and recording in the customs system that a vehicle or transport operation has entered or exited a customs gate. In short, it records that the vehicle has arrived at or passed through the customs gate. This record enables the vehicle and its related cargo to be tracked through subsequent customs procedures.",["Recording a vehicle or transport operation arriving at or passing through the customs gate","Entering gate arrival and exit information into the customs system","Linking the vehicle and cargo to subsequent customs procedures","Tracking the gate movement through the recorded entry"],"flow"],
 declarationImage:["DECLARATION IMAGE","Declaration Image Sent to Bank","Controlled retrieval, bank delivery and tracking of registered declaration images.",["Reduces manual email and attachment handling","Delivery time and recipient logs","Retry and error alerts","Connection to payment and guarantee flows"],"flow"]}};
 
 const rpaProjectData={
@@ -224,18 +221,10 @@ const rpaProjectScreens={
 
 const specialScreens={
   archiveIndex:[
-    {src:"assets/aycube_screens/arsiv-fihrist.png",label:{tr:"Arşiv Fihrist",en:"Archive Index"}},
-    {src:"assets/aycube_screens/arsiv-dosya-yukleme.png",label:{tr:"Dosya Yükleme ve Belge Eşleştirme",en:"File Upload and Document Matching"}}
+    {src:"assets/aycube_screens/arsiv-fihrist.png",label:{tr:"Arşiv Fihrist",en:"Archive Index"}}
   ],
-  gate:[
-    {src:"assets/aycube_screens/gecici-ithalat-takip.png",label:{tr:"Gümrük Süreç Takibi",en:"Customs Process Tracking"},description:{tr:"Gümrük dosyasına bağlı hareket, durum ve süre bilgilerinin aynı kayıt üzerinden izlenebildiği takip görünümü.",en:"A tracking view where movement, status and duration data linked to the customs file can be monitored in one record."}},
-    {src:"assets/aycube_screens/ihracat-beyanname-raporu.png",label:{tr:"İhracat Beyanname ve Çıkış Kayıtları",en:"Export Declaration and Exit Records"},description:{tr:"Kapı çıkışında kontrol edilen beyanname, sevkiyat ve sonuç alanlarını birlikte gösteren gümrük raporu.",en:"A customs report combining the declaration, shipment and result fields checked during gate exit."}},
-    {src:"assets/aycube_screens/ithalat-beyanname-raporu-detayli.png",label:{tr:"Detaylı Araç ve Beyanname Bilgileri",en:"Detailed Vehicle and Declaration Data"},description:{tr:"Plaka ve gümrük dosyası eşleşmesinin doğrulanmasında kullanılan ayrıntılı beyanname ve operasyon alanları.",en:"Detailed declaration and operational fields used to validate the match between the plate and customs file."}}
-  ],
-  declarationImage:[
-    {src:"assets/aycube_screens/arsiv-dosya-yukleme.png",label:{tr:"Beyanname Görüntüsü Dosya Akışı",en:"Declaration Image File Flow"}},
-    {src:"assets/aycube_screens/arsiv-fihrist.png",label:{tr:"Arşiv Kayıt Eşleşmesi",en:"Archive Record Match"}}
-  ]
+  gate:[],
+  declarationImage:[]
 };
 
 const speakerScripts={
@@ -303,7 +292,6 @@ app?.classList.toggle("is-closing",current===slides.length-1);
 progressBar.style.width=`${((current+1)/slides.length)*100}%`;
 currentNo.textContent=String(current+1).padStart(2,"0");
 prevBtn.disabled=current===0;nextBtn.disabled=current===slides.length-1;sectionName.textContent=titleFor(current);
-updateSpeakerNotes();
 if(window.matchMedia("(max-width: 1120px)").matches){
   requestAnimationFrame(()=>window.scrollTo(0,0));
 }
@@ -343,7 +331,7 @@ if(isOpen)closePartnership();else renderPartnership(button.dataset.partnership);
 }
 function renderIntegration(key){
 const d=integrationData[lang][key];
-$("#integrationCode").textContent=d.code;$("#integrationTitle").textContent=d.title;$("#integrationDescription").textContent=d.description;
+$("#integrationTitle").textContent=d.title;$("#integrationDescription").textContent=d.description;
 const flowColumns=$("#flowColumns");
 flowColumns.classList.toggle("is-three",d.cards.length===3);
 flowColumns.innerHTML=d.cards.map(c=>`<article class="flow-card"><span>${c[0]}</span><h4>${c[1]}</h4><p>${c[2]}</p></article>`).join("");
@@ -377,6 +365,7 @@ function renderModalGallery(items=[]){
 function resetInfoModalMode(){
   infoModal.classList.remove("catalog-mode","project-group-mode","supalan-feature-mode","supalan-report-mode");
   delete infoModal.dataset.projectKey;
+  $("#modalCode").hidden=false;
 }
 function projectItemsMarkup(key){
   return (projectItems[key]||[]).map((item,index)=>{
@@ -397,12 +386,13 @@ function projectItemsMarkup(key){
 function projectSolutionCardsMarkup(key){
   return (projectItems[key]||[]).map((item,index)=>{
     const title=item.title[lang],number=String(index+1).padStart(2,"0"),detailId=`project-solution-${key}-${index}`;
-    const typeLabel=item.metric?.[lang]||(item.image?(lang==="tr"?"Ekranlı proje":"Project with screen"):(lang==="tr"?"Operasyon projesi":"Operations project"));
+    const typeLabel=key==="archive"||key==="customs"?"":item.metric?.[lang]||(item.image?(lang==="tr"?"Ekranlı proje":"Project with screen"):(lang==="tr"?"Operasyon projesi":"Operations project"));
+    const typeMarkup=typeLabel?`<small>${typeLabel}</small>`:"";
     const media=item.image?`<button class="solution-project-media" type="button" data-solution-image="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}"><img src="${item.image}" alt="${title}" loading="lazy" decoding="async" /><span>${lang==="tr"?"Ekranı büyüt":"Enlarge screen"}</span></button>`:"";
     return `<article class="solution-project-card${item.image?" has-screen":""}">
       <button class="solution-project-toggle" type="button" aria-expanded="false" aria-controls="${detailId}">
         <span class="solution-project-index">${number}</span>
-        <span class="solution-project-copy"><strong>${title}</strong><small>${typeLabel}</small></span>
+        <span class="solution-project-copy"><strong>${title}</strong>${typeMarkup}</span>
         <i aria-hidden="true"></i>
       </button>
       <div class="solution-project-body" id="${detailId}"><div>${media}<p>${item.description[lang]}</p></div></div>
@@ -419,10 +409,11 @@ function renderProjectSolution(key){
   panel.classList.remove("theme-customs","theme-finance","theme-archive","theme-supalan","is-empty");
   panel.classList.add(`theme-${key}`);
   panel.classList.toggle("is-empty",items.length===0);
-  $("#projectSolutionCode").textContent=d[0];
   $("#projectSolutionTitle").textContent=d[1];
   $("#projectSolutionDescription").textContent=d[2];
-  $("#projectSolutionPortfolioLabel").textContent=lang==="tr"?"FORD PROJE PORTFÖYÜ":"FORD PROJECT PORTFOLIO";
+  const portfolioLabel=$("#projectSolutionPortfolioLabel");
+  portfolioLabel.hidden=key==="archive"||key==="customs";
+  portfolioLabel.textContent=lang==="tr"?"FORD PROJE PORTFÖYÜ":"FORD PROJECT PORTFOLIO";
   $("#projectSolutionCount").hidden=false;
   $("#projectSolutionCount").textContent=`${items.length} ${lang==="tr"?"proje":"projects"}`;
   $("#projectSolutionHint").textContent=lang==="tr"?"Her kart ayrı bir projedir. Detay ve ekran için kartı açın.":"Each card is a distinct project. Open it for details and its screen.";
@@ -438,11 +429,10 @@ function featureSolutionScreens(scope,key){
 function featureSolutionScreenMarkup(items){
   return items.map((item,index)=>{
     const title=item.label?.[lang]||item.title?.[lang]||(lang==="tr"?"Ekran görünümü":"Screen view");
-    const meta=item.meta?.[lang]||(lang==="tr"?"Gerçek operasyon ekranı":"Real operational screen");
     const detail=item.description?.[lang]||projectScreenDetails[item.src]?.[lang]||"";
     return `<button class="feature-screen-card" type="button" data-feature-screen="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}">
       <span class="feature-screen-media"><img src="${item.src}" alt="${title}" loading="lazy" decoding="async" /><i>${lang==="tr"?"Büyüt":"Enlarge"}</i></span>
-      <span class="feature-screen-copy"><small>${String(index+1).padStart(2,"0")} / ${meta}</small><strong>${title}</strong>${detail?`<p>${detail}</p>`:""}</span>
+      <span class="feature-screen-copy"><small>${String(index+1).padStart(2,"0")}</small><strong>${title}</strong>${detail?`<p>${detail}</p>`:""}</span>
     </button>`;
   }).join("");
 }
@@ -458,10 +448,11 @@ function renderFeatureSolution(scope,key){
   delete projectSolutionModal.dataset.projectKey;
   panel.classList.remove("theme-customs","theme-finance","theme-archive","theme-supalan","is-empty");
   panel.classList.add(`theme-${theme}`);
-  $("#projectSolutionCode").textContent=data[0];
   $("#projectSolutionTitle").textContent=data[1];
   $("#projectSolutionDescription").textContent=data[2];
-  $("#projectSolutionPortfolioLabel").textContent=scope==="supalan"?(lang==="tr"?"SAHA KONTROL KAPSAMI":"FIELD CONTROL SCOPE"):(lang==="tr"?"ÇÖZÜM KAPSAMI":"SOLUTION SCOPE");
+  const portfolioLabel=$("#projectSolutionPortfolioLabel");
+  portfolioLabel.hidden=false;
+  portfolioLabel.textContent=scope==="supalan"?(lang==="tr"?"SAHA KONTROL KAPSAMI":"FIELD CONTROL SCOPE"):(lang==="tr"?"ÇÖZÜM KAPSAMI":"SOLUTION SCOPE");
   $("#projectSolutionCount").hidden=true;
   $("#projectSolutionHint").textContent=screens.length?(lang==="tr"?"Ekran kartlarını seçerek büyük görüntüleyebilirsiniz.":"Select a screen card to enlarge it."):(lang==="tr"?"Kontrol adımları tek çözüm görünümünde sunulur.":"Control steps are presented in one solution view.");
   toolbar.hidden=false;
@@ -514,7 +505,7 @@ function openRpaInfo(d,galleryItems=[]){
   openInfo(d,galleryItems);
   $("#modalDemo").innerHTML="";
 }
-function openCatalog(code,title,description,groups){resetInfoModalMode();infoModal.classList.add("catalog-mode");$("#modalCode").textContent=code;$("#modalTitle").textContent=title;$("#modalText").textContent=description;renderModalGallery([]);$("#modalPoints").innerHTML=groups.map(g=>`<section class="catalog-group"><h4>${g[0]} <span>${g[1].length}</span></h4><div class="catalog-items">${g[1].map((item,index)=>`<div><b>${String(index+1).padStart(2,"0")}</b><span>${item}</span></div>`).join("")}</div></section>`).join("");$("#modalDemo").innerHTML="";infoModal.showModal()}
+function openCatalog(title,description,groups){resetInfoModalMode();infoModal.classList.add("catalog-mode");$("#modalCode").hidden=true;$("#modalCode").textContent="";$("#modalTitle").textContent=title;$("#modalText").textContent=description;renderModalGallery([]);$("#modalPoints").innerHTML=groups.map(g=>`<section class="catalog-group"><h4>${g[0]} <span>${g[1].length}</span></h4><div class="catalog-items">${g[1].map((item,index)=>`<div><b>${String(index+1).padStart(2,"0")}</b><span>${item}</span></div>`).join("")}</div></section>`).join("");$("#modalDemo").innerHTML="";infoModal.showModal()}
 
 const supalanImages=[
   {src:"assets/supalan/supalan-1.jpg",caption:{tr:"Drone çekimi • Genel saha görünümü",en:"Drone shot • Overall field view"}},
@@ -1011,7 +1002,6 @@ $("#startBtn").addEventListener("click",()=>navigate(1));$("#restartBtn").addEve
 $("#fullscreenBtn").addEventListener("click",()=>document.fullscreenElement?document.exitFullscreen?.():document.documentElement.requestFullscreen?.());
 $("#langBtn").addEventListener("click",()=>{lang=lang==="tr"?"en":"tr";updateLanguage()});
 $("#overviewBtn").addEventListener("click",()=>overview.classList.add("is-open"));$("#overviewClose").addEventListener("click",()=>overview.classList.remove("is-open"));
-notesBtn?.addEventListener("click",()=>toggleSpeakerNotes());notesClose?.addEventListener("click",()=>toggleSpeakerNotes(false));
 $$("[data-team-card]").forEach(card=>card.addEventListener("click",()=>{const open=!card.classList.contains("is-open");$$("[data-team-card]").forEach(x=>{x.classList.remove("is-open");x.setAttribute("aria-expanded","false")});if(open){card.classList.add("is-open");card.setAttribute("aria-expanded","true")}}));
 $$(".engine-node").forEach(b=>b.addEventListener("click",()=>togglePartnership(b)));
 $("#partnershipClose")?.addEventListener("click",closePartnership);
@@ -1043,7 +1033,7 @@ $("#projectSolutionGrid")?.addEventListener("click",event=>{
   grid.querySelectorAll(".solution-project-card").forEach(item=>{item.classList.remove("is-open");item.querySelector(".solution-project-toggle")?.setAttribute("aria-expanded","false")});
   if(willOpen){card.classList.add("is-open");toggle.setAttribute("aria-expanded","true")}
 });
-$("#allProjectsBtn").addEventListener("click",()=>openCatalog("FORD PROJECT CATALOG",lang==="tr"?"Ford Otosan Proje Kataloğu":"Ford Otosan Project Catalogue",lang==="tr"?"Kullanıcı tarafından paylaşılan 29 proje, operasyonel yetkinliklere göre gruplandırılmıştır.":"The 29 projects supplied by the user are grouped by operational capability.",projectCatalog[lang]));
+$("#allProjectsBtn").addEventListener("click",()=>openCatalog(lang==="tr"?"Ford Otosan Proje Kataloğu":"Ford Otosan Project Catalogue",lang==="tr"?"Kullanıcı tarafından paylaşılan 29 proje, operasyonel yetkinliklere göre gruplandırılmıştır.":"The 29 projects supplied by the user are grouped by operational capability.",projectCatalog[lang]));
 $$(".integration-tab").forEach(b=>b.addEventListener("click",()=>{$$(".integration-tab").forEach(x=>x.classList.remove("is-active"));b.classList.add("is-active");renderIntegration(b.dataset.integrationTab)}));
 $$(".special-card").forEach(b=>b.addEventListener("click",()=>openFeatureSolution("special",b.dataset.special)));
 $$("[data-rpa-project]").forEach(b=>b.addEventListener("click",()=>{
@@ -1062,7 +1052,7 @@ startSupalanTruckFlow();
 runOtomailFlow();
 runRobotFlow();
 
-$("#allReportsBtn").addEventListener("click",()=>openCatalog("OTOMAIL REPORT CATALOG",lang==="tr"?"Ford Otomail Rapor Kataloğu":"Ford Otomail Report Catalogue",lang==="tr"?"37 rapor kaydı konu başlıklarına göre gruplanmıştır. Otomail akışında raporlar güvenli biçimde üretilir, doğrulanır ve yalnızca yetkili Ford Otosan alıcılarına iletilir.":"The 37 report entries are grouped by subject. In the Otomail flow, reports are securely generated, validated and delivered only to authorised Ford Otosan recipients.",reportCatalog[lang]));
+$("#allReportsBtn").addEventListener("click",()=>openCatalog(lang==="tr"?"Ford Otomail Rapor Kataloğu":"Ford Otomail Report Catalogue",lang==="tr"?"37 rapor kaydı konu başlıklarına göre gruplanmıştır. Otomail akışında raporlar güvenli biçimde üretilir, doğrulanır ve yalnızca yetkili Ford Otosan alıcılarına iletilir.":"The 37 report entries are grouped by subject. In the Otomail flow, reports are securely generated, validated and delivered only to authorised Ford Otosan recipients.",reportCatalog[lang]));
 
 $("#intacDetailBtn").addEventListener("click",()=>openRpaInfo(lang==="tr"?["FORD İNTAÇ PROJESİ","Ford İNTAÇ Sorgulama","Robotun portal oturumu açması, sorgu parametrelerini girmesi, sonucu alması ve sonraki sisteme kontrollü biçimde aktarması.",["Tekrarlı portal adımlarının otomasyonu","Sorgu sonuçlarının loglanması","Hata ve istisna durumlarının işaretlenmesi","Aycube ve ilgili sistemlere aktarım"],"flow"]:["INTAÇ AUTOMATION","Ford INTAÇ Query","The robot opens the portal session, enters query parameters, retrieves the result and transfers it to the next system in a controlled flow.",["Automation of repetitive portal steps","Query-result logging","Error and exception marking","Transfer to Aycube and related systems"],"flow"],projectScreens.intac));
 
@@ -1118,7 +1108,6 @@ document.addEventListener("keydown",e=>{
   if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();navigate(current-1)}
   if(e.key.toLowerCase()==="f")document.fullscreenElement?document.exitFullscreen?.():document.documentElement.requestFullscreen?.();
   if(e.key.toLowerCase()==="o")overview.classList.add("is-open");
-  if(e.key.toLowerCase()==="n")toggleSpeakerNotes();
   if(e.key==="Home")navigate(0);
   if(e.key==="End")navigate(slides.length-1);
   if(e.key==="Escape")overview.classList.remove("is-open");
