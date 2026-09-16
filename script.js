@@ -23,6 +23,29 @@ const cinematicAssetsReady=Promise.all(cinematicAssetSources.map(src=>{
   return typeof image.decode==="function"?image.decode().catch(()=>undefined):Promise.resolve();
 }));
 
+// Hidden slides and dialog content can cause native lazy-loading to start too
+// late in presentation mode. Warm the active and upcoming slide assets with a
+// small rolling window so images are ready without downloading the full deck
+// in one burst.
+const warmedAssetSources=new Set(cinematicAssetSources);
+function warmImageSource(src){
+  if(!src||warmedAssetSources.has(src))return;
+  warmedAssetSources.add(src);
+  const image=new Image();
+  image.decoding="async";
+  image.src=src;
+  if(typeof image.decode==="function")image.decode().catch(()=>undefined);
+}
+function warmSlideAssets(index){
+  if(index<0||index>=slides.length)return;
+  slides[index].querySelectorAll("img").forEach(image=>{
+    const src=image.currentSrc||image.getAttribute("src");
+    if(!src)return;
+    image.loading="eager";
+    warmImageSource(src);
+  });
+}
+
 const partnershipData={
 tr:{
 collaboration:["01 / YAKIN ÇALIŞMA","Ford ekipleriyle ortak çalışma masası","İhtiyaçlar Ford operasyon ekipleriyle doğrudan ele alınır; hedef, kapsam ve öncelikler birlikte netleştirilir."],
@@ -394,6 +417,7 @@ function scheduleAdjacentWarmup(center=current){
 function commitSlide(index){
 current=Math.max(0,Math.min(index,slides.length-1));
 slides.forEach((slide,i)=>{slide.classList.toggle("is-active",i===current);slide.classList.toggle("is-before",i<current)});
+warmSlideAssets(current);warmSlideAssets(current+1);warmSlideAssets(current+2);
 const app=$(".app");
 const activeSlide=slides[current];
 activeSlide.classList.remove("is-prewarming");
@@ -451,7 +475,7 @@ $(".integration-stage").animate([{opacity:.45,transform:"translateY(10px)"},{opa
 }
 function benefitMarkup(items=[]){
   if(!items.length)return"";
-  return `<section class="project-benefits"><span class="project-benefit-icon" aria-hidden="true"><img src="assets/icons/ford-benefit-v1.png" alt="" loading="lazy" decoding="async" /></span><div><strong>${lang==="tr"?"Ford için kazanım":"Benefit for Ford"}</strong><ul>${items.map(item=>`<li>${item}</li>`).join("")}</ul></div></section>`;
+  return `<section class="project-benefits"><span class="project-benefit-icon" aria-hidden="true"><img src="assets/icons/ford-benefit-v1.png" alt="" loading="eager" decoding="async" /></span><div><strong>${lang==="tr"?"Ford için kazanım":"Benefit for Ford"}</strong><ul>${items.map(item=>`<li>${item}</li>`).join("")}</ul></div></section>`;
 }
 function demoMarkup(type){
 if(type==="search")return`<div class="demo-search"><span>${lang==="tr"?"FORD / 2026 / Beyanname / Referans...":"FORD / 2026 / Declaration / Reference..."}</span><b>${lang==="tr"?"0,4 sn":"0.4 sec"}</b></div>`;
@@ -488,7 +512,7 @@ function projectItemsMarkup(key){
   return (projectItems[key]||[]).map((item,index)=>{
     const title=item.title[lang];
     const metric=item.metric?`<small>${item.metric[lang]}</small>`:"";
-    const media=item.image?`<button class="project-detail-media" type="button" data-project-image="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}"><img src="${item.image}" alt="${title}" loading="lazy" decoding="async" /><span>${lang==="tr"?"Görseli büyüt":"Enlarge image"}</span></button>`:"";
+    const media=item.image?`<button class="project-detail-media" type="button" data-project-image="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}"><img src="${item.image}" alt="${title}" loading="eager" decoding="async" /><span>${lang==="tr"?"Görseli büyüt":"Enlarge image"}</span></button>`:"";
     return `
     <article class="project-detail-card${item.image?" has-project-image":""}">
       <button class="project-detail-toggle" type="button" aria-expanded="false">
@@ -505,7 +529,7 @@ function projectSolutionCardsMarkup(key){
     const title=item.title[lang],number=String(index+1).padStart(2,"0"),detailId=`project-solution-${key}-${index}`;
     const typeLabel=["archive","customs","finance"].includes(key)?"":item.metric?.[lang]||(item.image?(lang==="tr"?"Ekranlı proje":"Project with screen"):(lang==="tr"?"Operasyon projesi":"Operations project"));
     const typeMarkup=typeLabel?`<small>${typeLabel}</small>`:"";
-    const media=item.image?`<button class="solution-project-media" type="button" data-solution-image="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}"><img src="${item.image}" alt="${title}" loading="lazy" decoding="async" /><span>${lang==="tr"?"Ekranı büyüt":"Enlarge screen"}</span></button>`:"";
+    const media=item.image?`<button class="solution-project-media" type="button" data-solution-image="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}"><img src="${item.image}" alt="${title}" loading="eager" decoding="async" /><span>${lang==="tr"?"Ekranı büyüt":"Enlarge screen"}</span></button>`:"";
     return `<article class="solution-project-card${item.image?" has-screen":""}">
       <button class="solution-project-toggle" type="button" aria-expanded="false" aria-controls="${detailId}">
         <span class="solution-project-index">${number}</span>
@@ -548,7 +572,7 @@ function featureSolutionScreenMarkup(items){
     const title=item.label?.[lang]||item.title?.[lang]||(lang==="tr"?"Ekran görünümü":"Screen view");
     const detail=item.description?.[lang]||projectScreenDetails[item.src]?.[lang]||"";
     return `<button class="feature-screen-card" type="button" data-feature-screen="${index}" aria-label="${lang==="tr"?`${title} görselini büyüt`:`Enlarge ${title} image`}">
-      <span class="feature-screen-media"><img src="${item.src}" alt="${title}" loading="lazy" decoding="async" /><i>${lang==="tr"?"Büyüt":"Enlarge"}</i></span>
+        <span class="feature-screen-media"><img src="${item.src}" alt="${title}" loading="eager" decoding="async" /><i>${lang==="tr"?"Büyüt":"Enlarge"}</i></span>
       <span class="feature-screen-copy"><small>${String(index+1).padStart(2,"0")}</small><strong>${title}</strong>${detail?`<p>${detail}</p>`:""}</span>
     </button>`;
   }).join("");
