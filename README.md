@@ -99,3 +99,13 @@ Supalan saha kapasitesi ve canlı panel değerleri görsel demo verileridir. Ger
 - Detay modalındaki galeriler lightbox ile uyumlu hâle getirildi.
 - Aycube, Supalan, ekip ve logo görselleri kendi galerileri içinde sağ/sol yön tuşlarıyla gezilebiliyor.
 - Mobil galeride yatay kaydırma desteği eklendi.
+
+## 9 Ekim 2026 — Güncel sunum
+
+- Türkiye ve Romanya bölümleriyle toplam 10 slayt; 29 Ford projesi ve 37 rapor kataloğu.
+- Her bölüm için başlıklı, konuya özel geçişler ve Türkiye–Romanya operasyon haritası.
+- Seçilen karttan büyüyerek açılan çözüm ekranları ve kartına geri dönen kapanış hareketi.
+- Otomail gönderim hacimleri 7 saniyede yükselir: günlük ~147, haftalık 1.035, aylık ~4.497, yıllık 53.966. Bu gösterim canlı gönderim sayacı değildir.
+- Aycube’nin katmanları, sayfa 5’teki “Katmanlar” düğmesiyle açılıp birleştirilebilir.
+- Mobil, tablet, yatay ekran ve sunum çözünürlükleri için uyarlanmış düzen; azaltılmış hareket desteği.
+- Yeni ekip portrelerinin orijinalleri korunur; sunumda daha hafif WebP kopyaları kullanılır.

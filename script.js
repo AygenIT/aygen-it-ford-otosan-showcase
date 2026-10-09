@@ -4,7 +4,7 @@ const prevBtn=$("#prevBtn"),nextBtn=$("#nextBtn"),progressBar=$("#progressBar"),
 const transitionStage=$("#transitionStage"),transitionNumber=$("#transitionNumber"),transitionName=$("#transitionName");
 const overview=$("#overview"),overviewGrid=$("#overviewGrid"),infoModal=$("#infoModal"),notesPanel=$("#speakerNotes"),notesBtn=$("#notesBtn"),notesClose=$("#notesClose"),notesTitle=$("#speakerNotesTitle"),notesText=$("#speakerNotesText");
 const projectSolutionModal=$("#projectSolutionModal");
-const solutionModals={integration:$("#integrationSolutionModal"),automation:$("#rpaSolutionModal"),customs:projectSolutionModal,finance:projectSolutionModal,archive:projectSolutionModal};
+const solutionModals={integration:$("#integrationSolutionModal"),automation:$("#rpaSolutionModal"),customs:projectSolutionModal,finance:projectSolutionModal,archive:projectSolutionModal,romania:$("#romaniaModal")};
 let current=0,lang="tr",busy=false,touchStartX=null;
 totalNo.textContent=String(slides.length).padStart(2,"0");
 
@@ -53,14 +53,14 @@ analysis:["02 / ANALİZ","İhtiyacı veriye ve akışa dönüştürme","Mevcut s
 development:["03 / GELİŞTİRME","Onaylı kapsamı çalışan çözüme dönüştürme","Çözüm, Ford süreçlerine uyumlu modüler bileşenlerle geliştirilir; entegrasyonlar ve kritik senaryolar uçtan uca doğrulanır."],
 architecture:["04 / GÜVENLİ MİMARİ","Güvenli ve sürdürülebilir temel","Yetkilendirme, veri bütünlüğü, izlenebilir kayıt ve genişleyebilir entegrasyon yapısı Ford’un güvenlik gereksinimleriyle birlikte ele alınır."],
 iteration:["05 / HIZLI İTERASYON","Geri bildirimle kısa geliştirme döngüsü","Demo ve kullanıcı testlerinden gelen geri bildirimler hızla değerlendirilir; küçük, kontrollü sürümlerle çözüm sürekli iyileştirilir."],
-delivery:["06 / TESLİMAT","Kontrollü geçiş, kalıcı kullanım","Kabul testleri tamamlanan çözüm dokümantasyon, kullanıcı bilgilendirmesi ve destek planıyla devreye alınır; sonuçlar birlikte izlenir."]},
+delivery:["06 / PROJE TESLİMİ","Kontrollü geçiş, kalıcı kullanım","Kabul testleri tamamlanan çözüm dokümantasyon, kullanıcı bilgilendirmesi ve destek planıyla devreye alınır; sonuçlar birlikte izlenir."]},
 en:{
 collaboration:["01 / CLOSE COLLABORATION","A shared working table with Ford teams","Needs are addressed directly with Ford operations teams, while goals, scope and priorities are clarified together."],
 analysis:["02 / ANALYSIS","Turning needs into data and process flows","The current process, data sources, business rules and exceptions are analysed together to define measurable acceptance criteria."],
 development:["03 / DEVELOPMENT","Turning approved scope into a working solution","The solution is developed with modular components aligned to Ford processes, while integrations and critical scenarios are validated end to end."],
 architecture:["04 / SECURE ARCHITECTURE","A secure and sustainable foundation","Authorisation, data integrity, traceable records and an extensible integration structure are addressed together with Ford’s security requirements."],
 iteration:["05 / FAST ITERATION","Short development cycles shaped by feedback","Feedback from demos and user tests is evaluated quickly, continuously improving the solution through small, controlled releases."],
-delivery:["06 / DELIVERY","Controlled rollout, lasting adoption","After acceptance testing, the solution goes live with documentation, user guidance and a support plan, and outcomes are monitored together."]}};
+delivery:["06 / PROJECT DELIVERY","Controlled rollout, lasting adoption","After acceptance testing, the solution goes live with documentation, user guidance and a support plan, and outcomes are monitored together."]}};
 const partnershipKeys=["collaboration","analysis","development","architecture","iteration","delivery"];
 
 const projectData={
@@ -180,28 +180,37 @@ archive:[
 const integrationBenefits={
 tr:{
 import:[["Manuel veri girişi azalır","Beyanname hazırlığı hızlanır","Alan doğruluğu artar"],["Kalem bazlı kontrol süresi kısalır","GTİP ve alan hataları azalır","Tekrar işleme maliyeti düşer"]],
-export:[["Sevkiyat ve beyanname akışı hızlanır","Eksik alan riski azalır","Ekipler güncel veriyle çalışır"],["Kalem bazlı veri aktarımı hızlanır","Vergi ve belge kontrolleri standartlaşır","Manuel kontrol yükü azalır"],["Zorunlu alanlar erken doğrulanır","Tescil ve çıkış görünürlüğü artar","Gecikme riski azalır"]],
-archive:[["Belge arama süresi kısalır","Operasyon beklemeleri azalır","Tek veri kaynağına güven artar"],["Denetim izi güçlenir","Yanlış versiyon riski azalır","Kontrol maliyeti düşer"]],
-bank:[["Manuel gönderim yükü azalır","İletim hataları düşer","Gönderim kaydı izlenir"],["Eksik dekontlar erken görülür","Mutabakat süresi kısalır","Finansal risk azalır"]]
+archive:[["Belge arama süresi kısalır","Operasyon beklemeleri azalır","Beyannameye ait diğer evrakların arşiv kayıtlarına erişim"],["Kullanıcı yetkilendirmesi ve işlem loglarıyla güvenli, izlenebilir arşiv erişimi sağlanır","Kontrol maliyeti düşer"]],
+bank:[["Yanlış beyannameye ödeme ihtimali ortadan kalkar.","Vergi ödeme kayıtları gerçek zamanlı olarak işlenir ve raporlanır.","Manuel işlem kaynaklı hata riski azalır."]],
+gtb:[["Başvuru ve belge takibi tek noktada birleşir","Manuel kontrol ve tekrar işlem yükü azalır","İzin, süre ve işlem durumları görünür hâle gelir","Ford ekipleri güncel kayıtlarla ilerler"],["IMEI başvurularında riskleri minimize eder.","Hatalı veya eksik işlem kaynaklı ceza riskini azaltır."]],
+getApp:[["Beyanname bilgilerine erişim hızlanır","Tekrarlı veri girişi ve manuel sorgular azalır","Ekipler aynı güncel veriyle çalışır"],["Vergi tutarları ve ödeme kayıtları karşılaştırılabilir","Hatalı veya eksik ödeme riski azalır","Finansal kontrol ve mutabakat süresi kısalır"]]
 },
 en:{
 import:[["Manual data entry decreases","Declaration preparation accelerates","Field accuracy increases"],["Line-level review time is shortened","GTIP and field errors decrease","Rework cost is reduced"]],
-export:[["Shipment and declaration flow accelerates","Missing-field risk decreases","Teams work with current data"],["Line-level data transfer accelerates","Tax and document checks are standardised","Manual review work decreases"],["Mandatory fields are verified early","Registration and exit visibility increases","Delay risk decreases"]],
-archive:[["Document search time is shortened","Operational waiting decreases","Trust in a single data source increases"],["The audit trail becomes stronger","Wrong-version risk decreases","Control cost is reduced"]],
-bank:[["Manual delivery work decreases","Transmission errors decrease","Delivery records stay traceable"],["Missing receipts surface early","Reconciliation time is shortened","Financial risk decreases"]]
+archive:[["Document search time is shortened","Operational waiting decreases","Access to archive records for other documents associated with the declaration"],["User authorisation and transaction logs provide secure, traceable access to the archive","Control cost is reduced"]],
+bank:[["Eliminates the possibility of payment against the wrong declaration.","Tax payment records are processed and reported in real time.","Reduces the risk of errors caused by manual processing."]],
+gtb:[["Application and document tracking are brought together","Manual checks and rework decrease","Permit, deadline and transaction status become visible","Ford teams work with current records"],["Minimises risks in IMEI applications.","Reduces the risk of penalties caused by incorrect or incomplete transactions."]],
+getApp:[["Access to declaration information accelerates","Repeated data entry and manual queries decrease","Teams work with the same current data"],["Tax amounts and payment records can be compared","Incorrect or incomplete payment risk decreases","Financial control and reconciliation time is shortened"]]
 }};
+
+const integrationExportBenefits={
+tr:["Sevkiyat ve beyanname hazırlığı hızlanır","Manuel veri girişi ve kontrol yükü azalır","Eksik alanlar ve veri tutarsızlıkları erken görülür","Vergi ve belge kontrolleri standartlaşır","İntaç bilgileri tek yönlü aktarılır; tescil ve çıkış kayıtlarıyla birlikte izlenir","Açık dosyalar ve gecikme riski görünür hâle gelir","Tekrar işlemden doğan zaman ve maliyet kaybı azalır"],
+en:["Shipment and declaration preparation accelerates","Manual data entry and review workload decrease","Missing fields and inconsistent data are identified early","Tax and document checks are standardised","Closure information is transferred one way and tracked alongside registration and exit records","Open files and delay risks become visible","Time and cost lost to rework decrease"]
+};
 
 const rpaProjectBenefits={
 tr:{
 berkbot:["Tekrarlı iş yükü azalır","Kullanıcı hataları düşer","Operasyon kapasitesi artar"],
 fordBilling:["Ay sonu faturalama süresi kısalır","Eksik ve tutarsız kayıtlar azalır","Muhasebe kontrol maliyeti düşer"],
 invoiceOcr:["Manuel dosyalama ortadan kalkar","Belge ayrıştırma süresi kısalır","Fatura karışıklığı azalır"],
+taxPayment:["Vergi ödeme süresi kısalır","Manuel işlem kaynaklı hata riski azalır","Ödeme sonuçları ve işlem kayıtları izlenebilir"],
 intac:["Toplu sorgu süresi kısalır","Tekrarlı portal işlemleri azalır","Sonuç aktarımında hata riski düşer"]
 },
 en:{
 berkbot:["Repetitive workload decreases","User errors decline","Operational capacity increases"],
 fordBilling:["Month-end billing time is shortened","Missing and inconsistent records decrease","Accounting control cost is reduced"],
 invoiceOcr:["Manual filing is eliminated","Document separation time is shortened","Invoice mix-ups decrease"],
+taxPayment:["Tax payment processing time is shortened","The risk of manual processing errors decreases","Payment results and transaction records become traceable"],
 intac:["Bulk query time is shortened","Repeated portal work decreases","Result-transfer error risk decreases"]
 }};
 
@@ -275,27 +284,127 @@ const projectScreenDetails={
 const integrationData={
 tr:{
 import:{title:"İthalat Entegrasyonu",description:"Ford Entegrasyon kapsamında araç ve yedek parça ithalatı; farklı veri alanları, saymanlık bilgisi, GTİP kuralları, bütçeler ve geliştirme süreçleri nedeniyle ayrı akışlarda yönetilir.",rate:96.4,rateText:"%96,4",cards:[["1","İthalat Araç","Araç operasyonuna özel veri modeli, doğrulama alanları, saymanlık bilgisi ve beyanname senaryoları."],["2","İthalat Yedek Parça","Yedek parça kalemleri, GTİP güncelleme, alan seçimi ve kontrol ihtiyaçları."]]},
-export:{title:"İhracat Entegrasyonu",description:"Araç, kamyon ve yedek parça ihracatı; otomatik getirilen alanlar, vergi bilgisinin tescil sonrası aktarımı, sevkiyat ve beyanname ihtiyaçları nedeniyle operasyona özel akışlarla yönetilir.",rate:94.8,rateText:"%94,8",cards:[["1","İhracat Araç","Araç ihracatına özel sevkiyat, beyanname ve otomatik alan akışı."],["2","İhracat Yedek Parça","Kalem bazlı veri, vergi alanı ve doğrulama ihtiyaçlarına özel akış."],["3","İhracat Kamyon","Kamyon ihracatına ait araç, sevkiyat ve beyanname verileri tek akışta eşleştirilir. Zorunlu alanlar doğrulanır; tescil, çıkış ve intaç durumu Ford ekipleri için izlenebilir hâle gelir."]]},
-archive:{title:"Arşiv Entegrasyonu",description:"Ford Arşiv Entegrasyon ve Arşiv Fihrist ile evrakları tek havuzda, standart metaveri ve olay bazlı arşivleme yaklaşımıyla yönetir.",rate:100,rateText:"%100",cards:[["1","Hızlı Erişim","Anahtar alanlarla saniyeler içinde arama, görüntüleme ve kayıt ilişkilendirme."],["2","Versiyon & Audit Trail","Tek doğru kayıt, versiyon geçmişi ve denetlenebilir işlem izi."]]},
-bank:{title:"Banka Entegrasyonu",description:"Bankaya gönderilen beyanname görüntüsü, dekont edilmeyen dosyaların tespiti ve ekstre gönderimi süreçlerini standart, kontrollü ve izlenebilir hâle getirir.",rate:99.2,rateText:"%99,2",cards:[["1","Kontrollü İletim","Bankaya gönderilen beyanname görüntüsünün kontrollü alınması ve iletilmesi."],["2","Mutabakat & İstisna","Dekont edilmeyen dosyaların tespiti, otomatik ekstre ve hata durumlarının izlenmesi."]]}},
+export:{title:"İhracat Entegrasyonu",description:"Araç, yedek parça ve kamyon ihracatından intaç takibine kadar sevkiyat, beyanname ve kapanış bilgileri; operasyona özel veri alanları ve kontrollerle ortak entegrasyon yapısında yönetilir.",rate:94.8,rateText:"%94,8",cards:[["1","İhracat Araç","Araç ihracatına ait sevkiyat ve beyanname verileri eşleştirilir; gerekli alanlar kaynak sistemden otomatik alınarak kontrol edilir."],["2","İhracat Yedek Parça","Yedek parça ihracatında kalem bazlı veriler ve belge referansları aktarılır. Vergi bilgisi tescil sonrası ilgili kayda bağlanır; alan ve doğrulama kontrolleri aynı akışta yürütülür."],["3","İhracat Kamyon","Kamyon ihracatına ait araç, sevkiyat ve beyanname bilgileri tek akışta eşleştirilir. Zorunlu alanlar doğrulanarak tescil ve çıkış durumu Ford ekipleri için izlenebilir hâle gelir."],["4","İhracat İntaç (Tek Yönlü)","İhracat beyannamelerine ait intaç tarihi ve sonuç bilgisi ilgili kayıtlara tek yönlü olarak aktarılır. Bu entegrasyon çift yönlü veri alışverişi yapmaz; Ford ekipleri kapanış durumunu ortak görünümden takip eder."]]},
+archive:{title:"Arşiv Entegrasyonu",description:"Ford Arşiv Entegrasyon ve Arşiv Fihrist ile evrakları tek havuzda, standart metaveri ve olay bazlı arşivleme yaklaşımıyla yönetir.",rate:100,rateText:"%100",cards:[["1","Hızlı Erişim","Anahtar alanlarla saniyeler içinde arama, görüntüleme ve kayıt ilişkilendirme."],["2","Güvenlik & Loglama","Arşiv erişimleri kullanıcı yetkileriyle kontrol edilir. Erişim ve işlem kayıtları kullanıcı ve zaman bilgileriyle loglanarak belge üzerindeki hareketler izlenebilir hâle getirilir."],["3","Fatura ve Dekont Arşiv Yönetimi","Fatura ve dekontları ilgili beyanname ve dosya referanslarıyla arşiv kayıtlarına bağlar. Ford ekipleri fatura ve ödeme belgelerine aynı işlem üzerinden erişebilir; belge arama ve manuel eşleştirme yükü azalır."]]},
+bank:{title:"Banka Entegrasyonu",description:"Beyannameye ait vergi ödeme bilgilerinin banka sistemleriyle entegre şekilde işlenmesini sağlar. Vergi ödemeleri kontrollü, hızlı ve izlenebilir biçimde gerçekleştirilir.",rate:99.2,rateText:"%99,2",cards:[["1","Beyanname Bazlı Vergi Ödemeleri","Vergi ödeme bilgileri ilgili beyannameyle eşleştirilerek banka sistemlerine aktarılır. Ödemeler kontrollü ve izlenebilir biçimde gerçekleştirilir."],["2","Ödeme Takibi & Raporlama","Vergi ödeme kayıtları gerçek zamanlı olarak işlenir ve raporlanır. Ford ekipleri ödeme durumunu ilgili beyanname üzerinden takip eder."]]},
+gtb:{title:"GTB Entegrasyonları",description:"Tek Pencere Sistemi, geçici ithalat, nihai kullanım ve IMEI başvuru süreçlerindeki belge, başvuru ve takip bilgileri ortak entegrasyon yapısında birleştirilir. Ford ekipleri ilgili kayıtları ve işlem durumlarını tek görünümde izler.",cards:[["1","Tek Pencere Sistemi","Gümrük işlemlerinde kullanılan izin, onay ve belge başvurularına ait referans ve durum bilgilerini ilgili işlem kayıtlarıyla ilişkilendirir. Başvuru ve belge takibini ortak bir akışta toplar."],["2","Geçici İthalat","Geçici ithalata ait izin, başvuru ve dosya bilgilerini birlikte takip eder. Süre ve kapanış bilgileriyle aksiyon bekleyen kayıtların Ford ekipleri tarafından izlenmesini kolaylaştırır."],["3","Nihai Kullanım","Nihai kullanım izin ve belge bilgilerini ilgili beyanname kayıtlarıyla birleştirir. Başvuru, referans ve işlem durumlarına erişimi kolaylaştırarak takip ve kontrol için ortak veri sağlar."],["4","IMEI Başvuru","IMEI bilgileri ve ilgili başvuru kayıtlarını aynı akışta toplar. Eksik veya tutarsız bilgilerin görülmesini ve başvuru durumunun takip edilmesini kolaylaştırarak kontrollü işlem yürütülmesini destekler."]]},
+getApp:{title:"GET-APP Entegrasyonu",description:"GET-APP üzerinden beyanname bilgilerine erişilir; vergi tutarları ve ödeme işlemleri aynı kayıtlar üzerinden kontrol edilir. Ford operasyon ve finans ekipleri için güncel, karşılaştırılabilir ve izlenebilir veri sağlar.",cards:[["1","Beyanname Bilgilerine Erişim","Tüm beyanname bilgileri sistem üzerinden çekilebilir. İlgili dosya ve işlem kayıtlarına aynı veri kaynağı üzerinden erişilir."],["2","Vergi ve Ödeme Doğrulama","Vergi tutarları GET-APP üzerinden kontrol edilerek ödeme işlemleri doğrulanabilir."]]}},
 en:{
 import:{title:"Import Integration",description:"Vehicle and spare-part operations are managed as separate flows because of different data fields, validation rules, budgets and delivery cycles.",rate:96.4,rateText:"96.4%",cards:[["1","Vehicle Import","Vehicle-specific data model, validation fields and declaration scenarios."],["2","Spare-Part Import","Line-item, field and validation needs specific to spare-part operations."]]},
-export:{title:"Export Integration",description:"Vehicle, truck and spare-part exports are managed through operation-specific flows because shipment, declaration, document and data-standardisation needs differ.",rate:94.8,rateText:"94.8%",cards:[["1","Vehicle Export","Vehicle-specific shipment, declaration and validation flow."],["2","Spare-Part Export","A flow tailored to line-level data, documents and validation needs."],["3","Truck Export","Vehicle, shipment and declaration data for truck exports is matched in one flow. Mandatory fields are validated, making registration, exit and closure status traceable for Ford teams."]]},
-archive:{title:"Archive Integration",description:"Manages documents in one pool with standard metadata and event-based archiving.",rate:100,rateText:"100%",cards:[["1","Fast Access","Search and view within seconds using key fields."],["2","Version & Audit Trail","Single source of truth, version history and auditable records."]]},
-bank:{title:"Bank Integration",description:"Makes payments, collections, receipts and declaration-image flows standard, controlled and traceable.",rate:99.2,rateText:"99.2%",cards:[["1","Controlled Delivery","Automatic recorded delivery of declaration images to the bank."],["2","Reconciliation & Exception","Monitoring successful, pending and failed states."]]}}};
+export:{title:"Export Integration",description:"From vehicle, spare-part and truck exports to closure tracking, shipment, declaration and closure information is managed through a shared integration structure with operation-specific fields and controls.",rate:94.8,rateText:"94.8%",cards:[["1","Vehicle Export","Vehicle shipment and declaration data is matched. Required fields are retrieved automatically from the source system and validated."],["2","Spare-Part Export","Line-level data and document references are transferred for spare-part exports. Tax information is linked to the relevant record after registration, with field and validation checks in the same flow."],["3","Truck Export","Vehicle, shipment and declaration information for truck exports is matched in one flow. Mandatory fields are validated so Ford teams can track registration and exit status."],["4","Export Closure (One-Way)","Export declarations’ closure dates and results are transferred to the related records through a one-way integration. There is no bidirectional data exchange in this flow; Ford teams track closure status in a shared view."]]},
+archive:{title:"Archive Integration",description:"Manages documents in one pool with standard metadata and event-based archiving.",rate:100,rateText:"100%",cards:[["1","Fast Access","Search and view within seconds using key fields."],["2","Security & Logging","Archive access is controlled through user permissions. Access and transaction records are logged with user and timestamp information, making document activity traceable."],["3","Invoice and Receipt Archive Management","Links invoices and payment receipts to archive records through the relevant declaration and file references. Ford teams access invoice and payment documents through the same transaction, reducing document searches and manual matching."]]},
+bank:{title:"Bank Integration",description:"Processes tax payment information for declarations through integration with banking systems. Tax payments are made in a controlled, fast and traceable way.",rate:99.2,rateText:"99.2%",cards:[["1","Declaration-Based Tax Payments","Tax payment information is matched to the relevant declaration and transferred to banking systems. Payments are made in a controlled and traceable way."],["2","Payment Tracking & Reporting","Tax payment records are processed and reported in real time. Ford teams track payment status against the relevant declaration."]]},
+gtb:{title:"GTB Integrations",description:"Document, application and tracking information across the Single Window System, temporary import, end-use and IMEI application processes is brought together in one integration structure. Ford teams can follow related records and transaction status in a shared view.",cards:[["1","Single Window System","Links references and status information for customs permit, approval and document applications to the relevant transaction records. Brings application and document tracking into a shared flow."],["2","Temporary Import","Tracks temporary-import permit, application and file information together. Deadline and closure information helps Ford teams follow records requiring action."],["3","End-Use","Links end-use permit and document information to the relevant declaration records. Makes application references and transaction status easier to access, providing shared data for tracking and control."],["4","IMEI Application","Brings IMEI information and related application records into one flow. Supports controlled processing by making missing or inconsistent information and application status easier to follow."]]},
+getApp:{title:"GET-APP Integration",description:"Declaration information is retrieved through GET-APP, while tax amounts and payment transactions are checked against the same records. Provides current, comparable and traceable data for Ford operations and finance teams.",cards:[["1","Access to Declaration Information","All declaration information can be retrieved through the system. Related file and transaction records can be accessed from the same data source."],["2","Tax and Payment Verification","Tax amounts can be checked through GET-APP to verify payment transactions."]]}}};
+
+const romaniaProjectData={
+  aycube:[{
+    title:{tr:"Aycube.ro Nedir?",en:"What Is Aycube.ro?"},
+    image:"assets/romania/aycube-ro-ana-ekran.png",
+    imageAlt:{tr:"Aycube.ro Ana Ekran",en:"Aycube.ro Home Screen"},
+    description:{
+      tr:"Aycube.ro, Romanya gümrük operasyonlarında iş akışlarını, arşiv kayıtlarını, entegrasyonları ve raporlamayı tek çatı altında toplayan modüler platformumuzdur. Ford Otosan Romanya ekipleri; dosya ve belge bilgilerine, sözlü beyan ve geçici ithalat kayıtlarına ortak bir çalışma alanından ulaşır. Ana ekran; operasyon menülerini, BI raporlarını ve güncel bilgi akışını bir araya getirerek günlük takibi kolaylaştırır.",
+      en:"Aycube.ro is our modular platform bringing workflows, archive records, integrations and reporting for Romanian customs operations under one roof. Ford Otosan Romania teams access file and document information, oral declarations and temporary import records through a shared workspace. The home screen brings operational menus, BI reports and current information together to simplify day-to-day tracking."
+    },
+    points:{
+      tr:["Romanya gümrük işlemleri ve raporları için merkezi takip","Dosya, belge ve işlem kayıtlarında uçtan uca izlenebilirlik","Yeni operasyon ihtiyaçlarına uyarlanabilen modüler yapı"],
+      en:["Central tracking of Romanian customs operations and reports","End-to-end traceability across files, documents and transaction records","A modular structure adaptable to new operational needs"]
+    }
+  }],
+  archive:[{
+    title:{tr:"Doküman Yönetim Sistemi",en:"Document Management System"},
+    visual:"documents",
+    description:{
+      tr:"Romanya gümrük operasyonlarına ait beyanname, fatura ve ek belgeleri ilgili dosya ve işlem referanslarıyla tek merkezde düzenler. Ford Otosan Romanya ekiplerinin ihtiyaç duyduğu dokümanlara daha hızlı ulaşmasını sağlar. Belge arama ve manuel dosyalama yükünü azaltarak arşivde düzenli ve izlenebilir bir yapı oluşturur.",
+      en:"Organises declarations, invoices and supporting documents for Romanian customs operations in one place, linked to the relevant files and transaction references. Ford Otosan Romania teams can reach the documents they need faster. It reduces document searches and manual filing work while creating an orderly, traceable archive."
+    }
+  },{
+    title:{tr:"Orijinal Evrak OCR",en:"Original Document OCR"},
+    visual:"ocr",
+    description:{
+      tr:"Taranmış orijinal evraklar üzerindeki metin ve temel belge bilgilerini OCR teknolojisiyle dijital veriye dönüştürür. Elde edilen bilgiler, evrakların ilgili Romanya operasyon dosyalarıyla eşleştirilmesini ve arşivde aranabilir hâle gelmesini destekler. Böylece manuel veri girişi azalır; belgeye erişim ve kontrol süreçleri hızlanır.",
+      en:"Uses OCR to convert text and key document information from scanned original documents into digital data. The extracted information supports matching documents to the relevant Romanian operational files and making them searchable in the archive. This reduces manual data entry and speeds up document access and review."
+    }
+  },{
+    title:{tr:"Sözlü Beyan Arşivleri",en:"Oral Declaration Archives"},
+    visual:"oral-archive",
+    description:{
+      tr:"Romanya’da sözlü beyan kapsamında yürütülen işlemlerin belge ve kayıtlarını tarih, dosya ve işlem referanslarıyla bir arada saklar. Ford ekipleri ilgili beyanın destekleyici evraklarına tek noktadan ulaşabilir ve geçmiş işlemleri geriye dönük inceleyebilir. Beyan kaydı ile evrakın birlikte tutulması, operasyonel kontrolü ve denetim hazırlığını kolaylaştırır.",
+      en:"Keeps documents and records for oral declaration operations in Romania together with their dates, file and transaction references. Ford teams can access supporting documents from one place and review past transactions. Keeping declaration records and documents together simplifies operational checks and audit preparation."
+    }
+  }],
+  integration:[{
+    title:{tr:"TBR Raporu (Yarı Entegrasyon)",en:"TBR Report (Partial Integration)"},
+    visual:"tbr",
+    description:{
+      tr:"TBR raporundaki verileri Romanya operasyon kayıtlarıyla ilişkilendiren yarı entegre çalışma modelidir. Veri hazırlama ve aktarım adımları sistem desteğiyle ilerlerken, gerekli kontroller ve tamamlayıcı işlemler kullanıcı tarafından yürütülür. Rapor ile işlem kayıtlarının tutarlı biçimde takip edilmesini sağlayarak tekrarlı veri girişi ve manuel kontrol yükünü azaltır.",
+      en:"A partially integrated workflow that links TBR report data to Romanian operational records. Data preparation and transfer are supported by the system, while users carry out the required checks and completing steps. Consistent tracking of the report and transaction records helps reduce repeated data entry and manual review work."
+    }
+  }],
+  special:[{
+    title:{tr:"Sözlü Beyan (Oral Declaration)",en:"Oral Declaration"},
+    image:"assets/romania/sozlu-beyan-aycube-ro.png",
+    imageAlt:{tr:"Aycube.ro Sözlü Beyan ekranı",en:"Aycube.ro Oral Declaration screen"},
+    description:{
+      tr:"Romanya operasyonlarında sözlü beyan kapsamında yürütülen gümrük işlemlerini dijital olarak kayıt altına alır. Eşya bilgileri, işlem tarihleri ve ilgili belge referansları tek dosyada toplanır; Ford ekipleri beyanları, işlem durumlarını ve takip gerektiren kayıtları ortak bir görünümden izler. Böylece sözlü beyanla yürütülen operasyonun kayıt bütünlüğü ve geriye dönük izlenebilirliği güçlenir.",
+      en:"Digitally records customs operations handled through oral declarations in Romania. Goods information, transaction dates and related document references are brought together in one file, allowing Ford teams to follow declarations, transaction status and records requiring attention in a shared view. This strengthens record consistency and retrospective traceability."
+    }
+  },{
+    title:{tr:"Geçici İthalat (Temporary Import)",en:"Temporary Import"},
+    image:"assets/romania/gecici-ithalat-aycube-ro.png",
+    imageAlt:{tr:"Aycube.ro Geçici İthalat ekranı",en:"Aycube.ro Temporary Import screen"},
+    description:{
+      tr:"Romanya’ya geçici olarak getirilen eşyaya ilişkin giriş, izin, süre ve yeniden ihracat veya kapanış bilgilerini tek dosyada izler. Açık kayıtları, yaklaşan süreleri ve tamamlanması gereken işlemleri Ford ekipleri için görünür hâle getirir. Eşya ve belge referanslarını bir arada tutarak girişten rejimin kapanışına kadar düzenli takip ve izlenebilirlik sağlar.",
+      en:"Tracks entry, authorisation, deadlines and re-export or closure information for goods temporarily brought into Romania in one file. Open records, approaching deadlines and outstanding actions become visible to Ford teams. Keeping goods and document references together supports consistent tracking and traceability from entry to closure of the procedure."
+    }
+  }]
+};
+
+const romaniaOtomailReports=[
+  {title:"ScoreCard Report",icon:"scorecard",description:{tr:"Operasyonel performansı skor kart görünümünde ekiplerin değerlendirmesine sunar.",en:"Shares a scorecard view of operational performance for teams to review."}},
+  {title:"Train Report",icon:"train",description:{tr:"Tren taşımalarına ilişkin operasyon bilgilerini ekiplerle paylaşır.",en:"Shares operational information on rail shipments with the teams."}},
+  {title:"Monthly Import",icon:"import",description:{tr:"Aylık ithalat operasyonlarına ait rapor verilerini bir araya getirir.",en:"Brings together reporting data for monthly import operations."}},
+  {title:"Monthly Export",icon:"export",description:{tr:"Aylık ihracat operasyonlarına ait rapor verilerini bir araya getirir.",en:"Brings together reporting data for monthly export operations."}},
+  {title:"General Report (YTD Report)",icon:"chart",description:{tr:"Yıl başından bugüne operasyonların genel görünümünü ekiplerle paylaşır.",en:"Shares an overview of operations from the start of the year to date."}},
+  {title:"Arad T2 Report",icon:"location",description:{tr:"Arad T2 süreçlerine ait rapor çıktısını ilgili ekiplerle paylaşır.",en:"Shares report output for Arad T2 processes with the relevant teams."}}
+];
+
+const romaniaAycubeProjectGroups=[
+  {
+    title:{tr:"BI",en:"BI"},
+    projects:{
+      tr:["Romanya Skor Kart","Romanya Fatura BI","Romanya Genel Grafik","Romanya İhracat Grafik","Romanya İthalat Grafik"],
+      en:["Romania Scorecard","Romania Invoice BI","Romania Overview Chart","Romania Export Chart","Romania Import Chart"]
+    }
+  },
+  {
+    title:{tr:"Arşiv",en:"Archive"},
+    projects:{
+      tr:["Romanya İhracat Raporu","Romanya İthalat Raporu","E-Arşiv"],
+      en:["Romania Export Report","Romania Import Report","E-Archive"]
+    }
+  },
+  {
+    title:{tr:"Operasyon",en:"Operations"},
+    projects:{
+      tr:["Sözlü Beyan","Geçici İthalat","Fatura Yükleme","Beyanname Yükleme","Material Kod Arama","SAP Excel Yükleme"],
+      en:["Oral Declaration","Temporary Import","Invoice Upload","Declaration Upload","Material Code Search","SAP Excel Upload"]
+    }
+  }
+];
 
 const projectCatalog={
 tr:[
   ["Gümrük & Takip",["Geçici İthalat Takip","İthalat Beyanname Raporu Detaylı","İthalat Beyanname Raporu","İhracat Beyanname Raporu","İhracat Beyanname Raporu Detaylı","Beyanname Durum Bilgisi","Beyanname Tescil Kontrolü","Yedek Parça Dekont ve Beyanname Görüntüsü","Bankaya Gönderilen Beyanname Görüntüsü","Ford’a Özel Aycube BI’lar — 14 özel BI","Kapı Bildirimleri","Beyanname Durum Bilgileri"]],
-  ["Entegrasyon & Veri",["İthalat Entegrasyonu","İhracat Entegrasyonu","Arşiv Entegrasyonu","Banka Entegrasyonu"]],
-  ["RPA & OCR",["Ford Toplu Fatura Kesim","Ford İNTAÇ Sorgulama","Akıllı Fatura Ayrıştırma – OCR Servisi"]],
+  ["Entegrasyon & Veri",["İthalat Entegrasyonu","İhracat Entegrasyonu","Arşiv Entegrasyonu","Banka Entegrasyonu","GTB Entegrasyonları","GET-APP Entegrasyonu"]],
+  ["RPA & OCR",["Ford Toplu Fatura Kesim","Ford İNTAÇ Sorgulama","Akıllı Fatura Ayrıştırma – OCR Servisi","Vergi Ödeme"]],
   ["Finans & Komisyon",["Bankaya Gönderilen Beyanname Görüntüsü","Toplu Fatura","Vergi Talep","Ekstre Gönderiminin Otomatize Edilmesi"]],
   ["Arşiv & Doküman",["Arşiv Fihrist","Arşiv Doküman Yönetim Sistemi","Toplu Evrak Talep"]]
 ],
 en:[
   ["Customs & Tracking",["Temporary Import Tracking","Detailed Import Declaration Report","Import Declaration Report","Export Declaration Report","Detailed Export Declaration Report","Declaration Status Information","Declaration Registration Check","Spare-Part Receipt and Declaration Image","Declaration Image Sent to the Bank","Ford-Specific Aycube BI Dashboards — 14 custom BI dashboards","Gate Notifications","Declaration Status Details"]],
-  ["Integration & Data",["Import Integration","Export Integration","Archive Integration","Bank Integration"]],
-  ["RPA & OCR",["Ford Bulk Billing","Ford INTAÇ Query","Smart Invoice Separation – OCR Service"]],
+  ["Integration & Data",["Import Integration","Export Integration","Archive Integration","Bank Integration","GTB Integrations","GET-APP Integration"]],
+  ["RPA & OCR",["Ford Bulk Billing","Ford INTAÇ Query","Smart Invoice Separation – OCR Service","Tax Payment"]],
   ["Finance & Commission",["Declaration Image Sent to the Bank","Bulk Billing","Tax Request","Automated Statement Delivery"]],
   ["Archive & Document",["Archive Index","Archive Document Management System","Bulk Document Request"]]
 ]};
@@ -312,33 +421,35 @@ const otomailReports=reportCatalog.tr.flatMap((trGroup,categoryIndex)=>trGroup[1
 
 const specialData={
 tr:{
-archiveIndex:["ARCHIVE INDEX","Arşiv Fihrist","Belgeye tarih, referans, süreç ve tip bazlı arama; saniyeler içinde bulma, görüntüleme ve ilgili kayıtla ilişkilendirme.",["Tekil doküman kimliği","Tutarlı metaveri alanları","Versiyon ve işlem geçmişi","Rol bazlı erişim"],"search"],
+archiveIndex:["ARCHIVE INDEX","Arşiv Fihrist","Orijinal evrakların konumu hızlıca tespit edilerek erişim süresi kısalır. Dosya veya beyanname numarasıyla Ford fiziksel arşivindeki raf ve konum bilgisine ulaşılır.",["Dosya / Beyanname bazlı sorgulama","Raf ve fiziksel konum bilgisi","Orijinal evrak konum takibi","Hızlı arama ve erişim"],"search"],
 gate:["CUSTOMS GATE NOTIFICATIONS","Gümrük Kapı Bildirimleri","Gümrükte kapı bildirimi, bir aracın veya taşıma işleminin gümrük kapısına giriş ya da çıkış yaptığının gümrük sistemine bildirilmesi ve kayıt altına alınmasıdır. Kısaca, ‘Araç gümrük kapısına geldi veya geçti’ bilgisinin sisteme işlenmesidir. Bu kayıt, taşıtın ve ilgili yükün sonraki gümrük işlemlerinin takip edilmesini sağlar.",["Araç veya taşıma işleminin gümrük kapısına geliş ya da geçiş kaydı","Giriş ve çıkış bilgisinin gümrük sistemine işlenmesi","Taşıt ile ilgili yükün sonraki gümrük işlemleriyle ilişkilendirilmesi","Kapı hareketinin kayıt üzerinden izlenebilmesi"],"flow"],
 declarationImage:["DECLARATION IMAGE","Bankaya Gönderilen Beyanname Görüntüsü","Tescil beyanname görüntüsünün kontrollü şekilde alınması, bankaya iletilmesi ve gönderim kayıtlarının izlenmesi.",["Manuel e-posta ve ek yönetimini azaltır","Gönderim zamanı ve alıcı logları","Tekrar deneme ve hata uyarısı","Ödeme ve teminat akışlarıyla bağlantı"],"flow"]},
 en:{
-archiveIndex:["ARCHIVE INDEX","Archive Index","Search by date, reference, process and type; find, view and link documents to the relevant record within seconds.",["Unique document identity","Consistent metadata","Version and activity history","Role-based access"],"search"],
+archiveIndex:["ARCHIVE INDEX","Archive Index","Original documents are located quickly, shortening access time. A file or declaration number identifies the shelf and position in Ford’s physical archive.",["File / declaration-based queries","Shelf and physical location information","Original document location tracking","Fast search and access"],"search"],
 gate:["CUSTOMS GATE NOTIFICATIONS","Customs Gate Notifications","A customs gate notification is the notification and recording in the customs system that a vehicle or transport operation has entered or exited a customs gate. In short, it records that the vehicle has arrived at or passed through the customs gate. This record enables the vehicle and its related cargo to be tracked through subsequent customs procedures.",["Recording a vehicle or transport operation arriving at or passing through the customs gate","Entering gate arrival and exit information into the customs system","Linking the vehicle and cargo to subsequent customs procedures","Tracking the gate movement through the recorded entry"],"flow"],
 declarationImage:["DECLARATION IMAGE","Declaration Image Sent to Bank","Controlled retrieval, bank delivery and tracking of registered declaration images.",["Reduces manual email and attachment handling","Delivery time and recipient logs","Retry and error alerts","Connection to payment and guarantee flows"],"flow"]}};
 
 const specialProjectBenefits={
 tr:{
-archiveIndex:["Belgeye erişim süresi kısalır","Arşiv arama maliyeti düşer","Denetim izi güçlenir"],
+archiveIndex:["Orijinal evrakların konumu saniyeler içinde bulunur.","Fiziksel arşivde evrak arama süresi azalır.","Kayıp veya yanlış yerde aranan evrak riski azalır.","Denetimlerde ihtiyaç duyulan orijinal evraklara hızlı erişim sağlanarak arama süresi ve iş gücü maliyeti düşürülür."],
 gate:["Araç ve yük hareketleri anlık görünür","Gümrük takip süresi kısalır","Eksik veya uyumsuz kayıt riski azalır"],
 declarationImage:["Manuel e-posta ve ek yönetimi azalır","Banka gönderimleri izlenebilir hâle gelir","Ödeme ve teminat süreçleri hızlanır"]
 },
 en:{
-archiveIndex:["Document access time is shortened","Archive search cost decreases","The audit trail becomes stronger"],
+archiveIndex:["The location of original documents is found within seconds.","Time spent searching for documents in the physical archive decreases.","The risk of missing documents or searching in the wrong location decreases.","Fast access to original documents required during audits reduces search time and labour costs."],
 gate:["Vehicle and cargo movements become instantly visible","Customs tracking time is shortened","Missing or inconsistent record risk decreases"],
 declarationImage:["Manual email and attachment work decreases","Bank deliveries become traceable","Payment and guarantee processes accelerate"]
 }};
 
 const rpaProjectData={
 tr:{
+taxPayment:["","Vergi Ödeme","Vergi Ödeme projesi, beyannamelere ait vergi ödeme adımlarını BerkBOT altyapısıyla otomatikleştirir. Beyanname referansı ve vergi tutarı işlem öncesinde kontrol edilir; ödeme işlemleri tanımlı yetki ve iş kuralları çerçevesinde yürütülür. İşlem sonuçları ilgili dosya kayıtlarıyla ilişkilendirilir, hata ve istisnalar loglanarak Ford operasyon ve finans ekipleri için izlenebilir hâle getirilir. Böylece tekrarlayan manuel ödeme adımları azalır, süreç daha kontrollü ve hızlı ilerler.",["Beyanname ve vergi tutarının işlem öncesinde kontrolü","Vergi ödeme adımlarının RPA ile otomasyonu","Ödeme sonucunun ilgili dosya kaydıyla ilişkilendirilmesi","Hata ve istisnaların loglanarak takip edilmesi"],"flow"],
 berkbot:["","BerkBOT | Akıllı Otomasyon Platformu","BerkBOT, şirketimiz bünyesinde geliştirdiğimiz yapay zekâ destekli RPA otomasyon platformudur. Tekrarlayan operasyonel süreçleri uçtan uca otomatikleştirirken iş gücü ve zaman tasarrufu sağlar, kullanıcı kaynaklı hataları minimum seviyeye indirmeyi hedefler. Süreçte karşılaştığı hata ve istisnalardan öğrenen yapısı; kontrol setleri, çapraz doğrulama mekanizmaları ve yapay zekâ destekli kontrollerle olası sorunları işlem gerçekleşmeden önce tespit eder, değerlendirir ve mümkün olan durumlarda otomatik olarak düzeltir. Böylece yalnızca işleri otomatikleştiren değil, operasyonel kaliteyi sürekli geliştiren akıllı bir altyapı sunar.",["Tekrarlayan operasyonel işlemlerin uçtan uca otomasyonu","Kullanıcı kaynaklı hataların işlem öncesinde tespiti","Kontrol setleri ve çapraz doğrulama mekanizmaları","Hata ve istisnalardan öğrenen gelişen yapı","Uygun senaryolarda otomatik düzeltme ve kesintisiz tamamlama"],"flow"],
 fordBilling:["FORD TOPLU FATURA PROJESİ","Ford Toplu Fatura Kesim Sistemi","Ford Toplu Fatura Kesim Sistemi, ay boyunca oluşan masraf ve fatura kalemlerini otomatik analiz eden; verileri cari kod bazında konsolide ederek ay sonunda tek seferde toplu faturalandıran akıllı bir otomasyon çözümüdür. BerkBOT altyapısı üzerinde çalışan sistem, OCR ve yapay zekâ destekli kontrollerle eksik, hatalı veya tutarsız kayıtları belirler; mümkün olan durumlarda otomatik düzeltme uygulayarak süreci kullanıcı müdahalesine ihtiyaç duymadan tamamlar. Faturalandırma sonrasında Muhasebe, Operasyon ve Yönetim ekiplerine cari tutarlar, işlem adetleri, masraf dağılımları ile hata ve istisna kayıtlarını içeren ayrıntılı ve izlenebilir raporlar sunar.",["Aylık masraf ve fatura kalemlerinin otomatik analizi","Cari kod bazında konsolidasyon ve tek seferde toplu faturalandırma","OCR ve yapay zekâ destekli eksik, hata ve tutarsızlık kontrolü","Uygun kayıtlarda otomatik düzeltme ve müdahalesiz tamamlama","Muhasebe, Operasyon ve Yönetim için cari bazlı izlenebilir raporlama"],"flow"],
 invoiceOcr:["AKILLI FATURA OCR PROJESİ","Akıllı Fatura Ayrıştırma – OCR Servisi","Toplu PDF faturalar OCR teknolojisiyle otomatik olarak analiz edilir ve her belgedeki fatura numarası tespit edilir. Sistem, faturaları Ford için tanımlanan klasör yapısına göre ayrıştırır; her faturayı kendi numarasıyla ayrı bir PDF olarak kaydeder. Böylece manuel dosyalama ihtiyacı ortadan kalkar, belge karışıklığı azalır ve Ford operasyon ekipleri işlenmeye hazır faturalara daha hızlı ulaşır.",["Toplu PDF faturaların tek işlemde OCR ile analizi","Fatura numarasının belge üzerinden otomatik tespiti","Ford için tanımlanan klasörlere kural bazlı ayrıştırma","Her faturanın kendi numarasıyla ayrı PDF olarak kaydedilmesi","Manuel dosyalamanın kaldırılması ve operasyon süresinin kısalması"],"flow"]},
 en:{
 berkbot:["","BerkBOT | Intelligent Automation Platform","BerkBOT is our in-house AI-powered RPA automation platform. It automates repetitive operational processes end to end, saving workforce capacity and time while minimising user-driven errors. Its learning structure evaluates errors and exceptions encountered during a process; control sets, cross-validation mechanisms and AI-assisted checks identify potential issues before execution and automatically correct them whenever possible. BerkBOT therefore provides an intelligent foundation that continuously improves operational quality rather than simply automating tasks.",["End-to-end automation of repetitive operational tasks","Pre-transaction detection of user-driven errors","Control sets and cross-validation mechanisms","A structure that learns from errors and exceptions","Automatic correction and unattended completion where applicable"],"flow"],
+taxPayment:["","Tax Payment","The Tax Payment project automates declaration-based tax payment steps through the BerkBOT platform. Declaration references and tax amounts are checked before processing, and payments follow defined permissions and business rules. Results are linked to the relevant file records, while errors and exceptions are logged for traceability by Ford operations and finance teams. This reduces repetitive manual payment steps and makes the process faster and more controlled.",["Pre-transaction checks of declaration references and tax amounts","RPA automation of tax payment steps","Linking payment results to the relevant file record","Logging and tracking errors and exceptions"],"flow"],
 fordBilling:["FORD BULK BILLING AUTOMATION","Ford Bulk Billing System","The Ford Bulk Billing System automatically analyses expense and invoice items accumulated throughout the month, consolidates them by account code and generates bulk billing in a single month-end run. Operating on the BerkBOT platform, the system uses OCR and AI-assisted controls to detect missing, incorrect or inconsistent records and applies automatic corrections whenever possible, completing the process without user intervention. After billing, it provides Accounting, Operations and Management teams with detailed, traceable reports covering account-based amounts, transaction counts, expense distributions, errors and exceptions.",["Automated analysis of monthly expense and invoice items","Account-code consolidation and single-run bulk billing","OCR and AI-assisted checks for missing, incorrect or inconsistent data","Automatic correction and unattended completion where applicable","Traceable account-based reporting for Accounting, Operations and Management"],"flow"],
 invoiceOcr:["SMART INVOICE OCR","Smart Invoice Separation – OCR Service","Bulk PDF invoices are analysed automatically with OCR technology and the invoice number on each document is detected. The service separates invoices according to the folder structure defined for Ford, then saves every invoice as an individual PDF named with its invoice number. This removes manual filing, reduces document mix-ups and helps Ford operations teams reach processing-ready invoices faster.",["OCR analysis of bulk PDF invoices in a single run","Automatic detection of the invoice number","Rule-based separation into folders defined for Ford","Each invoice saved as an individual PDF with its own number","Removal of manual filing and a shorter operational cycle"],"flow"]}};
 
@@ -356,7 +467,14 @@ const rpaProjectScreens={
 
 const specialScreens={
   archiveIndex:[
-    {src:"assets/aycube_screens/arsiv-fihrist.png",label:{tr:"Arşiv Fihrist",en:"Archive Index"}}
+    {
+      src:"assets/aycube_screens/arsiv-fihrist.png",
+      label:{tr:"Arşiv Fihrist",en:"Archive Index"},
+      description:{
+        tr:"Beyanname ve eklerine ait orijinal evrakların Ford fiziksel arşivindeki raf ve konum bilgilerini kayıt altında tutar. Dosya veya beyanname numarası üzerinden evrakın bulunduğu yer hızlıca tespit edilir.",
+        en:"Records the shelf and physical locations of original documents belonging to declarations and their attachments in Ford’s physical archive. The document’s location is identified quickly using a file or declaration number."
+      }
+    }
   ],
   gate:[],
   declarationImage:[]
@@ -364,24 +482,26 @@ const specialScreens={
 
 const speakerScripts={
 tr:[
-"Açılış mesajı tek: Aygen IT; entegrasyon, otomasyon, raporlama ve saha görünürlüğünü Ford operasyonları için tek dijital omurgada birleştiriyor. 26 proje ve 37 dijital iş akışı, dağınık çözümler değil, aynı ölçeklenebilir ekosistemin parçalarıdır.",
+"Açılış mesajı tek: Aygen IT; entegrasyon, otomasyon, raporlama ve saha görünürlüğünü Ford operasyonları için tek dijital omurgada birleştiriyor. 29 proje ve 37 dijital iş akışı, dağınık çözümler değil, aynı ölçeklenebilir ekosistemin parçalarıdır.",
 "Hikâyeyi beş eksende kuruyoruz: net sahiplik, tek platform, otomasyonla güçlenen karar ritmi, güvenlik ve sürdürülebilirlik. Her eksen, bir sonrakinin zeminini hazırlıyor.",
 "Bu bölüm teknolojiyi taşıyan altı kişilik IT kadromuzu gösteriyor. Liderlik, yazılım geliştirme, iş analizi, RPA, yapay zekâ ve yetişen yeni yetenekler aynı ekip yapısı içinde Ford operasyonlarına uçtan uca dijital çözümler sunuyor.",
 "İş birliği modelimizin farkı ortak ve sürdürülebilir sonuç üretme ritmidir. Yakın çalışma ile başlayan süreç; analiz, geliştirme, güvenli mimari, hızlı iterasyon ve kontrollü teslimat adımlarıyla ilerler. Böylece Ford operasyonlarında karar süresi kısalır, güvenilir ve anlamlı veriye daha hızlı ulaşılır.",
 "Aycube bölümünde ana mesaj tek platform mantığı. Ford için geliştirilen projeler; gümrük takip, entegrasyon, otomasyon, finans ve arşiv başlıklarında toplanıyor. Gümrük & Takip kartında ekranların her biri ayrı proje olarak sayılır ve 12 proje numaralı biçimde sunulur; Ford’a özel 14 Aycube BI da bu kapsamda görünür. Finans & Komisyon alanında bankaya gönderilen beyanname görüntüsü, toplu fatura, vergi talep ve otomatik ekstre gönderimi olmak üzere dört proje yer alır. Arşiv & Doküman alanı üç projeden oluşur.",
-"Otomail, Ford Otosan ekipleri için hazırlanan 37 operasyonel raporu zamanında üreten, doğrulayan ve yalnızca yetkili alıcılara güvenle ulaştıran otomatik rapor dağıtım servisidir. Akış 37 raporun tamamını sırayla gösterir. Günlük yaklaşık 40, haftalık 280, aylık ortalama 1.223 ve yıllık yaklaşık 14.671 rapor gönderimi; teslim kayıtları, hata uyarıları ve izlenebilir yeniden denemelerle yönetilir.",
+"Otomail, Ford Otosan ekipleri için hazırlanan 37 operasyonel raporu zamanında üreten, doğrulayan ve yalnızca yetkili alıcılara güvenle ulaştıran otomatik rapor dağıtım servisidir. Akış 37 raporun tamamını sırayla gösterir. Günlük yaklaşık 147, haftalık 1.035, aylık yaklaşık 4.497 ve yıllık 53.966 rapor gönderimi; teslim kayıtları, hata uyarıları ve izlenebilir yeniden denemelerle yönetilir.",
 "Özel projelerde sahadaki somut ihtiyaçlara üretilen nokta çözümleri gösteriyoruz: arşiv fihrist, gümrük kapı bildirimleri ve bankaya giden beyanname görüntüleri. Buradaki kapı bildirimi Supalan süreci değildir; gümrüklü sahaya giren veya sahadan çıkan aracın plaka, beyanname ya da taşıma kaydı, kapı ve zaman bilgileriyle eşleştirilerek ilgili gümrük dosyasına bağlanmasıdır. Böylece eksik veya uyumsuz hareketler görünür, yetkili ekipler için denetlenebilir bir işlem izi oluşur.",
+"",
 "Supalan bölümünde fiziksel saha ile dijital kontrolü birlikte görüyoruz. Araç ve şoför bilgileri tır giriş formunda toplanıp Aycube’da kayıt altında tutuluyor; giriş ve çıkışlar plaka tanıma, güvenlik kontrolü ve sisteme entegre 40 kameralı altyapıyla izleniyor. Gümrüklü araçlarda vergi ödemesi ve ilgili gümrük adımları tamamlanana kadar bekleme statüsü takip ediliyor. Giriş, çıkış ve transit sürelerini içeren raporlarımız Ford’a zaman görünürlüğü sağlıyor; Ford ekipleri demuraj değerlendirmesini bu raporlardaki verilerle yapıyor. Olay bildirimleri ile ithalat ve ihracat raporları yetkili ekiplere e-posta yoluyla iletiliyor. Ekrandaki sayısal veriler örnektir.",
 "Kapanış, veriyle görünür hale gelen operasyonun artık somut aksiyona dönüşebileceğini vurguluyor. Aygen IT ve Ford Otosan iş birliğini, geleceği birlikte şekillendiren uzun vadeli bir ortaklık mesajıyla tamamlıyoruz."
 ],
 en:[
-"The opening message is simple: Aygen IT unifies integration, automation, reporting and field visibility into one digital backbone for Ford operations. The 26 projects and 37 report flows are parts of the same scalable ecosystem.",
+"The opening message is simple: Aygen IT unifies integration, automation, reporting and field visibility into one digital backbone for Ford operations. The 29 projects and 37 report flows are parts of the same scalable ecosystem.",
 "The story follows five pillars: clear ownership, one platform, an automation-powered decision rhythm, security and sustainability. Each pillar creates the foundation for the next.",
 "This section introduces our six-person IT team. Leadership, software development, business analysis, RPA, AI and emerging talent come together to deliver end-to-end digital solutions for Ford operations.",
 "The differentiator is a shared rhythm focused on sustainable outcomes. Starting with close collaboration, the process moves through analysis, development, secure architecture, fast iteration and controlled delivery. This shortens decision cycles and provides Ford operations with faster access to reliable, meaningful data.",
 "The Aycube section communicates the single-platform logic. Ford projects are grouped under customs tracking, integration, automation, finance and archive capabilities. In Customs & Tracking, every screen is counted as a distinct project and the 12 projects are numbered individually; the scope also makes Ford’s 14 custom Aycube BI dashboards explicit. Finance & Commission contains four projects: declaration images sent to the bank, bulk billing, tax requests and automated statement delivery. Archive & Document contains three projects.",
-"Otomail is the automated report-distribution service that generates and validates 37 operational reports for Ford Otosan teams, then securely delivers them only to authorised recipients. The flow cycles through all 37 reports in sequence. Approximately 40 daily, 280 weekly, 1,223 monthly and 14,671 yearly deliveries are managed with delivery logs, error alerts and traceable retries.",
+"Otomail is the automated report-distribution service that generates and validates 37 operational reports for Ford Otosan teams, then securely delivers them only to authorised recipients. The flow cycles through all 37 reports in sequence. Approximately 147 daily, 1,035 weekly, 4,497 monthly and 53,966 yearly deliveries are managed with delivery logs, error alerts and traceable retries.",
 "Special projects show targeted solutions for concrete operational needs: archive index, customs gate notifications and declaration images sent to the bank. The gate notification shown here is not the Supalan process; it links a vehicle entering or leaving a customs-controlled site to its customs file through plate, declaration or transport record, gate and timestamp data. Missing or inconsistent movements become visible and authorised teams receive an auditable transaction trail.",
+"",
 "The Supalan section brings the physical site and digital control together. Vehicle and driver data is collected through the truck-entry form and retained in Aycube; entry and exit are monitored through plate recognition, security checks and an integrated 40-camera infrastructure. Customs-controlled vehicles remain in a waiting status until tax payment and the relevant customs steps are complete. Our entry, exit and transit-duration reports give Ford time visibility, and Ford teams make the demurrage assessment using the report data. Event notifications and import / export reports are delivered to authorised teams by email. The figures shown are illustrative.",
 "The close emphasizes that operational visibility can now become concrete action. It completes the Aygen IT and Ford Otosan story with a long-term partnership message focused on shaping the future together."
 ]
@@ -431,9 +551,12 @@ prevBtn.disabled=current===0;nextBtn.disabled=current===slides.length-1;sectionN
 if(window.matchMedia("(max-width: 1120px)").matches){
   requestAnimationFrame(()=>window.scrollTo(0,0));
 }
+document.dispatchEvent(new CustomEvent("presentation:slidechange",{detail:{index:current}}));
 }
 function navigate(index,useCurtain=true){
 const next=Math.max(0,Math.min(index,slides.length-1));if(next===current||busy)return;
+const transitionRequest=new CustomEvent("presentation:slidewillchange",{detail:{index:next,from:current},cancelable:true});
+if(!document.dispatchEvent(transitionRequest)){commitSlide(next);scheduleAdjacentWarmup(current);return}
 if(!useCurtain||window.matchMedia("(prefers-reduced-motion: reduce)").matches){commitSlide(next);return}
 const app=$(".app");
 busy=true;app?.classList.add("is-transitioning");transitionStage.classList.toggle("is-reverse",next<current);transitionNumber.textContent=String(next+1).padStart(2,"0");transitionName.textContent=titleFor(next);
@@ -469,13 +592,112 @@ function renderIntegration(key){
 const d=integrationData[lang][key];
 $("#integrationTitle").textContent=d.title;$("#integrationDescription").textContent=d.description;
 const flowColumns=$("#flowColumns");
-flowColumns.classList.toggle("is-three",d.cards.length===3);
-flowColumns.innerHTML=d.cards.map((c,index)=>`<article class="flow-card"><span>${c[0]}</span><h4>${c[1]}</h4><p>${c[2]}</p>${benefitMarkup(integrationBenefits[lang]?.[key]?.[index])}</article>`).join("");
+flowColumns.classList.remove("is-export","is-three");
+flowColumns.classList.add("is-split");
+const benefitsTitle=lang==="tr"?"Ford İçin Kazanımlar":"Benefits for Ford";
+const benefits=key==="export"?integrationExportBenefits[lang]:(integrationBenefits[lang]?.[key]||[]).flat();
+flowColumns.innerHTML=`<section class="integration-projects-grid" aria-label="${d.title}">${d.cards.map(c=>`<article class="integration-project-item"><span class="integration-project-number" aria-hidden="true">${c[0]}</span><div><h4>${c[1]}</h4><p>${c[2]}</p></div></article>`).join("")}</section><aside class="integration-benefits-grid" aria-label="${benefitsTitle}">${benefitMarkup(benefits,benefitsTitle)}</aside>`;
 $(".integration-stage").animate([{opacity:.45,transform:"translateY(10px)"},{opacity:1,transform:"translateY(0)"}],{duration:420,easing:"cubic-bezier(.22,1,.36,1)"});
 }
-function benefitMarkup(items=[]){
+function romaniaAycubeCatalogMarkup(){
+  const projectLabel=lang==="tr"?"proje":"projects";
+  const total=romaniaAycubeProjectGroups.reduce((sum,group)=>sum+group.projects[lang].length,0);
+  return `<section class="romania-screen-catalog" aria-labelledby="romaniaScreenCatalogTitle"><div class="romania-screen-catalog-heading"><h3 id="romaniaScreenCatalogTitle">${lang==="tr"?"Aycube.ro Projeleri":"Aycube.ro Projects"}</h3><span>${total} ${projectLabel}</span></div><div class="romania-screen-groups">${romaniaAycubeProjectGroups.map(group=>`<article class="romania-screen-group"><header><h4>${group.title[lang]}</h4><span>${group.projects[lang].length} ${projectLabel}</span></header><ul>${group.projects[lang].map(project=>`<li>${project}</li>`).join("")}</ul></article>`).join("")}</div></section>`;
+}
+function romaniaProjectIcon(type){
+  const paths={
+    documents:'<path d="M3 7h6l2 2h10v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/><path d="M3 7V5a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v2"/>',
+    document:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+    ocr:'<path d="M8 3H4a1 1 0 0 0-1 1v4m13-5h4a1 1 0 0 1 1 1v4M3 16v4a1 1 0 0 0 1 1h4m8 0h4a1 1 0 0 0 1-1v-4M7 8h10M7 12h10M7 16h6"/>',
+    "oral-archive":'<rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M9 13h6M10 16h4"/>',
+    tbr:'<rect x="2" y="3" width="7" height="7" rx="2"/><rect x="15" y="14" width="7" height="7" rx="2"/><path d="M9 6h6a4 4 0 0 1 4 4v4M15 18H9a4 4 0 0 1-4-4v-4"/>',
+    check:'<path d="m5 12 4 4L19 6"/>',
+    user:'<circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/>',
+    mail:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/>',
+    scorecard:'<path d="M5 20V10m7 10V4m7 16v-7M3 20h18"/><path d="m4 6 3-3 3 3"/>',
+    train:'<rect x="5" y="3" width="14" height="15" rx="4"/><path d="M5 10h14M12 3v7M7 21l2-3m8 3-2-3"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/>',
+    import:'<path d="M12 3v11m-4-4 4 4 4-4M5 12H3v8a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-8h-2"/>',
+    export:'<path d="M12 14V3m-4 4 4-4 4 4M5 12H3v8a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-8h-2"/>',
+    chart:'<path d="M3 3v18h18M6 16l5-6 4 3 5-8m-5 0h5v5"/>',
+    location:'<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/>'
+  };
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[type]||paths.document}</svg>`;
+}
+function romaniaProjectVisualMarkup(type){
+  const text=lang==="tr"?{
+    documents:["Belge akışı","Beyanname","Fatura","Ek belgeler","Dosya & belge arşivi","Dosya ile eşleştir","Arşivde eriş"],
+    ocr:["OCR ile dijital kayıt","Orijinal evrak","Belge bilgisi","Dosya referansı","Aranabilir metin","Manuel giriş azalır"],
+    "oral-archive":["Beyan ve evrak birlikte","Sözlü beyan kaydı","Tarih","Dosya","Referans","Beyan kaydı","Destekleyici evrak","Geriye dönük izlenebilirlik"],
+    tbr:["Yarı entegre çalışma modeli","TBR Raporu","Rapor verisi","Veri hazırlama","Sistem desteği","Romanya kayıtları","Aycube.ro","Sistem","Hazırlama & aktarım","Kullanıcı","Kontrol & tamamlama","Rapor ve kayıt tutarlılığı"]
+  }:{
+    documents:["Document flow","Declaration","Invoice","Supporting documents","File & document archive","Link to file","Access in archive"],
+    ocr:["Digital records with OCR","Original document","Document data","File reference","Searchable text","Less manual entry"],
+    "oral-archive":["Declaration and documents together","Oral declaration record","Date","File","Reference","Declaration record","Supporting documents","Retrospective traceability"],
+    tbr:["Partially integrated workflow","TBR Report","Report data","Data preparation","System support","Romanian records","Aycube.ro","System","Preparation & transfer","User","Review & completion","Report and record consistency"]
+  };
+  const t=text[type];
+  if(!t)return"";
+  let body="";
+  if(type==="documents"){
+    body=`<div class="ro-document-inputs">${t.slice(1,4).map(label=>`<span>${romaniaProjectIcon("document")}<b>${label}</b></span>`).join("")}</div><div class="ro-document-connector" aria-hidden="true"></div><div class="ro-document-hub">${romaniaProjectIcon("documents")}<div><strong>Aycube.ro</strong><small>${t[4]}</small></div></div><div class="ro-visual-footer"><span>${t[5]}</span><i aria-hidden="true">→</i><span>${t[6]}</span></div>`;
+  }else if(type==="ocr"){
+    body=`<div class="ro-ocr-flow"><div class="ro-ocr-paper"><span>${t[1]}</span><div class="ro-paper-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="ro-ocr-scan-line" aria-hidden="true"></div><b>OCR</b></div><span class="ro-flow-arrow" aria-hidden="true">→</span><div class="ro-ocr-output">${t.slice(2,5).map(label=>`<span>${romaniaProjectIcon("check")}<b>${label}</b></span>`).join("")}</div></div><div class="ro-visual-footer ro-visual-result">${romaniaProjectIcon("check")}<span>${t[5]}</span></div>`;
+  }else if(type==="oral-archive"){
+    body=`<div class="ro-archive-record"><div class="ro-archive-record-title">${romaniaProjectIcon("oral-archive")}<strong>${t[1]}</strong></div><div class="ro-record-fields">${t.slice(2,5).map(label=>`<span>${label}<i aria-hidden="true"></i></span>`).join("")}</div><div class="ro-linked-documents"><span>${romaniaProjectIcon("document")}<b>${t[5]}</b></span><i aria-hidden="true">+</i><span>${romaniaProjectIcon("documents")}<b>${t[6]}</b></span></div></div><div class="ro-visual-footer ro-visual-result">${romaniaProjectIcon("check")}<span>${t[7]}</span></div>`;
+  }else{
+    body=`<div class="ro-tbr-flow">${[["document",t[1],t[2]],["tbr",t[3],t[4]],["documents",t[5],t[6]]].map((node,index)=>`${index?'<span class="ro-flow-arrow" aria-hidden="true">→</span>':""}<div class="ro-tbr-node"><span>${romaniaProjectIcon(node[0])}</span><strong>${node[1]}</strong><small>${node[2]}</small></div>`).join("")}</div><div class="ro-tbr-roles"><div>${romaniaProjectIcon("tbr")}<span><strong>${t[7]}</strong><small>${t[8]}</small></span></div><div>${romaniaProjectIcon("user")}<span><strong>${t[9]}</strong><small>${t[10]}</small></span></div></div><div class="ro-visual-footer ro-visual-result">${romaniaProjectIcon("check")}<span>${t[11]}</span></div>`;
+  }
+  return `<figure class="romania-workflow-visual ro-visual-${type}"><figcaption>${t[0]}</figcaption>${body}</figure>`;
+}
+function romaniaOtomailMarkup(){
+  const total=romaniaOtomailReports.length;
+  const t=lang==="tr"?{
+    heading:"Romanya için otomatik rapor dağıtımı",
+    description:`Ford Otosan Romanya ekiplerine toplam ${total} farklı rapor gönderiyoruz. Otomail, bu raporların e-posta ile paylaşılmasını otomatikleştirerek operasyonel bilgiyi ekiplerle buluşturur.`,
+    count:"farklı rapor",reports:"Gönderilen raporlar",flow:"Gönderim akışı",service:"Otomatik e-posta dağıtımı",recipient:"Romanya ekipleri",destination:"Ford Otosan Romanya",note:"Raporlar tek bir otomatik dağıtım akışında ilgili ekiplere ulaştırılır."
+  }:{
+    heading:"Automatic report delivery for Romania",
+    description:`We deliver ${total} different reports to Ford Otosan Romania teams. Otomail automates sharing these reports by email, bringing operational information to the teams.`,
+    count:"different reports",reports:"Reports we deliver",flow:"Delivery flow",service:"Automated email distribution",recipient:"Romania teams",destination:"Ford Otosan Romania",note:"Reports reach the relevant teams through one automated distribution flow."
+  };
+  return `<div class="romania-otomail-layout">
+    <section class="ro-mail-header" aria-labelledby="romaniaOtomailHeading">
+      <span class="ro-mail-header-icon" aria-hidden="true">${romaniaProjectIcon("mail")}</span>
+      <div><h3 id="romaniaOtomailHeading">${t.heading}</h3><p>${t.description}</p></div>
+      <div class="ro-mail-total"><strong>${total}</strong><span>${t.count}</span></div>
+    </section>
+    <div class="ro-mail-workspace">
+      <section class="ro-mail-reports" aria-labelledby="romaniaOtomailReportsTitle">
+        <h3 id="romaniaOtomailReportsTitle">${t.reports}</h3>
+        <div class="ro-mail-report-grid">${romaniaOtomailReports.map(report=>`<article class="ro-mail-report-card"><span class="ro-mail-report-icon" aria-hidden="true">${romaniaProjectIcon(report.icon)}</span><div><h4>${report.title}</h4><p>${report.description[lang]}</p></div></article>`).join("")}</div>
+      </section>
+      <aside class="ro-mail-delivery" aria-labelledby="romaniaOtomailFlowTitle">
+        <h3 id="romaniaOtomailFlowTitle">${t.flow}</h3>
+        <div class="ro-mail-files" aria-hidden="true">${romaniaOtomailReports.map((report,index)=>`<span style="--ro-mail-order:${index}">${romaniaProjectIcon("document")}</span>`).join("")}</div>
+        <div class="ro-mail-route" aria-hidden="true"></div>
+        <div class="ro-mail-service"><span class="ro-mail-orb" aria-hidden="true">${romaniaProjectIcon("mail")}</span><strong>Otomail</strong><span>${t.service}</span></div>
+        <div class="ro-mail-route" aria-hidden="true"></div>
+        <div class="ro-mail-recipient"><span aria-hidden="true">${romaniaProjectIcon("user")}</span><div><small>${t.recipient}</small><strong>${t.destination}</strong></div></div>
+        <p class="ro-mail-delivery-note">${t.note}</p>
+      </aside>
+    </div>
+  </div>`;
+}
+function renderRomaniaCard(key){
+  const button=$(`[data-romania-card="${key}"]`),heading=button?.querySelector("strong"),modal=solutionModals.romania;
+  if(!heading||!modal)return;
+  const title=$("#romaniaModalTitle"),projects=romaniaProjectData[key]||[];
+  title.dataset.tr=heading.dataset.tr||heading.textContent;
+  title.dataset.en=heading.dataset.en||heading.textContent;
+  title.textContent=title.dataset[lang];
+  modal.dataset.romaniaKey=key;
+  if(key==="otomail"){$("#romaniaModalBody").innerHTML=romaniaOtomailMarkup();return;}
+  const projectMarkup=projects.length?`<div class="romania-project-grid">${projects.map((project,index)=>`<article class="romania-project${key==="aycube"?" romania-aycube-intro":""}${project.visual?` romania-project-designed romania-project-${project.visual}`:""}"><div class="romania-project-copy">${project.visual?`<span class="romania-project-symbol" aria-hidden="true">${romaniaProjectIcon(project.visual)}</span>`:""}<h3>${project.title[lang]}</h3><p>${project.description[lang]}</p>${project.points?.[lang]?.length?`<ul class="romania-project-points">${project.points[lang].map(point=>`<li>${point}</li>`).join("")}</ul>`:""}</div>${project.visual?romaniaProjectVisualMarkup(project.visual):""}${project.image?`<button class="romania-project-screen" type="button" data-romania-image="${index}" aria-label="${project.imageAlt[lang]} — ${lang==="tr"?"ekranı büyüt":"enlarge screen"}"><img src="${project.image}" alt="${project.imageAlt[lang]}" loading="eager" decoding="async" /><span>${lang==="tr"?"Ekranı büyüt":"Enlarge screen"}<b aria-hidden="true">↗</b></span></button>`:""}</article>`).join("")}</div>`:"";
+  $("#romaniaModalBody").innerHTML=key==="aycube"?`<div class="romania-aycube-layout">${romaniaAycubeCatalogMarkup()}${projectMarkup}</div>`:projectMarkup;
+}
+function benefitMarkup(items=[],title=lang==="tr"?"Ford için kazanım":"Benefit for Ford"){
   if(!items.length)return"";
-  return `<section class="project-benefits"><span class="project-benefit-icon" aria-hidden="true"><img src="assets/icons/ford-benefit-v1.png" alt="" loading="eager" decoding="async" /></span><div><strong>${lang==="tr"?"Ford için kazanım":"Benefit for Ford"}</strong><ul>${items.map(item=>`<li>${item}</li>`).join("")}</ul></div></section>`;
+  return `<section class="project-benefits"><span class="project-benefit-icon" aria-hidden="true"><img src="assets/icons/ford-benefit-v1.png" alt="" loading="eager" decoding="async" /></span><div><strong>${title}</strong><ul>${items.map(item=>`<li>${item}</li>`).join("")}</ul></div></section>`;
 }
 function demoMarkup(type){
 if(type==="search")return`<div class="demo-search"><span>${lang==="tr"?"FORD / 2026 / Beyanname / Referans...":"FORD / 2026 / Declaration / Reference..."}</span><b>${lang==="tr"?"0,4 sn":"0.4 sec"}</b></div>`;
@@ -609,9 +831,24 @@ function renderFeatureSolution(scope,key){
     ${screens.length?`<section class="feature-solution-block feature-solution-screens"><header><span>${lang==="tr"?"EKRANLAR":"SCREENS"}</span></header><div class="feature-screen-grid">${featureSolutionScreenMarkup(screens)}</div></section>`:""}
   </div>`;
 }
+// Optional experience handlers own only the motion; native dialogs remain the fallback.
+function openPresentationDialog(modal,origin=null,resume=false){
+  if(!modal||modal.open)return;
+  const request=new CustomEvent("presentation:dialogopen",{detail:{modal,origin,resume},cancelable:true});
+  if(!document.dispatchEvent(request))return;
+  modal.showModal();
+  if(!resume)modal.scrollTop=0;
+  if(modal.classList.contains("solution-modal"))requestAnimationFrame(()=>modal.classList.add("is-open"));
+}
+function closePresentationDialog(modal,immediate=false){
+  if(!modal?.open)return;
+  const request=new CustomEvent("presentation:dialogclose",{detail:{modal,immediate},cancelable:true});
+  if(!document.dispatchEvent(request))return;
+  modal.classList.remove("is-open");modal.close();
+}
 function openFeatureSolution(scope,key){
   renderFeatureSolution(scope,key);
-  if(!projectSolutionModal?.open){projectSolutionModal.showModal();projectSolutionModal.scrollTop=0;requestAnimationFrame(()=>projectSolutionModal.classList.add("is-open"))}
+  openPresentationDialog(projectSolutionModal);
 }
 function openProjectGroup(key){
   const d=projectData[lang][key],items=projectItems[key]||[],screens=projectScreens[key]||[];
@@ -626,23 +863,19 @@ function openProjectGroup(key){
   const hasProjectContent=items.length>0||screens.length>0;
   const summaryTitle=items.length?`${items.length} ${lang==="tr"?"proje":"projects"}`:`${screens.length} ${lang==="tr"?"ekran örneği":"screen examples"}`;
   $("#modalDemo").innerHTML=hasProjectContent?`<div class="project-group-summary"><strong>${summaryTitle}</strong><span>${lang==="tr"?"Her numara ayrı bir projedir. Kartı açın; ekranlı projelerde görseli ayrıca büyütebilirsiniz.":"Each number is a separate project. Open a card and enlarge the image where a project includes a screen."}</span></div>`:"";
-  infoModal.showModal();
+  openPresentationDialog(infoModal);
 }
 function openSolutionModal(key){
   const modal=solutionModals[key];
   if(!modal)return;
   if(modal===projectSolutionModal)renderProjectSolution(key);
   if(modal.open)return;
-  modal.showModal();
-  modal.scrollTop=0;
-  requestAnimationFrame(()=>modal.classList.add("is-open"));
+  openPresentationDialog(modal);
 }
 function closeSolutionModal(modal){
-  if(!modal?.open)return;
-  modal.classList.remove("is-open");
-  modal.close();
+  closePresentationDialog(modal);
 }
-function openInfo(d,galleryItems=[]){resetInfoModalMode();$("#modalCode").textContent=d[0];$("#modalTitle").textContent=d[1];$("#modalText").textContent=d[2];renderModalGallery(galleryItems);$("#modalPoints").innerHTML=d[3].map(p=>`<div>${p}</div>`).join("");$("#modalDemo").innerHTML=demoMarkup(d[4]);infoModal.showModal()}
+function openInfo(d,galleryItems=[]){resetInfoModalMode();$("#modalCode").textContent=d[0];$("#modalTitle").textContent=d[1];$("#modalText").textContent=d[2];renderModalGallery(galleryItems);$("#modalPoints").innerHTML=d[3].map(p=>`<div>${p}</div>`).join("");$("#modalDemo").innerHTML=demoMarkup(d[4]);openPresentationDialog(infoModal)}
 function openRpaInfo(d,galleryItems=[],benefits=[]){
   openInfo(d,galleryItems);
   $("#modalBenefits").innerHTML=benefitMarkup(benefits);
@@ -668,7 +901,7 @@ function openCatalog(title,description,groups,variant="default"){
   $("#modalCode").hidden=true;$("#modalCode").textContent="";$("#modalTitle").textContent=title;$("#modalText").textContent=description;
   renderModalGallery([]);
   $("#modalPoints").innerHTML=variant==="projects"?projectCatalogMarkup(groups):groups.map(g=>`<section class="catalog-group"><h4>${g[0]} <span>${g[1].length}</span></h4><div class="catalog-items">${g[1].map((item,index)=>`<div><b>${String(index+1).padStart(2,"0")}</b><span>${item}</span></div>`).join("")}</div></section>`).join("");
-  $("#modalDemo").innerHTML="";infoModal.showModal();
+  $("#modalDemo").innerHTML="";openPresentationDialog(infoModal);
 }
 
 const supalanImages=[
@@ -978,7 +1211,9 @@ if(projectSolutionModal?.open){
   if(projectSolutionModal.dataset.solutionMode==="feature")renderFeatureSolution(projectSolutionModal.dataset.featureScope,projectSolutionModal.dataset.featureKey);
   else if(projectSolutionModal.dataset.projectKey)renderProjectSolution(projectSolutionModal.dataset.projectKey);
 }
+if(solutionModals.romania?.open)renderRomaniaCard(solutionModals.romania.dataset.romaniaKey);
 setSupalanImage(supalanCurrent);refreshDynamicLanguage();
+document.dispatchEvent(new CustomEvent("presentation:languagechange"));
 }
 
 async function copyTeamEmail(button){
@@ -1021,9 +1256,9 @@ function openLightbox(items,index=0){
   if(!lightboxItems.length || !lightbox) return;
   lightboxReturnFocus=document.activeElement;
   reopenInfoModalAfterLightbox=Boolean(infoModal?.open);
-  if(reopenInfoModalAfterLightbox) infoModal.close();
+  if(reopenInfoModalAfterLightbox) closePresentationDialog(infoModal,true);
   reopenSolutionModalAfterLightbox=Object.values(solutionModals).find(modal=>modal?.open)||null;
-  if(reopenSolutionModalAfterLightbox)closeSolutionModal(reopenSolutionModalAfterLightbox);
+  if(reopenSolutionModalAfterLightbox)closePresentationDialog(reopenSolutionModalAfterLightbox,true);
   lightboxIndex=Math.max(0,Math.min(index,lightboxItems.length-1));
   renderLightbox();
   lightbox.classList.add("is-open");
@@ -1057,8 +1292,9 @@ function closeLightbox(){
   setTimeout(()=>{
     if(lightbox.classList.contains("is-open")) return;
     lightboxImage.src="";
-    if(shouldReopenInfoModal && !infoModal.open) infoModal.showModal();
-    if(solutionModalToReopen&&!solutionModalToReopen.open){solutionModalToReopen.showModal();requestAnimationFrame(()=>solutionModalToReopen.classList.add("is-open"))}
+    if(solutionModalToReopen&&!solutionModalToReopen.open)openPresentationDialog(solutionModalToReopen,null,true);
+    // Restore parent first, then its detail: the last native dialog is on top.
+    if(shouldReopenInfoModal && !infoModal.open) openPresentationDialog(infoModal,null,true);
     lightboxReturnFocus?.focus?.();
   },240);
 }
@@ -1085,7 +1321,8 @@ function galleryFromCards(selector,titleSelector="strong"){
 }
 function resolveImageOpenRequest(target){
   if(!(target instanceof Element)) return null;
-  if(target.closest(".logo-stage,.aycube-lockup,.engine-center,.closing-logos,.closing-brand-row")) return null;
+  if(target.closest(".logo-stage,.aycube-lockup,.engine-center,.closing-logos,.closing-brand-row,.romania-card-brand")) return null;
+  if(target.closest(".romania-project-screen"))return null;
 
   const projectMedia=target.closest(".project-card-media");
   if(projectMedia) return null;
@@ -1174,6 +1411,18 @@ $$(".project-card").forEach(b=>b.addEventListener("click",()=>{
   if(solutionModals[key])openSolutionModal(key);
   else openProjectGroup(key);
 }));
+$$("[data-romania-card]").forEach(button=>button.addEventListener("click",()=>{
+  renderRomaniaCard(button.dataset.romaniaCard);
+  openSolutionModal("romania");
+  solutionModals.romania.querySelector("[data-solution-close]").focus({preventScroll:true});
+  solutionModals.romania.querySelector(".solution-panel").scrollTop=0;
+}));
+$("#romaniaModalBody").addEventListener("click",event=>{
+  const screen=event.target.closest("[data-romania-image]");
+  if(!screen)return;
+  const project=romaniaProjectData[solutionModals.romania.dataset.romaniaKey]?.[Number(screen.dataset.romaniaImage)];
+  if(project?.image)openLightbox([{src:project.image,title:project.imageAlt[lang]}],0);
+});
 $("#projectSolutionGrid")?.addEventListener("click",event=>{
   const featureScreen=event.target.closest(".feature-screen-card");
   if(featureScreen){
@@ -1197,7 +1446,10 @@ $("#projectSolutionGrid")?.addEventListener("click",event=>{
   grid.querySelectorAll(".solution-project-card").forEach(item=>{item.classList.remove("is-open");item.querySelector(".solution-project-toggle")?.setAttribute("aria-expanded","false")});
   if(willOpen){card.classList.add("is-open");toggle.setAttribute("aria-expanded","true")}
 });
-$("#allProjectsBtn").addEventListener("click",()=>openCatalog(lang==="tr"?"Ford Otosan Proje Kataloğu":"Ford Otosan Project Catalogue",lang==="tr"?"Sayfa 5’teki kartlarda yer alan 26 proje, güncel çözüm gruplarına göre bir araya getirilmiştir.":"The 26 projects shown in the Page 5 cards are organised by their current solution groups.",projectCatalog[lang],"projects"));
+$("#allProjectsBtn").addEventListener("click",()=>{
+  const groups=projectCatalog[lang],total=groups.reduce((sum,group)=>sum+group[1].length,0);
+  openCatalog(lang==="tr"?"Ford Otosan Proje Kataloğu":"Ford Otosan Project Catalogue",lang==="tr"?`Sayfa 5’teki kartlarda yer alan ${total} proje, güncel çözüm gruplarına göre bir araya getirilmiştir.`:`The ${total} projects shown in the Page 5 cards are organised by their current solution groups.`,groups,"projects");
+});
 $$(".integration-tab").forEach(b=>b.addEventListener("click",()=>{$$(".integration-tab").forEach(x=>x.classList.remove("is-active"));b.classList.add("is-active");renderIntegration(b.dataset.integrationTab)}));
 $$(".special-card").forEach(b=>b.addEventListener("click",()=>openFeatureSolution("special",b.dataset.special)));
 $$("[data-rpa-project]").forEach(b=>b.addEventListener("click",()=>{
@@ -1220,7 +1472,7 @@ $("#allReportsBtn").addEventListener("click",()=>openCatalog(lang==="tr"?"Ford O
 
 $("#intacDetailBtn").addEventListener("click",()=>openRpaInfo(lang==="tr"?["FORD İNTAÇ PROJESİ","Ford İNTAÇ Sorgulama","Robotun portal oturumu açması, sorgu parametrelerini girmesi, sonucu alması ve sonraki sisteme kontrollü biçimde aktarması.",["Tekrarlı portal adımlarının otomasyonu","Sorgu sonuçlarının loglanması","Hata ve istisna durumlarının işaretlenmesi","Aycube ve ilgili sistemlere aktarım"],"flow"]:["INTAÇ AUTOMATION","Ford INTAÇ Query","The robot opens the portal session, enters query parameters, retrieves the result and transfers it to the next system in a controlled flow.",["Automation of repetitive portal steps","Query-result logging","Error and exception marking","Transfer to Aycube and related systems"],"flow"],projectScreens.intac,rpaProjectBenefits[lang].intac));
 
-$("#modalClose").addEventListener("click",()=>infoModal.close());infoModal.addEventListener("click",e=>{if(e.target===infoModal)infoModal.close()});
+$("#modalClose").addEventListener("click",()=>closePresentationDialog(infoModal));infoModal.addEventListener("click",e=>{if(e.target===infoModal)closePresentationDialog(infoModal)});
 $("#modalGallery")?.addEventListener("click",event=>{
   const detailToggle=event.target.closest(".screen-detail-toggle");
   if(detailToggle){
@@ -1263,7 +1515,7 @@ document.addEventListener("keydown",e=>{
     return;
   }
   if(infoModal.open)return;
-  const activeSolutionModal=Object.values(solutionModals).find(modal=>modal?.open);
+  const activeSolutionModal=document.querySelector("dialog[open]");
   if(activeSolutionModal){
     if(e.key==="Escape"){e.preventDefault();closeSolutionModal(activeSolutionModal)}
     return;
@@ -1284,7 +1536,7 @@ document.addEventListener("touchend",e=>{
   if(Math.abs(d)<=60)return;
   if(lightbox?.classList.contains("is-open")){moveLightbox(d<0?1:-1);return}
   if(infoModal.open)return;
-  if(Object.values(solutionModals).some(modal=>modal?.open))return;
+  if(document.querySelector("dialog[open]"))return;
   d<0?navigate(current+1):navigate(current-1);
 },{passive:true});
 document.addEventListener("mousemove",e=>{$("#cursorAura").style.left=`${e.clientX}px`;$("#cursorAura").style.top=`${e.clientY}px`});
