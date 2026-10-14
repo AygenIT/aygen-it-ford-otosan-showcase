@@ -31,11 +31,24 @@
     if (index === 5) return "Otomail";
     return deckSlides[index]?.dataset[locale === "tr" ? "titleTr" : "titleEn"] || "";
   }
+  /* Handshake icon: Lucide, https://lucide.dev/icons/handshake
+   * ISC License — Copyright (c) 2026 Lucide Icons and Contributors
+   * Permission to use, copy, modify, and/or distribute this software for any
+   * purpose with or without fee is hereby granted, provided that the above
+   * copyright notice and this permission notice appear in all copies.
+   * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+   * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+   * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+   * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+   * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+   * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+   * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+   */
   const paths = {
     bank:'<path d="m3 8 9-5 9 5H3Zm2 3v7m5-7v7m5-7v7m4-7v7M3 21h18"/><path d="m16 16 2 2 3-4"/>',
     compass:'<circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5 5-3Z"/>',
     cube:'<path d="m12 3 9 5v9l-9 5-9-5V8l9-5Zm0 10L3 8m9 5 9-5m-9 5v9"/>',
-    handshake:'<path d="m3 7 5-3 4 2 4-2 5 3-3 9-4 3-3-1-3 1-5-4-2-5m7-6-3 6 3 2 4-4 5 6m-9-1 5 5m-8-2 3 3"/>',
+    handshake:'<path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/>',
     shield:'<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 12 3 3 5-6"/>',
     leaf:'<path d="M20 3C10 2 3 6 4 13c1 5 8 7 12 3 4-4 4-13 4-13ZM5 20l11-11"/>',
     clock:'<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3"/>',
@@ -272,6 +285,7 @@
   const stage=document.createElement("section");stage.className="xp-volume-stage";stage.hidden=true;stage.setAttribute("aria-label","Gönderim ölçeği");
   stage.innerHTML='<button class="xp-scale-skip" type="button" aria-label="Ölçek animasyonunu tamamla">×</button><p class="xp-scale-heading"></p><div class="xp-scale-field" aria-hidden="true">'+Array.from({length:72},(_,i)=>'<span style="--xp-tile:'+i+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 3h9l5 5v13H5V3Zm9 0v5h5M8 12h8M8 16h8"/></svg></span>').join("")+'</div><div class="xp-scale-number" aria-hidden="true"><strong></strong><span></span></div><p class="xp-scale-note"></p><div class="xp-scale-progress" aria-hidden="true"><i></i></div>';
   machine.append(stage);
+  const volumeDuration=2500;
   let scaleFrame=0,scaleDeadline=0,scaleFade=0,scaleRun=0,scaleProgress=1,scaleReady=false,scaleRunning=false,scaleStart=0,lastPaint=0;
   const isMail=()=>q(".slide-otomail.is-active");
   function paintVolume(progress){
@@ -310,11 +324,11 @@
     requestAnimationFrame(()=>{if(run===scaleRun)stage.classList.add("is-counting");});
     function frame(now){
       if(run!==scaleRun)return;
-      const progress=Math.min(1,(now-scaleStart)/7000);
+      const progress=Math.min(1,(now-scaleStart)/volumeDuration);
       if(now-lastPaint>=40||progress===1){paintVolume(progress);lastPaint=now;}
-      if(progress<1)scaleFrame=requestAnimationFrame(frame);else finishScale();
+      if(progress<1)scaleFrame=requestAnimationFrame(frame);else finishScale(true);
     }
-    scaleFrame=requestAnimationFrame(frame);scaleDeadline=setTimeout(()=>finishScale(),7350);
+    scaleFrame=requestAnimationFrame(frame);scaleDeadline=setTimeout(()=>finishScale(true),volumeDuration+200);
   }
   function syncScale(){
     if(isMail()){
